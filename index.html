@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chima Ukachukwu — AI Security Analyst & Red Teamer. SOC-trained. AI-specialized. Certified Cybersecurity Educator. Portfolio showcasing AI red teaming frameworks and cybersecurity operations.">
+    <meta name="keywords" content="AI security, red teaming, cybersecurity, SOC analyst, LLM security, prompt injection, threat intelligence, Chima Ukachukwu">
+    <meta name="author" content="Chima Ukachukwu">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Chima Ukachukwu — AI Security Analyst & Red Teamer">
+    <meta property="og:description" content="SOC-trained. AI-specialized. I secure systems — whether they run on code or neural networks.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://chimaukachukwu.com">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630/0a0e14/00d4aa?text=Chima+Ukachukwu+%7C+AI+Security+Analyst+%26+Red+Teamer">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://via.placeholder.com/1200x630/0a0e14/00d4aa?text=Chima+Ukachukwu+%7C+AI+Security+Analyst+%26+Red+Teamer">
+    
+    <!-- Favicon — Multi-format "C" brand mark -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%2300d4aa'/%3E%3Cstop offset='100%25' style='stop-color:%2300a3ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Ctext x='50' y='72' text-anchor='middle' fill='%230a0e14' font-family='Inter,sans-serif' font-weight='900' font-size='62'%3EC%3C/text%3E%3C/svg%3E">
+<link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==">
+    
+    <title>Chima Ukachukwu | AI Security Analyst & Red Teamer</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">CU<span class="accent">.</span></a>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#expertise" class="nav-link">Expertise</a></li>
+                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="#techstack" class="nav-link">Tech Stack</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero">
+        <div class="hero-bg-grid"></div>
+        <div class="hero-container">
+            <div class="hero-badge">
+                <span class="pulse-dot"></span> Available for Opportunities
+            </div>
+            <h1 class="hero-title">
+                <span class="hero-greeting">Hi, I'm</span>
+                <span class="hero-name">Chima Ukachukwu</span>
+            </h1>
+            <h2 class="hero-role">
+                <span class="typing-text"></span><span class="cursor">|</span>
+            </h2>
+            <p class="hero-description">
+                SOC-trained cybersecurity analyst specializing in AI red teaming. 
+                10+ years IT infrastructure. 24 certifications. I break AI systems 
+                to make them safer — and I build defenses that actually hold.
+            </p>
+            <div class="hero-cta">
+                <a href="#portfolio" class="btn btn-primary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    View My Work
+                </a>
+                <a href="#contact" class="btn btn-secondary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    Hire Me
+                </a>
+                <a href="assets/resume/chima-ukachukwu-resume.pdf" class="btn btn-outline" download>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Resume
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="10">0</span>
+                    <span class="stat-suffix">+</span>
+                    <span class="stat-label">Years in IT</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="24">0</span>
+                    <span class="stat-label">Certifications</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="3">0</span>
+                    <span class="stat-suffix">.7</span>
+                    <span class="stat-label">GPA (M.S.)</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="about">
+        <div class="section-container">
+            <h2 class="section-title">
+                <span class="section-number">01.</span> About Me
+            </h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p class="about-intro">
+                        I'm a <strong>cybersecurity operations professional</strong> with over a decade of 
+                        hands-on IT infrastructure experience, now operating at the intersection of 
+                        <span class="highlight">traditional security operations</span> and 
+                        <span class="highlight">frontier AI security</span>.
+                    </p>
+                    <p>
+                        I hold an <strong>M.S. in Cybersecurity (First Class Honors, GPA 3.7)</strong> from 
+                        Oklahoma City University and 24 industry certifications including 
+                        <strong>CCEP</strong> — officially certified to teach cybersecurity.
+                    </p>
+                    <p>
+                        Currently, I conduct active adversarial testing against frontier large language models — 
+                        running jailbreak analysis, prompt injection assessments, and misuse evaluations. 
+                        I publish sanitized red teaming frameworks on GitHub to advance AI safety.
+                    </p>
+                    <p>
+                        On the defensive side, I've worked in a live enterprise SOC at 
+                        <strong>Hobby Lobby Corporate IS</strong>, deploying MISP threat intelligence 
+                        automation and monitoring security events with Splunk.
+                    </p>
+                    <div class="about-highlights">
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                    <path d="M9 12l2 2 4-4"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <strong>Dual-Domain Expertise</strong>
+                                <span>SOC Operations + AI Red Teaming</span>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                                    <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <strong>Certified Educator</strong>
+                                <span>CCEP — Authorized to teach cybersecurity</span>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="7" width="20" height="15" rx="2" ry="2"/>
+                                    <path d="M17 2H7a2 2 0 0 0-2 2v3h14V4a2 2 0 0 0-2-2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <strong>Enterprise Experience</strong>
+                                <span>Hobby Lobby SOC Internship + 10 yrs IT</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image-wrapper">
+                    <div class="about-image-container">
+                        <img src="assets/images/profile.jpg" alt="Chima Ukachukwu — AI Security Analyst & Red Teamer" class="about-profile-img">
+                    </div>
+                    <div class="about-quick-facts">
+                        <div class="fact">
+                            <span class="fact-icon">📍</span>
+                            <span>Oklahoma City, USA</span>
+                        </div>
+                        <div class="fact">
+                            <span class="fact-icon">🎓</span>
+                            <span>M.S. Cybersecurity, OCU</span>
+                        </div>
+                        <div class="fact">
+                            <span class="fact-icon">🔐</span>
+                            <span>CCEP | CTIGA | AI Security</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERTISE SECTION -->
+    <section id="expertise" class="expertise">
+        <div class="section-container">
+            <h2 class="section-title">
+                <span class="section-number">02.</span> Dual Expertise
+            </h2>
+            <p class="section-subtitle">I operate at the intersection of two critical security domains</p>
+            
+            <div class="expertise-grid">
+                <!-- SOC & Defensive -->
+                <div class="expertise-card defensive">
+                    <div class="card-icon">
+                        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <path d="M8 11l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <h3>SOC & Defensive Operations</h3>
+                    <p class="card-subtitle">Security Operations | Blue Team | Incident Response</p>
+                    <ul class="expertise-list">
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                            <div>
+                                <strong>SIEM & Monitoring</strong>
+                                <span>Splunk Enterprise Security for log analysis, alert triage, and security event monitoring in production SOC</span>
+                            </div>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                            <div>
+                                <strong>Threat Intelligence</strong>
+                                <span>MISP deployment and Python automation for threat feed ingestion, enrichment, and distribution</span>
+                            </div>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                            <div>
+                                <strong>Incident Response</strong>
+                                <span>Structured IR workflows, forensic analysis, and post-incident documentation</span>
+                            </div>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                            <div>
+                                <strong>GRC & Compliance</strong>
+                                <span>Governance frameworks, risk assessment, and security policy alignment</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="expertise-tags">
+                        <span>Splunk</span>
+                        <span>MISP</span>
+                        <span>Imperva</span>
+                        <span>Python</span>
+                        <span>SIEM</span>
+                    </div>
+                </div>
+
+                <!-- AI Red Teaming -->
+                <div class="expertise-card offensive">
+                    <div class="card-icon">
+                        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2a10 10 0 1 0 10 10H12V2z"/>
+                            <path d="M12 2a10 10 0 0 1 10 10h-10V2z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </div>
+                    <h3>AI Red Teaming & LLM Security</h3>
+                    <p class="card-subtitle">Adversarial Testing | Prompt Injection | AI Safety</p>
+                    <ul class="expertise-list">
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                            <div>
+                                <strong>Adversarial Testing</strong>
+                                <span>Jailbreak analysis, prompt injection assessments, and misuse evaluation against frontier LLMs</span>
+                            </div>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                            <div>
+                                <strong>Python Automation</strong>
+                                <span>Automated adversarial test suites for scaled red teaming across model versions</span>
+                            </div>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                            <div>
+                                <strong>Multimodal Analysis</strong>
+                                <span>Image and document-based attack surface evaluation for vision-enabled models</span>
+                            </div>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                            <div>
+                                <strong>Evaluation Frameworks</strong>
+                                <span>Governance-aligned AI safety evaluation workflows with structured reporting</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="expertise-tags">
+                        <span>LLM Security</span>
+                        <span>Prompt Injection</span>
+                        <span>Jailbreak Analysis</span>
+                        <span>AI Safety</span>
+                        <span>Python</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bridge Section -->
+            <div class="expertise-bridge">
+                <div class="bridge-line"></div>
+                <div class="bridge-content">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                    <h4>The Bridge</h4>
+                    <p>Threat modeling, structured methodology, and security mindset transfer seamlessly between traditional infrastructure and frontier AI systems. I bring enterprise security rigor to AI safety — and AI-native thinking to security operations.</p>
+                </div>
+                <div class="bridge-line"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO SECTION -->
+    <section id="portfolio" class="portfolio">
+        <div class="section-container">
+            <h2 class="section-title">
+                <span class="section-number">03.</span> Portfolio
+            </h2>
+            <p class="section-subtitle">Published frameworks, case studies, and professional work</p>
+            
+            <div class="portfolio-grid">
+                <!-- AI Red Teaming Card -->
+                <div class="portfolio-card featured">
+                    <div class="portfolio-card-header">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                        <span>GitHub Repository</span>
+                    </div>
+                    <h3>AI Red Teaming Frameworks</h3>
+                    <p>Sanitized, NDA-compliant frameworks from active adversarial testing against frontier LLMs.</p>
+                    <ul>
+                        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> LLM Jailbreak Taxonomy</li>
+                        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Prompt Injection Testing Framework</li>
+                        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Automated Adversarial Test Suite</li>
+                        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Multimodal Attack Surface Analysis</li>
+                    </ul>
+                    <a href="https://github.com/chima-ukachukwu-sec/ai-red-teaming-frameworks" class="btn btn-card" target="_blank">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        View Repository
+                    </a>
+                </div>
+
+                <!-- SOC Portfolio Card -->
+                <div class="portfolio-card featured">
+                    <div class="portfolio-card-header">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                        <span>GitHub Repository</span>
+                    </div>
+                    <h3>SOC & Defensive Security</h3>
+                    <p>Enterprise security operations work, case studies, and incident response simulations.</p>
+                    <ul>
+                        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> MISP Threat Intelligence Automation — Hobby Lobby</li>
+                        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Splunk SOC Monitoring Walkthrough</li>
+                        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Forage Cybersecurity Simulations (Mastercard, PwC, AIG)</li>
+                    </ul>
+                    <a href="https://github.com/chima-ukachukwu-sec/soc-defensive-portfolio" class="btn btn-card" target="_blank">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        View Repository
+                    </a>
+                </div>
+
+                <!-- Certifications Card -->
+                <div class="portfolio-card">
+                    <div class="portfolio-card-header">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+                        <span>Credential Stack</span>
+                    </div>
+                    <h3>24 Industry Certifications</h3>
+                    <p>Complete certification inventory including CCEP, CTIGA, AI Security, Cisco CyberOps, and 20 more.</p>
+                    <a href="#certifications" class="btn btn-card">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                        View All
+                    </a>
+                </div>
+
+                <!-- GitHub Profile Card -->
+                <div class="portfolio-card">
+                    <div class="portfolio-card-header">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                        <span>GitHub Profile</span>
+                    </div>
+                    <h3>Full GitHub Portfolio</h3>
+                    <p>Complete code repositories, frameworks, and ongoing security research projects.</p>
+                    <a href="https://github.com/chima-ukachukwu-sec" class="btn btn-card" target="_blank">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        Visit Profile
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATIONS SECTION -->
+    <section id="certifications" class="certifications">
+        <div class="section-container">
+            <h2 class="section-title">
+                <span class="section-number">04.</span> Certifications
+            </h2>
+            <p class="section-subtitle">24 verifiable industry credentials across cybersecurity, AI security, and IT infrastructure</p>
+            
+            <div class="cert-grid">
+                <div class="cert-card elite">
+                    <div class="cert-badge">Elite</div>
+                    <h4>CCEP</h4>
+                    <p>Certified Cybersecurity Educator Professional</p>
+                    <span class="cert-issuer">Red Team Leaders · Nov 2025</span>
+                </div>
+                <div class="cert-card elite">
+                    <div class="cert-badge">Elite</div>
+                    <h4>CTIGA</h4>
+                    <p>Certified Threat Intelligence & Governance Analyst</p>
+                    <span class="cert-issuer">Red Team Leaders · Jan 2026</span>
+                </div>
+                <div class="cert-card elite">
+                    <div class="cert-badge">Elite</div>
+                    <h4>AI Security</h4>
+                    <p>AI Security Certification</p>
+                    <span class="cert-issuer">Securiti AI · Jan 2026</span>
+                </div>
+                <div class="cert-card elite">
+                    <div class="cert-badge">Elite</div>
+                    <h4>CyberOps Associate</h4>
+                    <p>Cisco CyberOps Associate</p>
+                    <span class="cert-issuer">Cisco · May 2025</span>
+                </div>
+                <div class="cert-card">
+                    <h4>Microsoft Cybersecurity Analyst</h4>
+                    <p>Full Specialization</p>
+                    <span class="cert-issuer">Microsoft · Sep 2024</span>
+                </div>
+                <div class="cert-card">
+                    <h4>Google Cybersecurity</h4>
+                    <p>Professional Specialization</p>
+                    <span class="cert-issuer">Coursera · Jun 2023</span>
+                </div>
+                <div class="cert-card">
+                    <h4>AWS Cloud Practitioner</h4>
+                    <p>Certified Cloud Practitioner</p>
+                    <span class="cert-issuer">AWS · Aug 2022</span>
+                </div>
+                <div class="cert-card">
+                    <h4>Microsoft Security Fundamentals</h4>
+                    <p>Security, Compliance & Identity</p>
+                    <span class="cert-issuer">Microsoft · Apr 2025</span>
+                </div>
+            </div>
+            <p class="cert-more">+ 16 additional certifications including Azure AI Fundamentals, TryHackMe, TCM Security, Forage Simulations (Mastercard, PwC, AIG), and more.</p>
+        </div>
+    </section>
+
+    <!-- TECH STACK SECTION -->
+    <section id="techstack" class="tech-stack">
+        <div class="section-container">
+            <h2 class="section-title">
+                <span class="section-number">05.</span> Tech Stack
+            </h2>
+            <p class="section-subtitle">Tools, platforms, and technologies I work with daily</p>
+            <div class="stack-grid">
+                <div class="stack-category">
+                    <h4><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Security Operations</h4>
+                    <div class="stack-items">
+                        <span>Splunk</span><span>MISP</span><span>Imperva</span>
+                        <span>SIEM</span><span>Incident Response</span><span>Threat Intelligence</span>
+                    </div>
+                </div>
+                <div class="stack-category">
+                    <h4><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 2a10 10 0 0 1 10 10h-10V2z"/><circle cx="12" cy="12" r="3"/></svg> AI Security</h4>
+                    <div class="stack-items">
+                        <span>LLM Red Teaming</span><span>Prompt Injection</span><span>Jailbreak Analysis</span>
+                        <span>AI Safety</span><span>Adversarial Testing</span>
+                    </div>
+                </div>
+                <div class="stack-category">
+                    <h4><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> Languages & Tools</h4>
+                    <div class="stack-items">
+                        <span>Python</span><span>SQL</span><span>YAML</span>
+                        <span>Git</span><span>Linux</span><span>AWS</span><span>Azure</span>
+                    </div>
+                </div>
+                <div class="stack-category">
+                    <h4><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Governance & Compliance</h4>
+                    <div class="stack-items">
+                        <span>GRC</span><span>Risk Management</span><span>NDA Compliance</span>
+                        <span>Security Policy</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL PROOF SECTION -->
+    <section class="social-proof">
+        <div class="section-container">
+            <h2 class="section-title">
+                <span class="section-number">06.</span> Trust Signals
+            </h2>
+            <div class="proof-grid">
+                <div class="proof-card">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg>
+                    <h4>OCU Library Tribute</h4>
+                    <p>Oklahoma City University added a cybersecurity book to their permanent collection in my name.</p>
+                </div>
+                <div class="proof-card">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+                    <h4>First Class Honors</h4>
+                    <p>Graduated M.S. Cybersecurity with First Class Honors and 3.7 GPA.</p>
+                </div>
+                <div class="proof-card">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><path d="M17 2H7a2 2 0 0 0-2 2v3h14V4a2 2 0 0 0-2-2z"/></svg>
+                    <h4>Fortune 500 SOC Experience</h4>
+                    <p>Interned at Hobby Lobby Corporate IS — Splunk, MISP, Imperva.</p>
+                </div>
+                <div class="proof-card">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    <h4>Global IT Background</h4>
+                    <p>10+ years of IT spanning Nigeria and the United States — enterprise to national infrastructure.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="contact">
+        <div class="section-container">
+            <h2 class="section-title">
+                <span class="section-number">07.</span> Contact
+            </h2>
+            <p class="section-subtitle">I'm currently available for AI security roles, SOC analyst positions, red teaming engagements, and consulting opportunities.</p>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Let's Work Together</h3>
+                    <p>Whether you need an AI system stress-tested, a SOC analyst who understands both traditional and frontier threats, or a certified cybersecurity educator — I'm ready.</p>
+                    
+                    <div class="contact-methods">
+                        <a href="mailto:chima.ukachukwu@outlook.com" class="contact-method">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            <div>
+                                <strong>Email</strong>
+                                <span>chima.ukachukwu@outlook.com</span>
+                            </div>
+                        </a>
+                        <a href="https://linkedin.com/in/chima-ukachukwu" target="_blank" class="contact-method">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                            <div>
+                                <strong>LinkedIn</strong>
+                                <span>linkedin.com/in/chima-ukachukwu</span>
+                            </div>
+                        </a>
+                        <a href="https://github.com/chima-ukachukwu-sec" target="_blank" class="contact-method">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            <div>
+                                <strong>GitHub</strong>
+                                <span>github.com/chima-ukachukwu-sec</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-form-wrapper">
+                    <form id="contact-form" class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" placeholder="What's this about?">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Tell me about your project, role, or opportunity..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-submit">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                            Send Message
+                        </button>
+                    </form>
+                    <div id="form-success" class="form-success hidden">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        <p>Message sent successfully. I'll respond within 24 hours.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <a href="#" class="footer-logo">CU<span class="accent">.</span></a>
+                <div class="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#expertise">Expertise</a>
+                    <a href="#portfolio">Portfolio</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-social">
+                    <a href="https://linkedin.com/in/chima-ukachukwu" target="_blank" aria-label="LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+                    <a href="https://github.com/chima-ukachukwu-sec" target="_blank" aria-label="GitHub">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    </a>
+                    <a href="mailto:chima.ukachukwu@outlook.com" aria-label="Email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Chima Ukachukwu. Built with precision. Secured by expertise.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>
