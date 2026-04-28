@@ -439,6 +439,13 @@ img {
     color: var(--text-primary);
 }
 
+/* Text-style stat (e.g., "M.S.") rendered slightly smaller so it visually balances the numeric stats */
+.stat-number.stat-text {
+    font-size: 1.8rem;
+    letter-spacing: 0.02em;
+    color: var(--accent-primary);
+}
+
 .stat-suffix {
     font-family: var(--font-mono);
     font-size: 1.5rem;

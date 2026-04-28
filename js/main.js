@@ -131,77 +131,64 @@ function initTypingAnimation() {
     setTimeout(type, 1000);
 }
 
-/* ---------- STATS COUNTER (PATCHED) ---------- */
+/* ---------- STATS COUNTER (FIXED v2) ----------
+   Bug in v1: hero-stats is above the fold, so the IntersectionObserver
+   fired immediately on page load and recruiters saw "0" for ~2 seconds.
+   Fix: render the target value at rest. Only animate if the user has
+   scrolled away and scrolled back (delight, not bug). */
 function initStatsCounter() {
     const statNumbers = document.querySelectorAll('.stat-number[data-target]');
     if (!statNumbers.length) return;
 
-    let hasAnimated = false;
-    let animationFrameId;
-
-    const animateStats = () => {
-        if (hasAnimated) return;
-        hasAnimated = true;
-
+    // 1. Set rest state to the final value immediately so first paint is correct.
+    const setRestValues = () => {
         statNumbers.forEach(stat => {
             const target = parseFloat(stat.getAttribute('data-target'));
-            const duration = 2000;
+            stat.textContent = Number.isInteger(target) ? target : target.toFixed(1);
+        });
+    };
+    setRestValues();
+
+    let animationFrameId;
+    const animateOnce = () => {
+        statNumbers.forEach(stat => {
+            const target = parseFloat(stat.getAttribute('data-target'));
+            const duration = 800;
             const startTime = performance.now();
-            const startValue = 0;
 
-            function updateCounter(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
+            function tick(now) {
+                const progress = Math.min((now - startTime) / duration, 1);
                 const eased = 1 - Math.pow(1 - progress, 3);
-                const currentValue = startValue + (target - startValue) * eased;
-
-                stat.textContent = Math.floor(currentValue);
-
+                const value = target * eased;
+                stat.textContent = Number.isInteger(target) ? Math.floor(value) : value.toFixed(1);
                 if (progress < 1) {
-                    animationFrameId = requestAnimationFrame(updateCounter);
+                    animationFrameId = requestAnimationFrame(tick);
                 } else {
-                    stat.textContent = target;
+                    stat.textContent = Number.isInteger(target) ? target : target.toFixed(1);
                 }
             }
-
-            animationFrameId = requestAnimationFrame(updateCounter);
+            animationFrameId = requestAnimationFrame(tick);
         });
     };
 
-    // Finish animation if interrupted by fast scroll
-    const finishAnimation = () => {
-        if (animationFrameId) {
-            cancelAnimationFrame(animationFrameId);
-        }
-        statNumbers.forEach(stat => {
-            const target = parseFloat(stat.getAttribute('data-target'));
-            stat.textContent = target;
-        });
-        hasAnimated = true;
-    };
-
-    document.addEventListener('scrollend', () => {
-        const heroRect = document.querySelector('.hero-stats')?.getBoundingClientRect();
-        if (heroRect && heroRect.bottom < 0 && !hasAnimated) {
-            finishAnimation();
-        }
-    });
-
+    // 2. Track whether the user has scrolled away from the hero.
+    //    Only re-animate when they come BACK to it.
     const heroStats = document.querySelector('.hero-stats');
-    if (heroStats) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateStats();
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
+    if (!heroStats || !('IntersectionObserver' in window)) return;
 
-        observer.observe(heroStats);
-    } else {
-        animateStats();
-    }
+    let leftHero = false;
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+                leftHero = true;
+            } else if (leftHero) {
+                if (animationFrameId) cancelAnimationFrame(animationFrameId);
+                animateOnce();
+                leftHero = false;
+            }
+        });
+    }, { threshold: 0.5 });
+    observer.observe(heroStats);
 }
 
 /* ---------- SMOOTH SCROLL ---------- */
@@ -506,10 +493,10 @@ function initTerminal() {
 SOC-trained cybersecurity analyst operating at the intersection of traditional security operations and frontier AI security.
 
 <span class="output-highlight">📍 Oklahoma City, USA</span>
-<span class="output-highlight">🎓 M.S. Cybersecurity, OCU (First Class Honors, GPA 3.7)</span>
-<span class="output-highlight">📜 24 Industry Certifications (CCEP, CTIGA, AI Security, Cisco CyberOps)</span>
+<span class="output-highlight">🎓 M.S. Cybersecurity, OCU (GPA 3.7 / 4.0)</span>
+<span class="output-highlight">📜 Industry certifications + ongoing training (CCEP, CTIGA, Securiti AI, Cisco CyberOps)</span>
 <span class="output-highlight">💼 Active AI Red Teamer | Hobby Lobby SOC Alumnus</span>
-<span class="output-highlight">⚡ 10+ Years IT Infrastructure Experience</span>
+<span class="output-highlight">⚡ A decade of progressive IT and cybersecurity experience</span>
 
 <span class="output-subtitle">I break AI systems to make them safer — and I build defenses that actually hold.</span>`,
 
@@ -547,7 +534,7 @@ SOC-trained cybersecurity analyst operating at the intersection of traditional s
         },
 
         certs: () => `
-<span class="output-title">📜 Elite Certifications</span>
+<span class="output-title">📜 Certifications & Training</span>
 <span class="output-divider">─────────────────────────────────────</span>
 <span class="output-highlight">CCEP</span> — Certified Cybersecurity Educator Professional (Red Team Leaders, 2025)
 <span class="output-highlight">CTIGA</span> — Certified Threat Intelligence & Governance Analyst (Red Team Leaders, 2026)
@@ -557,21 +544,24 @@ SOC-trained cybersecurity analyst operating at the intersection of traditional s
 <span class="output-highlight">Google Cybersecurity</span> — Professional Specialization (2023)
 <span class="output-highlight">AWS Cloud Practitioner</span> — AWS (2022)
 <span class="output-highlight">Microsoft Security, Compliance & Identity</span> — (2025)
+<span class="output-highlight">CompTIA Security+</span> — In progress
 
-<span class="output-subtitle">+ 16 additional certifications available on LinkedIn</span>`,
+<span class="output-subtitle">+ Applied training: Azure AI Fundamentals, TryHackMe paths, TCM Security, Forage simulations. Full list on LinkedIn.</span>`,
 
         experience: () => `
 <span class="output-title">💼 Career Timeline</span>
 <span class="output-divider">─────────────────────────────────────</span>
 <span class="output-highlight">2026–Present</span>  AI Security & Evaluation Specialist (Independent)
+<span class="output-highlight">2026–Present</span>  AI Agent Evaluation Specialist — Alignerr
+<span class="output-highlight">Sep 2025 – Jan 2026</span>  Cyber Security Expert Fellow (AI Safety) — Handshake
 <span class="output-highlight">2024</span>          Cybersecurity Intern — Hobby Lobby Corporate IS
-<span class="output-highlight">2021–2024</span>     Enterprise IT Support — Microsoft Vendor
+<span class="output-highlight">2023–Present</span>  Cybersecurity Apprentice — Cybersecurity Clarity
+<span class="output-highlight">2021–2024</span>     Enterprise IT Support — Authorized Microsoft Vendor (via Upwork)
 <span class="output-highlight">2016–2017</span>     Technical Support Analyst — Hotels.ng
-<span class="output-highlight">2015–2016</span>     E-Payments Intern — NIBSS (National Financial Infrastructure)
+<span class="output-highlight">2015</span>          E-Payments Intern — NIBSS
 <span class="output-highlight">2014–2021</span>     IT Support & Systems Admin — Catholic Church Magodo
-<span class="output-highlight">2011–2015</span>     Brand Representative — EXP Marketing Nigeria
 
-<span class="output-subtitle">📍 Nigeria → United States | 10+ Years Progressive Growth</span>`,
+<span class="output-subtitle">📍 Nigeria → United States | A Decade of Progressive Growth</span>`,
 
         redteam: () => `
 <span class="output-title">🔴 AI Red Teaming Methodology</span>
@@ -599,9 +589,9 @@ SOC-trained cybersecurity analyst operating at the intersection of traditional s
         education: () => `
 <span class="output-title">🎓 Education</span>
 <span class="output-divider">─────────────────────────────────────</span>
-<span class="output-highlight">M.S. Computer Science — Cybersecurity</span>
+<span class="output-highlight">M.S. Cybersecurity</span>
 Oklahoma City University | 2023–2025
-GPA: 3.7 (First Class Honors)
+GPA: 3.7 / 4.0
 
 <span class="output-highlight">Key Coursework:</span>
 • Cybersecurity Risk Management
@@ -655,8 +645,8 @@ GPA: 3.7 (First Class Honors)
 <span class="output-success">Domain:</span>      chimaukachukwu.com
 <span class="output-success">Specialty:</span>   AI Red Teaming, SOC Operations, LLM Security
 <span class="output-success">Status:</span>      Active — Available for Opportunities
-<span class="output-success">Created:</span>     2014 (10+ years IT infrastructure experience)
-<span class="output-success">Updated:</span>     2026 (M.S. Cybersecurity, 24 certifications)
+<span class="output-success">Created:</span>     2014 (a decade of progressive IT and cybersecurity experience)
+<span class="output-success">Updated:</span>     2026 (M.S. Cybersecurity, industry certifications + ongoing training)
 <span class="output-success">Source:</span>      github.com/chima-ukachukwu-sec`,
 
         history: () => {
