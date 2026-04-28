@@ -294,7 +294,7 @@ function initContactForm() {
         // REPLACE WITH YOUR ACTUAL FORMSPREE FORM ID
         // Go to formspree.io → Create Form → Copy ID
         // ============================================
-        const formspreeEndpoint = 'https://formspree.io/f/YOUR_FORM_ID';
+        const formspreeEndpoint = 'https://formspree.io/f/xjgjqogk';
 
         fetch(formspreeEndpoint, {
             method: 'POST',
@@ -335,7 +335,7 @@ function initContactForm() {
         })
         .catch(error => {
             console.error('Form submission error:', error);
-            alert('Something went wrong. Please email me directly at chima.ukachukwu@outlook.com');
+            alert('Something went wrong. Please email me directly at chima.ukachukwu.sec@gmail.com');
             submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
         });
@@ -618,8 +618,8 @@ GPA: 3.7 (First Class Honors)
         contact: () => `
 <span class="output-title">📬 Let's Connect</span>
 <span class="output-divider">─────────────────────────────────────</span>
-<span class="output-success">Email:</span>    <span class="output-link">chima.ukachukwu@outlook.com</span>
-<span class="output-success">LinkedIn:</span>  <span class="output-link">linkedin.com/in/chima-ukachukwu</span>
+<span class="output-success">Email:</span>    <span class="output-link">chima.ukachukwu.sec@gmail.com</span>
+<span class="output-success">LinkedIn:</span>  <span class="output-link">linkedin.com/in/chima-anthony-u</span>
 <span class="output-success">GitHub:</span>    <span class="output-link">github.com/chima-ukachukwu-sec</span>
 <span class="output-success">Portfolio:</span> <span class="output-link">chimaukachukwu.com</span>
 
