@@ -618,6 +618,13 @@ GPA: 3.7 / 4.0
         github: () => `
 <span class="output-title">📦 GitHub Repositories</span>
 <span class="output-divider">─────────────────────────────────────</span>
+<span class="output-success">⚡ adverse-insight</span>
+  → Live app · 3-agent contract risk analyzer (Streamlit + OpenAI)
+  → Demo: <span class="output-link">adverse-insight.streamlit.app</span>
+
+<span class="output-success">🧪 ai-evaluation-safety-portfolio</span>
+  → NDA-compliant AI evaluation, safety, and red-teaming case studies
+
 <span class="output-success">🔴 ai-red-teaming-frameworks</span>
   → Jailbreak taxonomy, prompt injection testing, automated test suite
 
