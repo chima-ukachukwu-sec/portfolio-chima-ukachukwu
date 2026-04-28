@@ -2232,3 +2232,46 @@ section {
     .post-body h3 { font-size: 1.05rem; }
     .post-list-title { font-size: 1.2rem; }
 }
+
+/* Blog-page footer: simpler than the main-site footer (no .footer-top wrapper),
+   needs explicit flex layout so the link clusters don't collapse onto each other. */
+.post-main ~ .footer .footer-container,
+.post-main + .footer .footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 40px 24px;
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.post-main ~ .footer .footer-brand p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+.post-main ~ .footer .footer-links,
+.post-main ~ .footer .footer-social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.post-main ~ .footer .footer-links a,
+.post-main ~ .footer .footer-social a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+}
+
+.post-main ~ .footer .footer-links a:hover,
+.post-main ~ .footer .footer-social a:hover { color: var(--accent-primary); }
+
+.post-main ~ .footer .footer-copyright {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    margin-top: 16px;
+}
