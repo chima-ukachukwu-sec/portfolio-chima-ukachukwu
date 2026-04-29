@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Red Teaming Frameworks — Case Study · Chima Ukachukwu</title>
+    <meta name="description" content="The structured methodology I use for adversarial testing of frontier large language models — taxonomy, evaluation phases, automated test infrastructure, and the multimodal surface. Sanitized to remove all working exploits and client-identifying details.">
+    <meta name="author" content="Chima Anthony Ukachukwu">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="AI Red Teaming Frameworks — Case Study">
+    <meta property="og:description" content="The structured methodology I use for adversarial testing of frontier large language models. Taxonomy, evaluation phases, automated infrastructure.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://chimaukachukwu.com/portfolio/case-studies/ai-red-teaming-frameworks.html">
+    <meta property="og:image" content="https://chimaukachukwu.com/assets/images/profile.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://chimaukachukwu.com/assets/images/profile.jpg">
+
+    <link rel="canonical" href="https://chimaukachukwu.com/portfolio/case-studies/ai-red-teaming-frameworks.html">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%2300d4aa'/%3E%3Cstop offset='100%25' style='stop-color:%2300a3ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Ctext x='50' y='72' text-anchor='middle' fill='%230a0e14' font-family='Inter,sans-serif' font-weight='900' font-size='62'%3EC%3C/text%3E%3C/svg%3E">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+
+    <!-- JSON-LD Article schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "AI Red Teaming Frameworks — Case Study",
+      "description": "The structured methodology I use for adversarial testing of frontier LLMs.",
+      "author": { "@type": "Person", "name": "Chima Anthony Ukachukwu", "url": "https://chimaukachukwu.com" },
+      "datePublished": "2026-04-29",
+      "url": "https://chimaukachukwu.com/portfolio/case-studies/ai-red-teaming-frameworks.html",
+      "image": "https://chimaukachukwu.com/assets/images/profile.jpg"
+    }
+    </script>
+
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://plausible.io/js/pa-CULpUfeL2Juc-qRc9ARc9.js"></script>
+    <script>
+        window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+        plausible.init()
+    </script>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="../../index.html" class="nav-logo">CU<span class="accent">.</span></a>
+        <ul class="nav-menu">
+            <li><a href="../../index.html" class="nav-link">Home</a></li>
+            <li><a href="../../blog/index.html" class="nav-link">Writing</a></li>
+            <li><a href="../../index.html#portfolio" class="nav-link active">Portfolio</a></li>
+            <li><a href="../../resume/index.html" class="nav-link">Resume</a></li>
+            <li><a href="../../index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main class="post-main">
+    <article class="post-article">
+        <header class="post-header">
+            <p class="post-eyebrow"><a href="../../index.html#portfolio">← Portfolio</a></p>
+            <h1 class="post-title">AI Red Teaming Frameworks</h1>
+            <p class="post-dek">The structured methodology I use for adversarial testing of frontier large language models — taxonomy, evaluation phases, automated test infrastructure, and the multimodal surface. Sanitized to remove all working exploits and client-identifying details.</p>
+            <p class="post-meta">
+                <span class="post-meta-item">Case study</span>
+                <span class="post-meta-divider">·</span>
+                <time datetime="2026-04-29">Published Apr 29, 2026</time>
+                <span class="post-meta-divider">·</span>
+                <span class="post-meta-item">~8 min read</span>
+                <span class="post-meta-divider">·</span>
+                <span class="post-meta-item">Active work, 2025–present</span>
+            </p>
+            <p class="resume-download">
+                <a href="https://github.com/chima-ukachukwu-sec/ai-red-teaming-frameworks" class="btn btn-card" target="_blank" rel="noopener">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    Frameworks Repository (GitHub)
+                </a>
+                &nbsp;
+                <a href="https://github.com/chima-ukachukwu-sec/ai-evaluation-safety-portfolio" class="btn btn-card" target="_blank" rel="noopener">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    Evaluation Portfolio (GitHub)
+                </a>
+            </p>
+        </header>
+
+        <div class="post-body">
+
+            <h2>The problem</h2>
+
+            <p>Most published AI red team work falls into one of two failure modes. Either it's a single dramatic finding ("we got the model to say X by doing Y"), shareable but not generalizable. Or it's a list of fifty adversarial prompts dumped into a GitHub repo, useful as ammunition but not as a framework. Neither helps a team build the actual capability to evaluate models systematically across versions, surfaces, and deployments.</p>
+
+            <p>What's missing is the scaffolding. Taxonomies that classify attack patterns by mechanism, not by the words they happen to use. Evaluation phases that map to deployment stages. Test infrastructure that scales beyond one researcher's notebook. Documentation discipline that lets the next person on the team pick up where you left off without re-reading every prompt.</p>
+
+            <p>I work on that scaffolding. The frameworks below are what I use across active engagements — sanitized to remove client-identifying material, working exploits, and indicators specific to currently-deployed model versions. The structure is public so other practitioners can adapt it; the specifics are not.</p>
+
+            <h2>Why this work matters to me</h2>
+
+            <p>I'm in this lane for two reasons.</p>
+
+            <p>First — I think the next decade of security work happens at this intersection, and I want to be one of the people doing it well. Traditional security has decades of accumulated discipline (detection engineering, incident response, threat modeling, governance). AI safety has a short history of mostly research-grade evaluation. The transfer hasn't really happened yet, and there's room for people who can speak both languages. <a href="../../blog/posts/the-bridge.html">I wrote about why that matters</a>.</p>
+
+            <p>Second — adversarial work is a particular cast of mind, and it's the one I think with most naturally. SOC work taught me to ask "where could this go wrong, and what would I see if it did?" That question, pointed at an LLM or an agent system, is what AI red teaming is. Same muscle, different surface.</p>
+
+            <h2>The four frameworks</h2>
+
+            <p>The body of work is organized around four sub-frameworks. Each one is documented in the public <a href="https://github.com/chima-ukachukwu-sec/ai-red-teaming-frameworks" target="_blank" rel="noopener">frameworks repo</a> at the methodology level.</p>
+
+            <h3>1. LLM Jailbreak Taxonomy</h3>
+
+            <p>A working classification I maintain for jailbreak patterns, organized by mechanism rather than surface form. Categories include role-play coercion, hypothetical framing, context dilution, token smuggling, multi-turn ramping, indirect injection, system-prompt extraction, prefix/suffix leakage, authority impersonation, and capability negotiation.</p>
+
+            <p>Each category has three things attached: the underlying mechanism (why does this work, structurally?), the observed behavioral signals (what does it look like when it fires?), and the defensive controls a model provider can layer in. The categories survive model upgrades because they're about <em>structure</em>, not specific phrasings — when a new family of jailbreaks appears, it's almost always a variant of an existing category, not a genuinely new mechanism.</p>
+
+            <p>I treat this taxonomy the way a SOC team treats its detection categories: a living document, revised as new patterns emerge, with explicit versioning so I can talk about "these were the categories I tested against in March 2026" rather than waving at a vague "current standards" claim.</p>
+
+            <h3>2. Prompt Injection Testing Framework</h3>
+
+            <p>A five-phase methodology for evaluating any LLM-integrated application (RAG system, agent, plugin host, browser tool) for prompt injection vulnerabilities.</p>
+
+            <p><strong>Phase 1 — Surface mapping.</strong> Enumerate every untrusted input the model can ingest: user input, retrieved documents, web pages, tool outputs, image alt text, OCR'd content, function-call return values, system message segments under user control. The output is a labeled diagram of all attack surfaces with trust boundaries marked.</p>
+
+            <p><strong>Phase 2 — Direct injection.</strong> Probe each surface with payloads that attempt to override the model's instructions. Categorized by intent: data exfiltration, action triggering, persona override, context poisoning. Each probe is recorded with payload class, target surface, observed model behavior, and severity.</p>
+
+            <p><strong>Phase 3 — Indirect injection.</strong> The higher-impact phase. Plant instructions in documents, pages, and data the model will retrieve through its tool stack, then observe whether those instructions take effect when the model processes them as "data." This is where most production systems fail.</p>
+
+            <p><strong>Phase 4 — Chained / agentic injection.</strong> For agent systems, test whether an injection in one tool call cascades through the agent's reasoning chain to trigger downstream actions. This is the territory the OWASP Agentic AI Top 10 (2026) is starting to address — most teams haven't built defenses for it yet.</p>
+
+            <p><strong>Phase 5 — Output exfiltration channels.</strong> Test whether the model can be coerced to encode sensitive information into URLs, image alt text, function-call arguments, or other channels that bypass output filters.</p>
+
+            <p>Each phase produces structured findings with severity ratings (Critical / High / Medium / Low / Informational) and recommended mitigations mapped to OWASP Top 10 for LLM Applications.</p>
+
+            <h3>3. Automated Adversarial Test Suite</h3>
+
+            <p>A Python-based harness for running adversarial test campaigns at scale across multiple model versions and providers. Architecture: a tagged YAML prompt library feeds a parallel test runner, which calls model adapters (OpenAI, Anthropic, Google, etc.), logs results to JSON + SQLite, and produces rubric-scored reports.</p>
+
+            <p>The point isn't speed for its own sake. The point is <em>diff-ability</em>. When a provider releases a new model version, the team or the customer wants to know which adversarial categories it now resists versus still falls for, compared to the previous version. With this harness, that diff is a few minutes of compute. Without it, it's weeks of manual prompting and someone's vague memory of last quarter's results.</p>
+
+            <p>Stack: Python 3.11+, <code>httpx</code> for async model calls, <code>pydantic</code> for schema validation, SQLite for run history, pytest-style rubric assertions. The implementation specifics are private (client work). The architecture is public — reproducible by any competent Python engineer who reads the documentation.</p>
+
+            <h3>4. Multimodal Attack Surface Analysis</h3>
+
+            <p>Methodology for evaluating vision-enabled and document-processing models for adversarial inputs delivered through non-text channels.</p>
+
+            <p>Image-based vectors: visual prompt injection (instructions in legible or steganographic text), adversarial perturbations that flip classification, OCR-bypass payloads (low-contrast text the model reads but a human reviewer wouldn't notice), misleading visual context (image content that contradicts caption / alt text).</p>
+
+            <p>Document-based vectors: PDF metadata injection, hidden text layers (white-on-white, zero-font, off-page), markdown / HTML injection via document conversion pipelines, data exfiltration via "innocuous" structured tables.</p>
+
+            <p>Each finding is documented with: the vector, the affected processing pipeline, observed model behavior, severity, and mitigation. Live findings remain client-restricted; the framework structure does not.</p>
+
+            <h2>What surprised me</h2>
+
+            <p><strong>The taxonomy is more durable than the exploits.</strong> Specific working jailbreaks for a given model version often stop working within a release cycle or two. The category they belonged to almost always still works — somewhere, with some new variant. Categorizing by mechanism rather than phrasing means the taxonomy survives the patches that make individual examples obsolete.</p>
+
+            <p><strong>Indirect injection is more important than direct.</strong> It's also harder to test, because it requires building the surrounding tool/RAG infrastructure as part of the evaluation. Most public AI red team work focuses on direct injection because it's easier to reproduce. The work that actually moves production safety lives in the indirect-injection phase, and it's underrepresented for that reason.</p>
+
+            <p><strong>Documentation discipline transfers from SOC work.</strong> The single biggest difference I notice between AI red team work I've done and AI red team work I've inherited from others is the quality of the structured findings. SOC analysts learn early that an undocumented finding is half a finding; a lot of AI safety work is still produced as Slack messages and ad-hoc notebooks. Bringing the discipline over is a real upgrade.</p>
+
+            <h2>Where this is going</h2>
+
+            <p>The next phase of this work is the agentic surface. Single-model adversarial testing is a reasonably mature category at this point — there are public frameworks (Anthropic's, OpenAI's, the OWASP project's) that codify the basics. Agentic systems are not. An agent that can write code, send emails, query databases, and trigger workflows multiplies the attack surface non-linearly, and the evaluation methodology is still being invented.</p>
+
+            <p>Specifically, the gaps I'm working on:</p>
+
+            <ul>
+                <li><strong>Cross-tool injection chains.</strong> An adversarial payload planted in one tool's output that propagates through the agent's reasoning to trigger an action in a different tool. The OWASP Agentic AI Top 10 is starting to address this; the testing methodology is still ahead of what most teams can execute on.</li>
+                <li><strong>Reward-hacking detection.</strong> Did the agent actually complete the task, or did it find a shortcut that passes the success check while failing the spirit of the request? This is the work I'm currently doing at Alignerr.</li>
+                <li><strong>Evaluator manipulation.</strong> When the agent under test interacts with an automated evaluator, can it influence its own grade? The answer is "more often than you'd expect," and the defensive controls are nascent.</li>
+            </ul>
+
+            <h2>Where this fits</h2>
+
+            <p>The frameworks themselves are documented in <a href="https://github.com/chima-ukachukwu-sec/ai-red-teaming-frameworks" target="_blank" rel="noopener">github.com/chima-ukachukwu-sec/ai-red-teaming-frameworks</a>. The applied evaluation work — selected sanitized case studies and rubrics from active engagements — is in the <a href="https://github.com/chima-ukachukwu-sec/ai-evaluation-safety-portfolio" target="_blank" rel="noopener">AI Evaluation &amp; Safety Portfolio</a>.</p>
+
+            <p>Working exploits, model-version-specific findings, and any client-confidential material are not published anywhere public. References I work against include the <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" rel="noopener">OWASP Top 10 for LLM Applications</a>, the OWASP Agentic AI Top 10 (2026), <a href="https://atlas.mitre.org/" target="_blank" rel="noopener">MITRE ATLAS</a>, and the NIST AI Risk Management Framework.</p>
+
+            <p>If you're a hiring manager, an AI safety org, or a security team thinking about hardening LLM-integrated systems and want to talk methodology, the fastest way is the <a href="../../index.html#contact">contact form</a> or <a href="mailto:chima.ukachukwu.sec@gmail.com">email</a>.</p>
+
+        </div>
+
+        <footer class="post-footer">
+            <p class="post-author-card">
+                <strong>Chima Anthony Ukachukwu</strong> is an AI Security Analyst &amp; Red Teamer based in Oklahoma City. He runs adversarial testing against frontier LLMs, automates SOC threat intelligence, and is currently open to AI security and SOC analyst roles.
+                <br><br>
+                <a href="../../index.html#contact">Get in touch →</a> · <a href="https://linkedin.com/in/chima-anthony-u" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/chima-ukachukwu-sec" target="_blank" rel="noopener">GitHub</a>
+            </p>
+
+            <p class="post-share">
+                Share this case study:
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://chimaukachukwu.com/portfolio/case-studies/ai-red-teaming-frameworks.html" target="_blank" rel="noopener">LinkedIn</a> ·
+                <a href="https://twitter.com/intent/tweet?text=AI%20Red%20Teaming%20Frameworks%20%E2%80%94%20how%20I%20structure%20adversarial%20testing%20of%20frontier%20LLMs&url=https://chimaukachukwu.com/portfolio/case-studies/ai-red-teaming-frameworks.html" target="_blank" rel="noopener">X / Twitter</a>
+            </p>
+
+            <p class="post-back"><a href="../../index.html#portfolio">← Back to portfolio</a></p>
+        </footer>
+    </article>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-brand">
+            <span class="footer-logo">CU<span class="accent">.</span></span>
+            <p>AI Security Analyst &amp; Red Teamer</p>
+        </div>
+        <div class="footer-links">
+            <a href="../../index.html#home">Home</a>
+            <a href="../../blog/index.html">Writing</a>
+            <a href="../../index.html#portfolio">Portfolio</a>
+            <a href="../../resume/index.html">Resume</a>
+            <a href="../../index.html#contact">Contact</a>
+        </div>
+        <div class="footer-social">
+            <a href="https://linkedin.com/in/chima-anthony-u" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://github.com/chima-ukachukwu-sec" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </a>
+            <a href="mailto:chima.ukachukwu.sec@gmail.com" aria-label="Email">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+        </div>
+        <p class="footer-copyright">© 2026 Chima Anthony Ukachukwu</p>
+    </div>
+</footer>
+
+</body>
+</html>
