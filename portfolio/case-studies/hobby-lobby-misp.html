@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MISP Threat Intelligence Automation — Hobby Lobby · Case Study · Chima Ukachukwu</title>
+    <meta name="description" content="How I deployed and automated a community-feed threat intelligence platform for an enterprise SOC during a 4-month corporate internship. Architecture, what worked, what I'd do differently.">
+    <meta name="author" content="Chima Anthony Ukachukwu">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="MISP Threat Intelligence Automation — Hobby Lobby · Case Study">
+    <meta property="og:description" content="How I deployed and automated a community-feed threat intelligence platform for an enterprise SOC during a 4-month corporate internship.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://chimaukachukwu.com/portfolio/case-studies/hobby-lobby-misp.html">
+    <meta property="og:image" content="https://chimaukachukwu.com/assets/images/profile.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://chimaukachukwu.com/assets/images/profile.jpg">
+
+    <link rel="canonical" href="https://chimaukachukwu.com/portfolio/case-studies/hobby-lobby-misp.html">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%2300d4aa'/%3E%3Cstop offset='100%25' style='stop-color:%2300a3ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Ctext x='50' y='72' text-anchor='middle' fill='%230a0e14' font-family='Inter,sans-serif' font-weight='900' font-size='62'%3EC%3C/text%3E%3C/svg%3E">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+
+    <!-- JSON-LD Article schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "MISP Threat Intelligence Automation — Hobby Lobby",
+      "description": "Containerizing MISP and automating community-feed ingestion for an enterprise SOC during a 4-month corporate internship.",
+      "author": { "@type": "Person", "name": "Chima Anthony Ukachukwu", "url": "https://chimaukachukwu.com" },
+      "datePublished": "2026-04-29",
+      "url": "https://chimaukachukwu.com/portfolio/case-studies/hobby-lobby-misp.html",
+      "image": "https://chimaukachukwu.com/assets/images/profile.jpg"
+    }
+    </script>
+
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://plausible.io/js/pa-CULpUfeL2Juc-qRc9ARc9.js"></script>
+    <script>
+        window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+        plausible.init()
+    </script>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="../../index.html" class="nav-logo">CU<span class="accent">.</span></a>
+        <ul class="nav-menu">
+            <li><a href="../../index.html" class="nav-link">Home</a></li>
+            <li><a href="../../blog/index.html" class="nav-link">Writing</a></li>
+            <li><a href="../../index.html#portfolio" class="nav-link active">Portfolio</a></li>
+            <li><a href="../../resume/index.html" class="nav-link">Resume</a></li>
+            <li><a href="../../index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main class="post-main">
+    <article class="post-article">
+        <header class="post-header">
+            <p class="post-eyebrow"><a href="../../index.html#portfolio">← Portfolio</a></p>
+            <h1 class="post-title">MISP Threat Intelligence Automation — Hobby Lobby</h1>
+            <p class="post-dek">How I deployed and automated a community-feed threat intelligence platform for an enterprise SOC during a 4-month corporate internship. Architecture, what worked, and what I'd do differently.</p>
+            <p class="post-meta">
+                <span class="post-meta-item">Case study</span>
+                <span class="post-meta-divider">·</span>
+                <time datetime="2026-04-29">Published Apr 29, 2026</time>
+                <span class="post-meta-divider">·</span>
+                <span class="post-meta-item">~6 min read</span>
+                <span class="post-meta-divider">·</span>
+                <span class="post-meta-item">Internship: May–Aug 2024</span>
+            </p>
+            <p class="resume-download">
+                <a href="https://github.com/chima-ukachukwu-sec/soc-defensive-portfolio" class="btn btn-card" target="_blank" rel="noopener">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    SOC &amp; Defensive Portfolio (GitHub)
+                </a>
+            </p>
+        </header>
+
+        <div class="post-body">
+
+            <h2>The problem</h2>
+
+            <p>Hobby Lobby's Corporate Information Systems Network Security team had <a href="https://www.misp-project.org/" target="_blank" rel="noopener">MISP</a> (Malware Information Sharing Platform) available but no standardized deployment pattern, no automated community-feed ingestion, and no documented onboarding for new contributors. Threat intelligence is a force-multiplier that's only as good as how reliably it gets operationalized — when analysts are pulling indicators manually when they remember to, the value is barely above zero.</p>
+
+            <p>The team needed three things:</p>
+
+            <ul>
+                <li>A reproducible MISP deployment that didn't require tribal knowledge to spin up</li>
+                <li>Automated ingestion from a curated set of community threat feeds</li>
+                <li>Clear documentation so the next contributor — intern, analyst, or new hire — could be productive without starting from scratch</li>
+            </ul>
+
+            <p>That was my project for the summer.</p>
+
+            <h2>Why this internship mattered to me</h2>
+
+            <p>This was my first time doing security work in a Fortune 500 environment. My background up to that point was Microsoft 365 administration, IT support, and lab-based offensive practice (TryHackMe, Hack The Box, the usual). What I needed — what every entry-level cybersecurity candidate needs but rarely gets — was time inside a working SOC, on real infrastructure, with real signals.</p>
+
+            <p>Working embedded with the Network Security team, I got to see things you can't learn from a course: how alerts actually get prioritized when a dozen fire at once, what "tuning" a detection looks like in production, how analysts decide when something is a real threat versus benign noise that happens to look suspicious. The MISP project was important; the daily proximity to working analysts was where most of the learning happened.</p>
+
+            <h2>What I built</h2>
+
+            <p>Three deliverables, in roughly this order:</p>
+
+            <h3>1. Containerized deployment</h3>
+
+            <p>Rebuilt the MISP environment as a Docker-Compose-based deployment — MISP server, database, cache, all wired together with a single command. Configuration that had previously lived in someone's head moved into a checked-in template file and a documented setup process.</p>
+
+            <p>The win wasn't speed. The win was <em>repeatability</em>. The team could spin up a clean instance for testing in minutes, and rolling back a broken change was trivial. Before, both of those operations were "ask the person who set it up."</p>
+
+            <h3>2. Feed ingestion automation</h3>
+
+            <p>MISP is most valuable when it's continuously pulling and enriching indicators from external sources. I wrote Python scripts to pull from a curated list of community threat feeds — CIRCL OSINT, abuse.ch (URLhaus, ThreatFox), AlienVault OTX, and a few others — normalize their formats, and push the indicators into MISP on a scheduled cadence.</p>
+
+            <p>Each feed had its own quirks: different rate limits, different schemas, different reliability profiles. The scripts handled them per-source with proper error handling and logging, so a partial feed failure didn't take down the whole ingestion run.</p>
+
+            <h3>3. Documentation</h3>
+
+            <p>A setup runbook for the deployment, an analyst quick-start guide for using MISP in daily work, and architecture notes explaining the design choices for future maintainers. This was the deliverable I expected to spend the least time on and ended up spending the most. Good documentation is harder than it looks.</p>
+
+            <h2>The stack</h2>
+
+            <ul>
+                <li>MISP (containerized)</li>
+                <li>Docker, Docker-Compose</li>
+                <li>Python (<code>requests</code>, <code>pymisp</code>)</li>
+                <li>Linux (Ubuntu)</li>
+                <li>Splunk (downstream consumer of MISP indicators)</li>
+                <li>Bash for scheduling and orchestration glue</li>
+            </ul>
+
+            <h2>What surprised me</h2>
+
+            <p><strong>The hardest part wasn't the technology — it was the threat-feed governance.</strong> I'd assumed "pull from open-source threat feeds" was a solved problem and I'd just be writing glue code. What actually took the most thought was deciding which feeds to trust, which indicators to auto-ingest versus flag for analyst review, and how to prevent low-quality feeds from creating alert fatigue downstream in the SIEM. That's a judgment call problem, not an engineering problem.</p>
+
+            <p><strong>Documentation wasn't a separate task — it was the work.</strong> I'd thought of docs as "the writeup at the end." In practice, every time I documented something, I found a design decision that didn't survive being written down. Good docs forced me to make better choices in the implementation. The docs were the spec, not the postmortem.</p>
+
+            <p><strong>SOC analysts care about different things than security researchers do.</strong> I came in with a researcher's mindset: novel techniques, sophisticated attack chains, interesting findings. The SOC team cared about: was the alert reproducible, what's the false-positive rate, what's the runbook, can the next-shift analyst pick it up at 3am. That's a different value system, and learning it changed how I think about security work — and is a big part of why I now write about <a href="../../blog/posts/the-bridge.html">the bridge between SOC and AI red teaming</a>.</p>
+
+            <h2>What I'd do differently</h2>
+
+            <p><strong>A queue-based worker for ingestion.</strong> The feed ingestion script was a single cron-triggered Python process. That's fine when feeds are healthy. When a feed is slow or returning errors, it slows everything else down. A queue-based worker (Celery + Redis, or similar) would isolate per-feed failures and scale better as more sources got added.</p>
+
+            <p><strong>Per-feed reliability scoring.</strong> Some community feeds are higher signal-to-noise than others. The current ingestion treats them all equally. A scoring system that tracked per-feed signal quality over time and adjusted ingestion priority accordingly would be a real upgrade.</p>
+
+            <p><strong>Tighter integration with Splunk.</strong> I designed for MISP-as-source-of-truth, but in practice analysts spent most of their time in Splunk. A closer integration — surfacing MISP context inline on Splunk alerts via lookups — would have meant the threat intel I was ingesting actually got used in real triage, not just sat there waiting to be queried.</p>
+
+            <h2>Outcome</h2>
+
+            <p>By the end of the internship: a reproducible MISP environment with daily auto-updated indicators from a curated set of community feeds, plus documentation that the next contributor could actually use. I presented the work to senior IT staff at the end-of-internship review.</p>
+
+            <p>The bigger outcome was personal. Four months embedded with a working SOC taught me what I'd been trying to learn from books and labs for two years — what security operations actually look like when production is on the line. The technical skills (Splunk, MISP, Docker, Python automation) transferred cleanly into my next chapter of work in AI security and adversarial evaluation. The <em>operational</em> skills — triage discipline, runbook thinking, how to write a detection that survives a real shift — are the ones I rely on most.</p>
+
+            <h2>Where this fits</h2>
+
+            <p>This work lives in my <a href="https://github.com/chima-ukachukwu-sec/soc-defensive-portfolio" target="_blank" rel="noopener">SOC &amp; Defensive Security Portfolio</a> on GitHub, alongside other defensive security case studies and methodology notes. Specific findings, indicators, internal architecture details, and any client-confidential material are not published — that's all under standard internship NDA. The methodology and lessons are public; the proprietary details remain with the team.</p>
+
+            <p>If you're a hiring manager evaluating candidates for an entry-level SOC role and want to talk about what this work taught me, the fastest way is the <a href="../../index.html#contact">contact form</a> or <a href="mailto:chima.ukachukwu.sec@gmail.com">email</a>.</p>
+
+        </div>
+
+        <footer class="post-footer">
+            <p class="post-author-card">
+                <strong>Chima Anthony Ukachukwu</strong> is an AI Security Analyst &amp; Red Teamer based in Oklahoma City. He runs adversarial testing against frontier LLMs, automates SOC threat intelligence, and is currently open to AI security and SOC analyst roles.
+                <br><br>
+                <a href="../../index.html#contact">Get in touch →</a> · <a href="https://linkedin.com/in/chima-anthony-u" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/chima-ukachukwu-sec" target="_blank" rel="noopener">GitHub</a>
+            </p>
+
+            <p class="post-share">
+                Share this case study:
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://chimaukachukwu.com/portfolio/case-studies/hobby-lobby-misp.html" target="_blank" rel="noopener">LinkedIn</a> ·
+                <a href="https://twitter.com/intent/tweet?text=MISP%20Threat%20Intelligence%20Automation%20%E2%80%94%20a%20case%20study%20from%20my%20Fortune%20500%20SOC%20internship&url=https://chimaukachukwu.com/portfolio/case-studies/hobby-lobby-misp.html" target="_blank" rel="noopener">X / Twitter</a>
+            </p>
+
+            <p class="post-back"><a href="../../index.html#portfolio">← Back to portfolio</a></p>
+        </footer>
+    </article>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-brand">
+            <span class="footer-logo">CU<span class="accent">.</span></span>
+            <p>AI Security Analyst &amp; Red Teamer</p>
+        </div>
+        <div class="footer-links">
+            <a href="../../index.html#home">Home</a>
+            <a href="../../blog/index.html">Writing</a>
+            <a href="../../index.html#portfolio">Portfolio</a>
+            <a href="../../resume/index.html">Resume</a>
+            <a href="../../index.html#contact">Contact</a>
+        </div>
+        <div class="footer-social">
+            <a href="https://linkedin.com/in/chima-anthony-u" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://github.com/chima-ukachukwu-sec" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </a>
+            <a href="mailto:chima.ukachukwu.sec@gmail.com" aria-label="Email">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+        </div>
+        <p class="footer-copyright">© 2026 Chima Anthony Ukachukwu</p>
+    </div>
+</footer>
+
+</body>
+</html>
