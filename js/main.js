@@ -272,6 +272,20 @@ function initContactForm() {
             return;
         }
 
+        // hCaptcha verification — make sure the user solved the challenge before submitting
+        const captchaResponse = (typeof hcaptcha !== 'undefined')
+            ? hcaptcha.getResponse()
+            : (document.querySelector('[name="h-captcha-response"]')?.value || '');
+        if (!captchaResponse) {
+            shakeElement(form);
+            const captchaWidget = document.querySelector('.h-captcha');
+            if (captchaWidget) {
+                captchaWidget.style.outline = '2px solid var(--accent-danger)';
+                setTimeout(() => { captchaWidget.style.outline = ''; }, 2000);
+            }
+            return;
+        }
+
         const submitBtn = form.querySelector('.btn-submit');
         const originalText = submitBtn.innerHTML;
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
@@ -289,11 +303,12 @@ function initContactForm() {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            body: JSON.stringify({ 
+            body: JSON.stringify({
                 name: name,
                 email: email,
                 subject: document.getElementById('subject').value.trim(),
-                message: message
+                message: message,
+                'h-captcha-response': captchaResponse
             })
         })
         .then(response => {
@@ -313,6 +328,8 @@ function initContactForm() {
                         form.style.display = 'flex';
                         successMessage.classList.add('hidden');
                         sendAnother.remove();
+                        // Reset hCaptcha so the next message has a fresh challenge
+                        if (typeof hcaptcha !== 'undefined') hcaptcha.reset();
                     });
                     successMessage.appendChild(sendAnother);
                 }
