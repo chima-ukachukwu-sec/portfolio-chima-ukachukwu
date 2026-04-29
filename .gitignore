@@ -6,3 +6,7 @@ node_modules/
 
 # Staging area for separate GitHub repos to be created — not part of the portfolio
 _new-repos-to-create/
+_github-profile-readme/
+
+# Local-only context for Claude sessions (Claude Code, Cowork, etc.)
+CLAUDE.md
