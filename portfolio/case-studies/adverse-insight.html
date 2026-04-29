@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Adverse Insight — Case Study · Chima Ukachukwu</title>
+    <meta name="description" content="How I built Adverse Insight — a 3-agent contract risk analyzer (Streamlit + OpenAI) — in 48 hours for the Codex Creator Challenge. Architecture, design decisions, and what I'd do differently.">
+    <meta name="author" content="Chima Anthony Ukachukwu">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Adverse Insight — Case Study">
+    <meta property="og:description" content="How I built a 3-agent contract risk analyzer in 48 hours. Architecture, design decisions, and what I'd do differently.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://chimaukachukwu.com/portfolio/case-studies/adverse-insight.html">
+    <meta property="og:image" content="https://chimaukachukwu.com/assets/images/profile.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://chimaukachukwu.com/assets/images/profile.jpg">
+
+    <link rel="canonical" href="https://chimaukachukwu.com/portfolio/case-studies/adverse-insight.html">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%2300d4aa'/%3E%3Cstop offset='100%25' style='stop-color:%2300a3ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Ctext x='50' y='72' text-anchor='middle' fill='%230a0e14' font-family='Inter,sans-serif' font-weight='900' font-size='62'%3EC%3C/text%3E%3C/svg%3E">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+
+    <!-- JSON-LD Article schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Adverse Insight — Case Study",
+      "description": "How I built a 3-agent contract risk analyzer in 48 hours for the Codex Creator Challenge.",
+      "author": { "@type": "Person", "name": "Chima Anthony Ukachukwu", "url": "https://chimaukachukwu.com" },
+      "datePublished": "2026-04-29",
+      "url": "https://chimaukachukwu.com/portfolio/case-studies/adverse-insight.html",
+      "image": "https://chimaukachukwu.com/assets/images/profile.jpg"
+    }
+    </script>
+
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://plausible.io/js/pa-CULpUfeL2Juc-qRc9ARc9.js"></script>
+    <script>
+        window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+        plausible.init()
+    </script>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="../../index.html" class="nav-logo">CU<span class="accent">.</span></a>
+        <ul class="nav-menu">
+            <li><a href="../../index.html" class="nav-link">Home</a></li>
+            <li><a href="../../blog/index.html" class="nav-link">Writing</a></li>
+            <li><a href="../../index.html#portfolio" class="nav-link active">Portfolio</a></li>
+            <li><a href="../../resume/index.html" class="nav-link">Resume</a></li>
+            <li><a href="../../index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main class="post-main">
+    <article class="post-article">
+        <header class="post-header">
+            <p class="post-eyebrow"><a href="../../index.html#portfolio">← Portfolio</a></p>
+            <h1 class="post-title">Adverse Insight</h1>
+            <p class="post-dek">A 3-agent contract risk analyzer that reads a contract, scores every clause for hidden risk, and drafts negotiation language back to you. Built in 48 hours for the Codex Creator Challenge.</p>
+            <p class="post-meta">
+                <span class="post-meta-item">Case study</span>
+                <span class="post-meta-divider">·</span>
+                <time datetime="2026-04-29">Published Apr 29, 2026</time>
+                <span class="post-meta-divider">·</span>
+                <span class="post-meta-item">~7 min read</span>
+            </p>
+            <p class="resume-download">
+                <a href="https://adverse-insight.streamlit.app/" class="btn btn-card" target="_blank" rel="noopener">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    Open Live Demo
+                </a>
+                &nbsp;
+                <a href="https://github.com/chima-ukachukwu-sec/adverse-insight" class="btn btn-card" target="_blank" rel="noopener">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    View Repository
+                </a>
+            </p>
+        </header>
+
+        <div class="post-body">
+
+            <h2>The problem</h2>
+
+            <p>Contracts are dense, clause-heavy artifacts written by lawyers for lawyers. Most of the people who actually <em>sign</em> contracts — founders, freelancers, engineers, small-business owners — read them once, decide they're "probably fine," and move on. The clauses that hurt most aren't the obviously hostile ones. They're the buried ones: an unbounded indemnification, a quietly perpetual non-compete, a unilateral termination right with no equivalent on your side, a "MAY at our discretion" verb that should have been "WILL."</p>
+
+            <p>Generic LLM summaries don't help. Ask ChatGPT to "summarize this contract" and you'll get a polite paragraph about scope and term. The clauses that matter are the ones a summary smooths over.</p>
+
+            <p>I wanted a tool that did the opposite of summarize: <strong>extract every clause, treat each one adversarially, and tell me what a lawyer would tell me to push back on</strong>.</p>
+
+            <h2>Why this build matters to me</h2>
+
+            <p>This sits at the exact intersection I work at — security thinking applied to AI systems. "Adversarial scoring" isn't summarization. It's the same red-team mindset I apply to LLM evaluation, pointed at a different artifact. A contract clause is just a payload that the signer has to evaluate for hidden harm. The same skills transfer.</p>
+
+            <p>I also wanted to ship something <em>working</em>, not just framework documentation. The Codex Creator Challenge gave me a 48-hour window. That's a useful constraint — it forces design decisions you'd otherwise defer.</p>
+
+            <h2>The 3-agent architecture</h2>
+
+            <p>The pipeline is three specialized agents passing structured data to each other, not one mega-prompt trying to do everything:</p>
+
+            <h3>Agent 1 — Extractor</h3>
+
+            <p>Reads the raw contract text and emits a structured list of clauses. Each clause is tagged with its position, its category (indemnification, term, payment, IP, termination, etc.), and a verbatim quote of the source language.</p>
+
+            <p>Why a separate agent: clause extraction is a different competence from risk analysis. Mixing them in one prompt produces clauses scored on shallow analysis, or analyses written about clauses that the model paraphrased and slightly changed. Separating them keeps the source clause text honest.</p>
+
+            <h3>Agent 2 — Adversarial Scorer</h3>
+
+            <p>Takes one clause at a time and treats it the way a red teamer treats a model output: <em>what's the worst-case interpretation here, and what's the path to that outcome?</em> Outputs a structured risk score (low / medium / high / critical) plus a 1–2 sentence "if this goes wrong" scenario specific to that clause.</p>
+
+            <p>Why this design: scoring per clause rather than holistically forces the model to actually engage with each piece of language rather than defaulting to a vibe-summary. It's also debuggable — if a particular score looks wrong, you can read the exact prompt + the exact clause and figure out why.</p>
+
+            <h3>Agent 3 — Negotiator</h3>
+
+            <p>For each medium/high/critical clause, drafts a counter-proposal: alternative language plus a 1-line script for what to say in the negotiation conversation. Designed to be copy-pasteable into an email or a redline.</p>
+
+            <p>Why this matters: most contract-review tools stop at "here's what's risky." That's the easy half. The hard half is "here's what to ask for instead." The Negotiator agent closes the loop — you don't just learn there's a problem, you walk away with the language to fix it.</p>
+
+            <h2>The stack and the build</h2>
+
+            <ul>
+                <li><strong>Streamlit</strong> for the UI — paste-text-in, get-cards-out. No file upload, no auth, no persistence. Get out of the user's way.</li>
+                <li><strong>OpenAI API</strong> for the three agents — different system prompts, structured JSON output schema, parallel calls per clause for the scorer/negotiator pair.</li>
+                <li><strong>Python orchestration</strong> tying it together. ~600 lines. The agents themselves are mostly prompt design plus schema validation; the interesting code is the orchestration that handles partial failures and clause batching.</li>
+            </ul>
+
+            <p>Total build time: ~36 hours of actual coding spread across the 48-hour window. The remaining 12 hours were prompt iteration — getting the Adversarial Scorer to be specific rather than generic was 80% of the design work.</p>
+
+            <h2>What surprised me</h2>
+
+            <p><strong>The Negotiator was the easiest agent to make good.</strong> I expected it to be the hardest, because "draft contract language" sounds like a senior-lawyer skill. In practice, once the Scorer had identified <em>what was wrong with a clause</em>, getting the model to draft alternative language was straightforward. Most of the difficulty in legal drafting is identifying the issue, not phrasing the fix.</p>
+
+            <p><strong>The Extractor was harder than expected.</strong> Contract structure is inconsistent. Some are well-formatted with numbered clauses, others are wall-of-text. Some use defined terms; others reference "the Party of the First Part." Getting the extractor to produce a clean, structured list across that variance took more iteration than the scoring or drafting steps.</p>
+
+            <p><strong>Per-clause scoring beat holistic scoring.</strong> An early prototype let one agent see the whole contract and rate each clause in context. The output looked sophisticated but degraded quickly on long contracts — clauses near the end got shallow analysis. Splitting into per-clause calls (slower, more API spend) produced consistently better outputs.</p>
+
+            <h2>What I'd do differently</h2>
+
+            <p><strong>A second-opinion agent.</strong> Right now the Scorer's call is final. Adding a second agent that argues the opposite position ("here's why this clause is fine") and a third that reconciles them would catch overcalls. This is the same pattern as having two reviewers + a tiebreaker on a security finding.</p>
+
+            <p><strong>A redline export.</strong> Currently the Negotiator's output sits in the UI. Letting users export a clean redlined version of the original contract (with track-changes-style markup) would close another step in the workflow.</p>
+
+            <p><strong>Domain specialization.</strong> A SaaS contract has different risk patterns than a freelance work-for-hire agreement than a residential lease. Letting the user pick a contract type up front, and routing to a domain-specific Scorer prompt, would tighten outputs significantly.</p>
+
+            <p><strong>Persistence.</strong> The current build is stateless — close the tab and your analysis is gone. For real use this needs at least optional save-to-account.</p>
+
+            <h2>Why I built this and not something else</h2>
+
+            <p>Two reasons. First, contracts are a domain where adversarial thinking actually maps cleanly: every clause has a counter-party who wrote it for their benefit, not yours. That's the same mental model I use in security work, just applied to a different surface.</p>
+
+            <p>Second, I wanted something <em>useful to non-security people</em>. Most of my work is illegible to the people I love and respect — my mother, my pastor, my friends from before this career. <em>"I evaluate adversarial robustness in frontier model deployments"</em> means nothing to them. <em>"It reads contracts and tells you what to push back on"</em> they understood immediately. Some of them have used it.</p>
+
+            <p>That's a small thing, but it's the thing.</p>
+
+            <h2>Try it</h2>
+
+            <p>Live demo at <a href="https://adverse-insight.streamlit.app/" target="_blank" rel="noopener">adverse-insight.streamlit.app</a> — paste any contract you're allowed to share, see what comes back. Code at <a href="https://github.com/chima-ukachukwu-sec/adverse-insight" target="_blank" rel="noopener">github.com/chima-ukachukwu-sec/adverse-insight</a>.</p>
+
+            <p>Feedback welcome at <a href="mailto:chima.ukachukwu.sec@gmail.com">chima.ukachukwu.sec@gmail.com</a>.</p>
+
+        </div>
+
+        <footer class="post-footer">
+            <p class="post-author-card">
+                <strong>Chima Anthony Ukachukwu</strong> is an AI Security Analyst &amp; Red Teamer based in Oklahoma City. He runs adversarial testing against frontier LLMs, automates SOC threat intelligence, and is currently open to AI security and SOC analyst roles.
+                <br><br>
+                <a href="../../index.html#contact">Get in touch →</a> · <a href="https://linkedin.com/in/chima-anthony-u" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/chima-ukachukwu-sec" target="_blank" rel="noopener">GitHub</a>
+            </p>
+
+            <p class="post-share">
+                Share this case study:
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://chimaukachukwu.com/portfolio/case-studies/adverse-insight.html" target="_blank" rel="noopener">LinkedIn</a> ·
+                <a href="https://twitter.com/intent/tweet?text=Adverse%20Insight%20%E2%80%94%20a%203-agent%20contract%20risk%20analyzer%20I%20built%20in%2048%20hours&url=https://chimaukachukwu.com/portfolio/case-studies/adverse-insight.html" target="_blank" rel="noopener">X / Twitter</a>
+            </p>
+
+            <p class="post-back"><a href="../../index.html#portfolio">← Back to portfolio</a></p>
+        </footer>
+    </article>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-brand">
+            <span class="footer-logo">CU<span class="accent">.</span></span>
+            <p>AI Security Analyst &amp; Red Teamer</p>
+        </div>
+        <div class="footer-links">
+            <a href="../../index.html#home">Home</a>
+            <a href="../../blog/index.html">Writing</a>
+            <a href="../../index.html#portfolio">Portfolio</a>
+            <a href="../../resume/index.html">Resume</a>
+            <a href="../../index.html#contact">Contact</a>
+        </div>
+        <div class="footer-social">
+            <a href="https://linkedin.com/in/chima-anthony-u" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://github.com/chima-ukachukwu-sec" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </a>
+            <a href="mailto:chima.ukachukwu.sec@gmail.com" aria-label="Email">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+        </div>
+        <p class="footer-copyright">© 2026 Chima Anthony Ukachukwu</p>
+    </div>
+</footer>
+
+</body>
+</html>
