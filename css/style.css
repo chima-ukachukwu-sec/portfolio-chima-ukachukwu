@@ -2275,3 +2275,108 @@ section {
     font-size: 0.8rem;
     margin-top: 16px;
 }
+
+/* ============================================================
+   RESUME PAGE — /resume/
+   Reuses post-main + post-body styles, plus resume-specific tweaks
+   ============================================================ */
+
+.resume-meta,
+.resume-contact {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+.resume-contact a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+.resume-contact a:hover { opacity: 0.7; text-decoration: underline; }
+
+.resume-download {
+    margin-top: 16px;
+    margin-bottom: 0;
+}
+
+/* Skill rows: term/definition pairs aligned with the rest of the body */
+.resume-skills {
+    margin: 0 0 24px;
+}
+.resume-skills dt {
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-top: 12px;
+    margin-bottom: 2px;
+}
+.resume-skills dt:first-child { margin-top: 0; }
+.resume-skills dd {
+    margin-left: 0;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+/* Role blocks */
+.resume-role {
+    margin-bottom: 28px;
+}
+.resume-role-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 2px;
+}
+.resume-role-header h3 {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    color: var(--text-primary) !important;
+    font-size: 1.1rem !important;
+    flex: 1 1 auto;
+}
+.resume-role-dates {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent-primary);
+    white-space: nowrap;
+}
+.resume-role-meta {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 8px !important;
+}
+.resume-role ul {
+    margin: 0 0 0 24px;
+    padding: 0;
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+.resume-role ul li {
+    margin-bottom: 6px;
+}
+
+/* Education / Certifications / Projects lists */
+.resume-list {
+    margin: 0 0 16px 24px;
+    padding: 0;
+    color: var(--text-primary);
+    line-height: 1.7;
+}
+.resume-list li {
+    margin-bottom: 6px;
+}
+.resume-list-meta {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+}
+.resume-projects li { margin-bottom: 12px; }
+
+@media (max-width: 720px) {
+    .resume-role-header { flex-direction: column; gap: 4px; }
+    .resume-role-dates { font-size: 0.8rem; }
+}
