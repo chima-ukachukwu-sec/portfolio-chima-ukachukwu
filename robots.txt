@@ -1,0 +1,11 @@
+# robots.txt for chimaukachukwu.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location for crawlers
+Sitemap: https://chimaukachukwu.com/sitemap.xml
+
+# Block crawler access to staging folders (also gitignored, but defensive)
+Disallow: /_new-repos-to-create/
+Disallow: /_github-profile-readme/

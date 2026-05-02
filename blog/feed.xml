@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Chima Ukachukwu — Writing</title>
+    <description>Notes on AI security, LLM red teaming, SOC operations, and the intersection of traditional cybersecurity and frontier AI.</description>
+    <link>https://chimaukachukwu.com/blog/</link>
+    <atom:link href="https://chimaukachukwu.com/blog/feed.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <managingEditor>chima.ukachukwu.sec@gmail.com (Chima Anthony Ukachukwu)</managingEditor>
+    <webMaster>chima.ukachukwu.sec@gmail.com (Chima Anthony Ukachukwu)</webMaster>
+    <copyright>© 2026 Chima Anthony Ukachukwu</copyright>
+    <lastBuildDate>Tue, 28 Apr 2026 12:00:00 -0500</lastBuildDate>
+    <generator>Hand-maintained — no SSG. To add a new post: copy this item block, update the four fields.</generator>
+
+    <item>
+      <title>The Bridge — Why AI Security Needs SOC People, and SOC Needs AI Red Teamers</title>
+      <link>https://chimaukachukwu.com/blog/posts/the-bridge.html</link>
+      <guid isPermaLink="true">https://chimaukachukwu.com/blog/posts/the-bridge.html</guid>
+      <pubDate>Tue, 28 Apr 2026 12:00:00 -0500</pubDate>
+      <author>chima.ukachukwu.sec@gmail.com (Chima Anthony Ukachukwu)</author>
+      <category>AI Security</category>
+      <category>SOC</category>
+      <category>LLM Security</category>
+      <category>Career</category>
+      <description>Two communities that should be talking to each other are mostly not. Here's what each side is missing — and what bridging them looks like in practice.</description>
+    </item>
+
+  </channel>
+</rss>
