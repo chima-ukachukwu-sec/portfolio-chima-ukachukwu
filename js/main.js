@@ -24,25 +24,24 @@ function initMobileMenu() {
 
     if (!toggle || !menu) return;
 
+    const setOpen = (open) => {
+        toggle.classList.toggle('active', open);
+        menu.classList.toggle('active', open);
+        toggle.setAttribute('aria-expanded', String(open));
+        document.body.style.overflow = open ? 'hidden' : '';
+    };
+
     toggle.addEventListener('click', () => {
-        toggle.classList.toggle('active');
-        menu.classList.toggle('active');
-        document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+        setOpen(!menu.classList.contains('active'));
     });
 
     links.forEach(link => {
-        link.addEventListener('click', () => {
-            toggle.classList.remove('active');
-            menu.classList.remove('active');
-            document.body.style.overflow = '';
-        });
+        link.addEventListener('click', () => setOpen(false));
     });
 
     document.addEventListener('click', (e) => {
         if (!menu.contains(e.target) && !toggle.contains(e.target) && menu.classList.contains('active')) {
-            toggle.classList.remove('active');
-            menu.classList.remove('active');
-            document.body.style.overflow = '';
+            setOpen(false);
         }
     });
 }

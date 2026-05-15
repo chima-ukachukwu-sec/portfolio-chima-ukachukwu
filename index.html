@@ -89,9 +89,10 @@
     </script>
 </head>
 <body>
-    
+    <a href="#main-content" class="skip-link">Skip to content</a>
+
     <!-- NAVIGATION -->
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Primary">
         <div class="nav-container">
             <a href="#" class="nav-logo">CU<span class="accent">.</span></a>
             <ul class="nav-menu">
@@ -108,13 +109,15 @@
                 <li><a href="demo/index.html" class="nav-link">Demo</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
-            <div class="nav-toggle" id="mobile-menu">
+            <button class="nav-toggle" id="mobile-menu" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
-            </div>
+            </button>
         </div>
     </nav>
+
+    <main id="main-content">
 
     <!-- HERO SECTION -->
     <section id="home" class="hero">
@@ -380,7 +383,7 @@
                 <div class="bridge-line"></div>
                 <div class="bridge-content">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-                    <h4>The Bridge</h4>
+                    <h3>The Bridge</h3>
                     <p>Threat modeling, structured methodology, and security mindset transfer seamlessly between traditional infrastructure and frontier AI systems. I bring enterprise security rigor to AI safety — and AI-native thinking to security operations.</p>
                 </div>
                 <div class="bridge-line"></div>
@@ -524,45 +527,45 @@
             <div class="cert-grid">
                 <div class="cert-card elite">
                     <div class="cert-badge">Elite</div>
-                    <h4>CCEP</h4>
+                    <h3>CCEP</h3>
                     <p>Certified Cybersecurity Educator Professional</p>
                     <span class="cert-issuer">Red Team Leaders · Nov 2025</span>
                 </div>
                 <div class="cert-card elite">
                     <div class="cert-badge">Elite</div>
-                    <h4>CTIGA</h4>
+                    <h3>CTIGA</h3>
                     <p>Certified Threat Intelligence & Governance Analyst</p>
                     <span class="cert-issuer">Red Team Leaders · Jan 2026</span>
                 </div>
                 <div class="cert-card elite">
                     <div class="cert-badge">Elite</div>
-                    <h4>AI Security</h4>
+                    <h3>AI Security</h3>
                     <p>AI Security Certification</p>
                     <span class="cert-issuer">Securiti AI · Jan 2026</span>
                 </div>
                 <div class="cert-card elite">
                     <div class="cert-badge">Elite</div>
-                    <h4>CyberOps Associate</h4>
+                    <h3>CyberOps Associate</h3>
                     <p>Cisco CyberOps Associate</p>
                     <span class="cert-issuer">Cisco · May 2025</span>
                 </div>
                 <div class="cert-card">
-                    <h4>Microsoft Cybersecurity Analyst</h4>
+                    <h3>Microsoft Cybersecurity Analyst</h3>
                     <p>Full Specialization</p>
                     <span class="cert-issuer">Microsoft · Sep 2024</span>
                 </div>
                 <div class="cert-card">
-                    <h4>Google Cybersecurity</h4>
+                    <h3>Google Cybersecurity</h3>
                     <p>Professional Specialization</p>
                     <span class="cert-issuer">Coursera · Jun 2023</span>
                 </div>
                 <div class="cert-card">
-                    <h4>AWS Cloud Practitioner</h4>
+                    <h3>AWS Cloud Practitioner</h3>
                     <p>Certified Cloud Practitioner</p>
                     <span class="cert-issuer">AWS · Aug 2022</span>
                 </div>
                 <div class="cert-card">
-                    <h4>Microsoft Security Fundamentals</h4>
+                    <h3>Microsoft Security Fundamentals</h3>
                     <p>Security, Compliance & Identity</p>
                     <span class="cert-issuer">Microsoft · Apr 2025</span>
                 </div>
@@ -580,28 +583,28 @@
             <p class="section-subtitle">Tools, platforms, and technologies I work with daily</p>
             <div class="stack-grid">
                 <div class="stack-category">
-                    <h4><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Security Operations</h4>
+                    <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Security Operations</h3>
                     <div class="stack-items">
                         <span>Splunk</span><span>MISP</span><span>Imperva</span>
                         <span>SIEM</span><span>Incident Response</span><span>Threat Intelligence</span>
                     </div>
                 </div>
                 <div class="stack-category">
-                    <h4><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 2a10 10 0 0 1 10 10h-10V2z"/><circle cx="12" cy="12" r="3"/></svg> AI Security</h4>
+                    <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 2a10 10 0 0 1 10 10h-10V2z"/><circle cx="12" cy="12" r="3"/></svg> AI Security</h3>
                     <div class="stack-items">
                         <span>LLM Red Teaming</span><span>Prompt Injection</span><span>Jailbreak Analysis</span>
                         <span>AI Safety</span><span>Adversarial Testing</span>
                     </div>
                 </div>
                 <div class="stack-category">
-                    <h4><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> Languages & Tools</h4>
+                    <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> Languages & Tools</h3>
                     <div class="stack-items">
                         <span>Python</span><span>SQL</span><span>YAML</span>
                         <span>Git</span><span>Linux</span><span>AWS</span><span>Azure</span>
                     </div>
                 </div>
                 <div class="stack-category">
-                    <h4><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Governance & Compliance</h4>
+                    <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Governance & Compliance</h3>
                     <div class="stack-items">
                         <span>GRC</span><span>Risk Management</span><span>NDA Compliance</span>
                         <span>Security Policy</span>
@@ -636,7 +639,7 @@
                     </div>
                     <div class="timeline-content">
                         <span class="timeline-year">2014</span>
-                        <h4>IT Support & Systems Administrator</h4>
+                        <h3>IT Support & Systems Administrator</h3>
                         <p>Catholic Church of the Resurrection Magodo</p>
                         <span class="timeline-tag">Helpdesk • LAN/WAN • Endpoint Security</span>
                         <div class="timeline-stat">
@@ -653,7 +656,7 @@
                     </div>
                     <div class="timeline-content">
                         <span class="timeline-year">2015</span>
-                        <h4>E-Payments Testing Intern</h4>
+                        <h3>E-Payments Testing Intern</h3>
                         <p>Nigeria Inter-Bank Settlement System (NIBSS)</p>
                         <span class="timeline-tag">Financial Infrastructure • System Testing</span>
                         <div class="timeline-stat">
@@ -670,7 +673,7 @@
                     </div>
                     <div class="timeline-content">
                         <span class="timeline-year">2016</span>
-                        <h4>Technical Support Analyst</h4>
+                        <h3>Technical Support Analyst</h3>
                         <p>Hotels.ng — SaaS Platform</p>
                         <span class="timeline-tag">SaaS • Troubleshooting • Documentation</span>
                     </div>
@@ -683,7 +686,7 @@
                     </div>
                     <div class="timeline-content">
                         <span class="timeline-year">2020 • Major Leap</span>
-                        <h4>Google IT Support Certified</h4>
+                        <h3>Google IT Support Certified</h3>
                         <p>Started U.S. certification pathway</p>
                         <span class="timeline-tag">Coursera • IT Specialization</span>
                         <div class="timeline-stat">
@@ -700,7 +703,7 @@
                     </div>
                     <div class="timeline-content">
                         <span class="timeline-year">2021–2022</span>
-                        <h4>Cloud & Security Fundamentals</h4>
+                        <h3>Cloud & Security Fundamentals</h3>
                         <p>Microsoft Azure • AWS Cloud Practitioner • Cisco Cybersecurity</p>
                         <span class="timeline-tag">Azure AI • AWS CP • Cisco CyberEssentials</span>
                     </div>
@@ -713,7 +716,7 @@
                     </div>
                     <div class="timeline-content">
                         <span class="timeline-year">2023 • Major Leap</span>
-                        <h4>M.S. Cybersecurity Begins</h4>
+                        <h3>M.S. Cybersecurity Begins</h3>
                         <p>Oklahoma City University</p>
                         <span class="timeline-tag">Google Cybersecurity • CodePath • Per Scholas</span>
                         <div class="timeline-stat">
@@ -730,7 +733,7 @@
                     </div>
                     <div class="timeline-content">
                         <span class="timeline-year">2024 • Breakthrough</span>
-                        <h4>SOC Internship — Hobby Lobby Corporate IS</h4>
+                        <h3>SOC Internship — Hobby Lobby Corporate IS</h3>
                         <p>Fortune 500 Enterprise SOC · AI Evaluation contract work begins on independent platforms in parallel</p>
                         <span class="timeline-tag">Splunk • MISP • Imperva • Python Automation</span>
                         <div class="timeline-stat">
@@ -747,7 +750,7 @@
                     </div>
                     <div class="timeline-content">
                         <span class="timeline-year">2025 • Credential Peak</span>
-                        <h4>M.S. Cybersecurity — Graduated</h4>
+                        <h3>M.S. Cybersecurity — Graduated</h3>
                         <p>Oklahoma City University | GPA 3.7 / 4.0</p>
                         <span class="timeline-tag">CCEP • Cisco CyberOps • Microsoft Security</span>
                         <div class="timeline-stat">
@@ -765,7 +768,7 @@
                     </div>
                     <div class="timeline-content current-content">
                         <span class="timeline-year">2024 – Present</span>
-                        <h4>AI Evaluation & Safety Specialist</h4>
+                        <h3>AI Evaluation & Safety Specialist</h3>
                         <p>Independent / Contract — across Snorkel AI, Alignerr, Mercor, Meridian (Invisible), RemoteXperts, and LinkedIn's expert verification program</p>
                         <span class="timeline-tag">AI Red Teaming • Prompt Injection • Agent Evaluation • Reward-Hacking Detection • Multimodal Surface</span>
                         <div class="timeline-stat highlight-stat">
@@ -815,22 +818,22 @@
             <div class="proof-grid">
                 <div class="proof-card">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg>
-                    <h4>OCU Library Tribute</h4>
+                    <h3>OCU Library Tribute</h3>
                     <p>Oklahoma City University added a cybersecurity book to their permanent collection in my name.</p>
                 </div>
                 <div class="proof-card">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-                    <h4>Graduate-Level Cybersecurity</h4>
+                    <h3>Graduate-Level Cybersecurity</h3>
                     <p>M.S. Cybersecurity from Oklahoma City University — GPA 3.7 / 4.0.</p>
                 </div>
                 <div class="proof-card">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><path d="M17 2H7a2 2 0 0 0-2 2v3h14V4a2 2 0 0 0-2-2z"/></svg>
-                    <h4>Fortune 500 SOC Experience</h4>
+                    <h3>Fortune 500 SOC Experience</h3>
                     <p>Interned at Hobby Lobby Corporate IS — Splunk, MISP, Imperva.</p>
                 </div>
                 <div class="proof-card">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                    <h4>Global IT Background</h4>
+                    <h3>Global IT Background</h3>
                     <p>A decade of progressive IT experience spanning Nigeria and the United States — small business through Fortune 500.</p>
                 </div>
             </div>
@@ -853,7 +856,7 @@
                         <span class="dot maximize"></span>
                     </div>
                     <span class="terminal-title">chima@portfolio:~$</span>
-                    <button class="terminal-clear-btn" onclick="clearTerminal()" title="Clear terminal">Clear</button>
+                    <button class="terminal-clear-btn" onclick="clearTerminal()" aria-label="Clear terminal output" title="Clear terminal">Clear</button>
                 </div>
                 <div class="terminal-body" id="terminal-body">
                     <div class="terminal-welcome">
@@ -874,7 +877,8 @@
                     <div class="terminal-input-line">
                         <span class="terminal-prompt">┌──(chima㉿portfolio)-[~]</span>
                         <span class="terminal-prompt-arrow">└─$</span>
-                        <input type="text" id="terminal-input" class="terminal-input" autofocus autocomplete="off" spellcheck="false">
+                        <label for="terminal-input" class="sr-only">Terminal command</label>
+                        <input type="text" id="terminal-input" class="terminal-input" autofocus autocomplete="off" spellcheck="false" aria-label="Enter a terminal command (try 'help')">
                     </div>
                 </div>
             </div>
@@ -954,6 +958,8 @@
             </div>
         </div>
     </section>
+
+    </main>
 
     <!-- FOOTER -->
     <footer class="footer">

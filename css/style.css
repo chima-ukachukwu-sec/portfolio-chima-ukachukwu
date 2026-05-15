@@ -16,7 +16,7 @@
     
     --text-primary: #e6edf3;
     --text-secondary: #8b949e;
-    --text-muted: #646e7a;
+    --text-muted: #8a94a0;  /* WCAG AA: 6.0:1 on bg-secondary, 5.6:1 on bg-card */
     
     --accent-primary: #00d4aa;
     --accent-secondary: #00a3ff;
@@ -80,6 +80,57 @@ a {
 
 ul {
     list-style: none;
+}
+
+/* ---------- ACCESSIBILITY: SKIP LINK + FOCUS ---------- */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 16px;
+    z-index: 10000;
+    background: var(--accent-primary);
+    color: var(--bg-primary);
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 16px;
+    outline: 2px solid var(--text-primary);
+    outline-offset: 2px;
+}
+
+/* Visible focus ring for keyboard navigation across all interactive elements.
+   Uses :focus-visible so mouse clicks don't trigger the ring — only keyboard. */
+:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+/* Form fields and terminal input override :focus-visible with their own styling. */
+.form-group input:focus-visible,
+.form-group textarea:focus-visible,
+.terminal-input:focus-visible {
+    outline: none;
+}
+
+/* Screen-reader-only utility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 img {
@@ -198,6 +249,9 @@ img {
     gap: 5px;
     cursor: pointer;
     padding: 4px;
+    background: transparent;
+    border: none;
+    color: inherit;
 }
 
 .nav-toggle .bar {
@@ -811,6 +865,7 @@ section {
     flex-shrink: 0;
 }
 
+.bridge-content h3,
 .bridge-content h4 {
     font-size: 0.95rem;
     color: var(--text-primary);
@@ -952,6 +1007,7 @@ section {
     color: var(--accent-primary);
 }
 
+.cert-card h3,
 .cert-card h4 {
     font-size: 1rem;
     font-weight: 700;
@@ -1003,6 +1059,7 @@ section {
     border-color: var(--border-hover);
 }
 
+.stack-category h3,
 .stack-category h4 {
     font-size: 0.95rem;
     color: var(--text-primary);
@@ -1012,6 +1069,7 @@ section {
     gap: 10px;
 }
 
+.stack-category h3 svg,
 .stack-category h4 svg {
     flex-shrink: 0;
     color: var(--accent-primary);
@@ -1066,6 +1124,7 @@ section {
     flex-shrink: 0;
 }
 
+.proof-card h3,
 .proof-card h4 {
     font-size: 0.95rem;
     color: var(--text-primary);
@@ -1507,6 +1566,7 @@ section {
     text-transform: uppercase;
 }
 
+.timeline-content h3,
 .timeline-content h4 {
     font-size: 1rem;
     font-weight: 700;
