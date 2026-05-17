@@ -9,8 +9,22 @@
     <managingEditor>chima.ukachukwu.sec@gmail.com (Chima Anthony Ukachukwu)</managingEditor>
     <webMaster>chima.ukachukwu.sec@gmail.com (Chima Anthony Ukachukwu)</webMaster>
     <copyright>© 2026 Chima Anthony Ukachukwu</copyright>
-    <lastBuildDate>Tue, 28 Apr 2026 12:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 17 May 2026 12:00:00 -0500</lastBuildDate>
     <generator>Hand-maintained — no SSG. To add a new post: copy this item block, update the four fields.</generator>
+
+    <item>
+      <title>Detecting Prompt Injection: The Playbook Your SIEM Doesn't Have Yet</title>
+      <link>https://chimaukachukwu.com/blog/posts/detecting-prompt-injection.html</link>
+      <guid isPermaLink="true">https://chimaukachukwu.com/blog/posts/detecting-prompt-injection.html</guid>
+      <pubDate>Sun, 17 May 2026 12:00:00 -0500</pubDate>
+      <author>chima.ukachukwu.sec@gmail.com (Chima Anthony Ukachukwu)</author>
+      <category>AI Security</category>
+      <category>SOC</category>
+      <category>Detection Engineering</category>
+      <category>Prompt Injection</category>
+      <category>LLM Security</category>
+      <description>Prompt injection is succeeding in production right now, and most SOCs can't see it. Why traditional detection primitives partially-fail, three places where they can work, and what's still hard.</description>
+    </item>
 
     <item>
       <title>The Bridge — Why AI Security Needs SOC People, and SOC Needs AI Red Teamers</title>

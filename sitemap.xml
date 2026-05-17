@@ -19,7 +19,7 @@
     <loc>https://chimaukachukwu.com/blog/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-04-28</lastmod>
+    <lastmod>2026-05-17</lastmod>
   </url>
 
   <url>
@@ -27,6 +27,13 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-28</lastmod>
+  </url>
+
+  <url>
+    <loc>https://chimaukachukwu.com/blog/posts/detecting-prompt-injection.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-05-17</lastmod>
   </url>
 
   <url>
