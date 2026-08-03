@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initSmoothScroll();
     initContactForm();
     initActiveNavHighlight();
-    initTimeline();
     initTerminal();
     initHeroParallax();
 });
@@ -92,7 +91,7 @@ function initNavbarScrollState() {
    unobserved once revealed. Skipped entirely under reduced motion. */
 function initScrollReveal() {
     const elements = document.querySelectorAll(
-        '.expertise-card, .portfolio-card, .cert-card, .proof-card, .stack-category, .highlight-item, .contact-method'
+        '.artifact, .expertise-card, .contact-method'
     );
 
     if (!elements.length) return;
@@ -400,72 +399,6 @@ function shakeElement(element) {
     void element.offsetWidth; // restart the animation
     element.classList.add('shake');
     setTimeout(() => element.classList.remove('shake'), 500);
-}
-
-/* ---------- CAREER TIMELINE ---------- */
-function initTimeline() {
-    const timelineItems = document.querySelectorAll('.timeline-item');
-    const timelineProgress = document.querySelector('.timeline-progress');
-    const filterButtons = document.querySelectorAll('.timeline-btn');
-    const timeline = document.querySelector('.timeline-container');
-
-    if (!timelineItems.length) return;
-
-    if (timeline && timelineProgress) {
-        const updateProgress = rafThrottle(() => {
-            const rect = timeline.getBoundingClientRect();
-            const scrollProgress = Math.max(0, Math.min(1,
-                (window.innerHeight - rect.top) / (rect.height + window.innerHeight)
-            ));
-            timelineProgress.style.height = `${scrollProgress * 100}%`;
-        });
-
-        updateProgress();
-        window.addEventListener('scroll', updateProgress, { passive: true });
-        window.addEventListener('resize', updateProgress, { passive: true });
-    }
-
-    filterButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterButtons.forEach(b => {
-                b.classList.remove('active');
-                b.setAttribute('aria-pressed', 'false');
-            });
-            btn.classList.add('active');
-            btn.setAttribute('aria-pressed', 'true');
-
-            const filter = btn.getAttribute('data-view');
-            let shown = 0;
-
-            timelineItems.forEach(item => {
-                const hide = filter !== 'all' && item.getAttribute('data-category') !== filter;
-                item.classList.toggle('hidden-item', hide);
-                item.toggleAttribute('inert', hide);
-                if (!hide) shown++;
-            });
-
-            const status = document.getElementById('timeline-status');
-            if (status) {
-                status.textContent = `Showing ${shown} of ${timelineItems.length} career milestones.`;
-            }
-        });
-    });
-
-    if (prefersReducedMotion() || !('IntersectionObserver' in window)) return;
-
-    const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add('is-revealed');
-            obs.unobserve(entry.target);
-        });
-    }, { threshold: 0.2 });
-
-    timelineItems.forEach((item, index) => {
-        item.classList.add('reveal-timeline');
-        item.style.setProperty('--reveal-delay', `${index * 0.1}s`);
-        observer.observe(item);
-    });
 }
 
 /* ---------- INTERACTIVE TERMINAL ---------- */
