@@ -1,0 +1,38 @@
+name: Verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  pages-up-to-date:
+    name: Shared partials are stamped
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      # Fails if someone edited a partial without re-running the stamper, or
+      # hand-edited a generated region. This is the check that would have
+      # caught the stale navigation on ten sub-pages.
+      - run: node tools/build-pages.js --check
+
+  links:
+    name: No broken links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # With 11 pages of hand-written relative paths at three directory depths,
+      # a broken link is the most likely regression and the most damaging one
+      # when a recruiter hits it.
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --accept 200,206,429
+            --exclude-path ./_github-profile-readme
+            --exclude '^https://(www\.)?linkedin\.com'
+            './**/*.html'
+          fail: true

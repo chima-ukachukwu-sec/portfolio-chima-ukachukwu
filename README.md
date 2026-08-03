@@ -105,3 +105,24 @@ portfolio-chima-ukachukwu/
 ## Contact
 
 📧 `chima.ukachukwu.sec@gmail.com` · 💼 [LinkedIn](https://linkedin.com/in/chima-anthony-u) · 🌐 [chimaukachukwu.com](https://chimaukachukwu.com)
+
+## Working on this site
+
+Deployment is still just `git push` — GitHub Pages serves the files as they are.
+
+Shared markup (navigation, footer, head assets) lives in `partials/` and is stamped into every
+page by a small Node script with no dependencies:
+
+```bash
+node tools/build-pages.js          # after editing anything in partials/
+node tools/build-pages.js --check  # verify every page is up to date
+```
+
+Markup between `<!-- build:name -->` and `<!-- /build:name -->` is generated. Edit the partial,
+not the page.
+
+Preview locally:
+
+```bash
+python3 -m http.server 8000
+```
