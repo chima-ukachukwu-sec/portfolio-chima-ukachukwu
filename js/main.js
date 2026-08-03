@@ -26,8 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initNavbarScrollState();
     initScrollReveal();
-    initTypingAnimation();
-    initStatsCounter();
+    initHeroProbe();
     initSmoothScroll();
     initContactForm();
     initActiveNavHighlight();
@@ -113,116 +112,78 @@ function initScrollReveal() {
     });
 }
 
-/* ---------- TYPING ANIMATION ---------- */
-function initTypingAnimation() {
-    const typingElement = document.querySelector('.typing-text');
-    if (!typingElement) return;
+/* ---------- HERO PROBE ----------
+   A compact front end over the same classifier that powers /demo/. The
+   taxonomy itself lives in js/lib/taxonomy.js so the two can never drift. */
+function initHeroProbe() {
+    const input = document.getElementById('probe-input');
+    const runBtn = document.getElementById('probe-run');
+    const results = document.getElementById('probe-results');
+    const chips = document.querySelectorAll('.probe-chip');
+    const lib = window.RedTeamTaxonomy;
 
-    const roles = [
-        'AI Security Analyst',
-        'SOC & Blue Team Specialist',
-        'AI Red Teamer',
-        'LLM Security Researcher',
-        'Certified Cybersecurity Educator'
-    ];
+    if (!input || !runBtn || !results) return;
 
-    // Reduced motion: state the role, don't perform it.
-    if (prefersReducedMotion()) {
-        typingElement.textContent = roles[0];
-        document.querySelector('.hero-role .cursor')?.remove();
+    // The probe is an enhancement. If the taxonomy failed to load, leave the
+    // markup inert and let the link to the full detector do the work.
+    if (!lib) {
+        runBtn.disabled = true;
+        results.innerHTML = '<p class="probe-empty">Classifier unavailable — the full detector still works.</p>';
         return;
     }
 
-    let roleIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let typeSpeed = 80;
-
-    function type() {
-        if (prefersReducedMotion()) {
-            typingElement.textContent = roles[0];
-            return;
-        }
-
-        const currentRole = roles[roleIndex];
-
-        if (isDeleting) {
-            typingElement.textContent = currentRole.substring(0, charIndex - 1);
-            charIndex--;
-            typeSpeed = 40;
-        } else {
-            typingElement.textContent = currentRole.substring(0, charIndex + 1);
-            charIndex++;
-            typeSpeed = 80;
-        }
-
-        if (!isDeleting && charIndex === currentRole.length) {
-            typeSpeed = 2000;
-            isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            roleIndex = (roleIndex + 1) % roles.length;
-            typeSpeed = 500;
-        }
-
-        setTimeout(type, typeSpeed);
-    }
-
-    setTimeout(type, 1000);
-}
-
-/* ---------- STATS COUNTER ----------
-   hero-stats sits above the fold, so the final value is rendered at rest and
-   the count-up only replays if the user scrolls away and comes back. */
-function initStatsCounter() {
-    const statNumbers = document.querySelectorAll('.stat-number[data-target]');
-    if (!statNumbers.length) return;
-
-    const restValue = (target) => (Number.isInteger(target) ? target : target.toFixed(1));
-
-    statNumbers.forEach(stat => {
-        stat.textContent = restValue(parseFloat(stat.getAttribute('data-target')));
-    });
-
-    const heroStats = document.querySelector('.hero-stats');
-    if (!heroStats || !('IntersectionObserver' in window)) return;
-
-    let animationFrameId;
-    const animateOnce = () => {
-        statNumbers.forEach(stat => {
-            const target = parseFloat(stat.getAttribute('data-target'));
-            const duration = 800;
-            const startTime = performance.now();
-
-            function tick(now) {
-                const progress = Math.min((now - startTime) / duration, 1);
-                const eased = 1 - Math.pow(1 - progress, 3);
-                const value = target * eased;
-                stat.textContent = Number.isInteger(target) ? Math.floor(value) : value.toFixed(1);
-                if (progress < 1) {
-                    animationFrameId = requestAnimationFrame(tick);
-                } else {
-                    stat.textContent = restValue(target);
-                }
-            }
-            animationFrameId = requestAnimationFrame(tick);
-        });
+    const RISK_LABEL = {
+        none: 'clean', low: 'low', medium: 'medium', high: 'high', critical: 'critical'
     };
 
-    let leftHero = false;
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) {
-                leftHero = true;
-            } else if (leftHero) {
-                leftHero = false;
-                if (prefersReducedMotion()) return;
-                if (animationFrameId) cancelAnimationFrame(animationFrameId);
-                animateOnce();
-            }
+    const syncState = () => { runBtn.disabled = !input.value.trim(); };
+
+    const clearResults = () => { results.innerHTML = ''; };
+
+    const classify = () => {
+        const { matches } = lib.analyze(input.value);
+        const score = lib.scoreFromMatches(matches);
+        const level = RISK_LABEL[score.level] || score.level;
+
+        if (!matches.length) {
+            results.innerHTML =
+                `<p class="probe-verdict risk-${score.level}">` +
+                `<span class="probe-dot" aria-hidden="true"></span>No adversarial pattern matched</p>` +
+                `<p class="probe-note">Pattern matching misses novel attacks. That limitation is the ` +
+                `reason manual red teaming still exists.</p>`;
+        } else {
+            const chipsHtml = matches.map(m =>
+                `<span class="probe-hit">${lib.escapeHtml(m.category.name)}</span>`
+            ).join('');
+            results.innerHTML =
+                `<p class="probe-verdict risk-${score.level}">` +
+                `<span class="probe-dot" aria-hidden="true"></span>` +
+                `${lib.escapeHtml(level)} · ${matches.length} ` +
+                `${matches.length === 1 ? 'category' : 'categories'} matched</p>` +
+                `<div class="probe-hits">${chipsHtml}</div>`;
+        }
+
+        if (window.plausible) plausible('hero-probe-run');
+    };
+
+    runBtn.addEventListener('click', () => { if (!runBtn.disabled) classify(); });
+    input.addEventListener('input', () => { syncState(); clearResults(); });
+    input.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') runBtn.click();
+    });
+
+    chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            const text = lib.EXAMPLES[chip.getAttribute('data-example')];
+            if (!text) return;
+            input.value = text;
+            syncState();
+            classify();
+            if (window.plausible) plausible('hero-probe-example');
         });
-    }, { threshold: 0.5 });
-    observer.observe(heroStats);
+    });
+
+    syncState();
 }
 
 /* ---------- SMOOTH SCROLL ---------- */

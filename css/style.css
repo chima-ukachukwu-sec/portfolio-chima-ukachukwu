@@ -419,9 +419,11 @@ img {
     -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 40%, transparent 70%);
 }
 
+/* One shared left edge for the whole hero. Centred text above a left-aligned
+   probe card read as two competing alignments rather than one composition. */
 .hero-container {
-    max-width: 800px;
-    text-align: center;
+    max-width: 940px;
+    text-align: left;
     position: relative;
     z-index: 1;
 }
@@ -2577,6 +2579,380 @@ section {
 @media (max-width: 768px) {
     .resume-role-header { flex-direction: column; gap: var(--space-2); }
     .resume-role-dates { font-size: var(--text-sm); }
+}
+
+/* ============================================
+   HERO (rebuilt Sprint 3)
+   Positioning line first, live proof second, prose never.
+   ============================================ */
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-3) var(--space-6);
+    margin-bottom: var(--space-8);
+    background: rgba(0, 212, 170, 0.08);
+    border: 1px solid rgba(0, 212, 170, 0.25);
+    border-radius: 100px;
+    color: var(--color-brand);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.hero-title {
+    max-width: 20ch;
+    margin-bottom: var(--space-7);
+    font-size: var(--text-display-hero);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+}
+
+.hero-identity {
+    max-width: 54ch;
+    margin-bottom: var(--space-4);
+    color: var(--text-secondary);
+    font-size: var(--text-2xl);
+    line-height: 1.5;
+}
+
+.hero-identity strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-6);
+    margin-bottom: var(--space-11);
+    padding: 0;
+    list-style: none;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+}
+
+.hero-meta li + li::before {
+    content: '·';
+    margin-right: var(--space-6);
+    color: var(--border-hover);
+}
+
+/* ---------- HERO PROBE ---------- */
+.hero-probe {
+    max-width: 640px;
+    padding: var(--space-6);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    text-align: left;
+}
+
+.probe-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-5);
+    margin-bottom: var(--space-5);
+}
+
+.probe-title {
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 600;
+}
+
+.probe-badge {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+}
+
+.probe-input {
+    width: 100%;
+    padding: var(--space-5);
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    resize: vertical;
+    transition: border-color var(--duration-fast) var(--ease-out);
+}
+
+.probe-input::placeholder { color: var(--text-muted); }
+
+.probe-input:focus {
+    outline: none;
+    border-color: var(--color-focus);
+    box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.14);
+}
+
+.probe-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-5);
+    margin-top: var(--space-5);
+    flex-wrap: wrap;
+}
+
+.probe-examples {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+.probe-chip {
+    display: inline-flex;
+    align-items: center;
+    /* Comfortable tap target, not just the WCAG 2.5.8 minimum. */
+    min-height: 36px;
+    padding: var(--space-2) var(--space-5);
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 100px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    cursor: pointer;
+    transition: color var(--duration-fast) var(--ease-out),
+                border-color var(--duration-fast) var(--ease-out);
+}
+
+.probe-chip:hover,
+.probe-chip:focus-visible {
+    color: var(--color-interactive);
+    border-color: var(--color-interactive);
+}
+
+.probe-run {
+    padding: var(--space-4) var(--space-7);
+    background: var(--color-interactive);
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--bg-primary);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.probe-run:hover:not(:disabled) { opacity: 0.85; }
+.probe-run:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.probe-results:not(:empty) {
+    margin-top: var(--space-5);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--border-color);
+}
+
+.probe-verdict {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    text-transform: capitalize;
+}
+
+.probe-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.probe-verdict.risk-none .probe-dot     { background: var(--color-status-ok); }
+.probe-verdict.risk-low .probe-dot      { background: var(--color-status-warn); }
+.probe-verdict.risk-medium .probe-dot   { background: var(--color-status-warn); }
+.probe-verdict.risk-high .probe-dot     { background: var(--color-status-error); }
+.probe-verdict.risk-critical .probe-dot { background: var(--color-status-error); }
+
+.probe-hits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+}
+
+.probe-hit {
+    padding: var(--space-2) var(--space-5);
+    background: rgba(0, 212, 170, 0.08);
+    border: 1px solid rgba(0, 212, 170, 0.25);
+    border-radius: var(--radius-sm);
+    color: var(--color-brand);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+}
+
+.probe-note,
+.probe-noscript,
+.probe-empty {
+    margin-top: var(--space-4);
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+}
+
+.probe-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-top: var(--space-5);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    transition: color var(--duration-fast) var(--ease-out);
+}
+
+.probe-link:hover { color: var(--color-interactive); }
+.probe-link svg { transition: transform var(--duration-fast) var(--ease-out); }
+.probe-link:hover svg { transform: translateX(3px); }
+
+/* ---------- NAV CTA ---------- */
+.nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-6);
+    border: 1px solid var(--border-hover);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: var(--text-md);
+    font-weight: 500;
+    transition: border-color var(--duration-fast) var(--ease-out),
+                color var(--duration-fast) var(--ease-out);
+}
+
+.nav-cta:hover {
+    border-color: var(--color-interactive);
+    color: var(--color-interactive);
+}
+
+.nav-cta svg { transition: transform var(--duration-fast) var(--ease-out); }
+.nav-cta:hover svg { transform: translateX(2px); }
+
+/* ---------- SELECTED WORK ---------- */
+.artifact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-8);
+}
+
+.artifact {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-8);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    transition: border-color var(--duration-fast) var(--ease-out),
+                transform var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-base) var(--ease-out);
+}
+
+.artifact:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* The lead artifact spans both columns — an asymmetric grid gives the eye a
+   path, where a uniform one leaves everything competing equally. */
+.artifact-lead {
+    grid-column: 1 / -1;
+}
+
+.artifact-kind {
+    margin-bottom: var(--space-5);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.artifact h3 {
+    margin-bottom: var(--space-5);
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+}
+
+.artifact-lead h3 { font-size: var(--text-5xl); }
+
+.artifact h3 a {
+    color: var(--text-primary);
+    transition: color var(--duration-fast) var(--ease-out);
+}
+
+.artifact h3 a:hover { color: var(--color-interactive); }
+
+/* Whole card is a click target for the title link. */
+.artifact h3 a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+}
+
+.artifact { position: relative; }
+
+.artifact-desc {
+    margin-bottom: var(--space-7);
+    color: var(--text-secondary);
+    font-size: var(--text-lg);
+    line-height: 1.65;
+}
+
+.artifact-lead .artifact-desc { max-width: 62ch; }
+
+.artifact-proves {
+    margin-top: auto;
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    line-height: 1.6;
+}
+
+.artifact-proves span {
+    color: var(--color-brand);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.artifact-proves span::after {
+    content: ' → ';
+    color: var(--border-hover);
+}
+
+@media (max-width: 768px) {
+    .hero-title { max-width: none; }
+    .hero-identity { font-size: var(--text-xl); }
+    .hero-probe { padding: var(--space-5); }
+    .probe-controls { flex-direction: column; align-items: stretch; }
+    .probe-run { width: 100%; min-height: 44px; }
+    .probe-chip { min-height: 44px; }
+    .nav-cta { min-height: 44px; }
+    .artifact-grid { grid-template-columns: 1fr; }
+    .artifact h3,
+    .artifact-lead h3 { font-size: var(--text-4xl); }
+    .nav-cta-item { margin-top: var(--space-5); }
 }
 
 /* ============================================

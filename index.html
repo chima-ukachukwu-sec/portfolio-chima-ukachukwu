@@ -99,18 +99,17 @@
         <div class="nav-container">
             <a href="#" class="nav-logo">CU<span class="accent">.</span></a>
             <ul class="nav-menu">
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#expertise" class="nav-link">Expertise</a></li>
-                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
-                <li><a href="#certifications" class="nav-link">Certifications</a></li>
-                <li><a href="#techstack" class="nav-link">Tech Stack</a></li>
-                <li><a href="#timeline" class="nav-link">Career</a></li>
-                <li><a href="#trust" class="nav-link">Trust</a></li>
-                <li><a href="#terminal-demo" class="nav-link">Terminal</a></li>
-                <li><a href="blog/index.html" class="nav-link">Writing</a></li>
+                <li><a href="#work" class="nav-link">Work</a></li>
                 <li><a href="demo/index.html" class="nav-link">Demo</a></li>
+                <li><a href="blog/index.html" class="nav-link">Writing</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li class="nav-cta-item">
+                    <a href="resume/index.html" class="nav-cta">
+                        Résumé
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </a>
+                </li>
             </ul>
             <button class="nav-toggle" id="mobile-menu" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
                 <span class="bar"></span>
@@ -126,57 +125,88 @@
     <section id="home" class="hero">
         <div class="hero-bg-grid"></div>
         <div class="hero-container">
-            <div class="hero-badge">
-                <span class="pulse-dot"></span> Available for Opportunities
-            </div>
-            <h1 class="hero-title">
-                <span class="hero-greeting">Hi, I'm</span>
-                <span class="hero-name">Chima Ukachukwu</span>
-            </h1>
-            <h2 class="hero-role">
-                <span class="typing-text"></span><span class="cursor">|</span>
-            </h2>
-            <p class="hero-description">
-                SOC-trained cybersecurity analyst specializing in AI red teaming.
-                A decade of progressive IT and cybersecurity experience. I break AI systems
-                to make them safer — and I build defenses that actually hold.
+            <p class="hero-badge">
+                <span class="pulse-dot" aria-hidden="true"></span> Available for AI security roles
             </p>
-            <div class="hero-cta">
-                <a href="#portfolio" class="btn btn-primary">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                    View My Work
-                </a>
-                <a href="#contact" class="btn btn-secondary">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                    Hire Me
-                </a>
-                <a href="resume/index.html" class="btn btn-outline">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-                    Resume
-                </a>
-            </div>
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number" data-target="10">10</span>
-                    <span class="stat-suffix">+</span>
-                    <span class="stat-label">Years in IT</span>
+            <h1 class="hero-title">
+                I break AI systems to make them safer — and defend the networks they run on.
+            </h1>
+            <p class="hero-identity">
+                <strong>Chima Ukachukwu</strong> — SOC-trained security analyst and AI red teamer.
+            </p>
+            <ul class="hero-meta">
+                <li>M.S. Cybersecurity</li>
+                <li>Fortune 500 SOC</li>
+                <li>Oklahoma City · open to U.S.-remote</li>
+            </ul>
+
+            <!-- Proof before prose: the same deterministic classifier that powers
+                 /demo/, running here so the first thing a visitor does is use it. -->
+            <div class="hero-probe">
+                <div class="probe-header">
+                    <span class="probe-title">Adversarial prompt classifier</span>
+                    <span class="probe-badge">runs in your browser</span>
                 </div>
-                <div class="stat-divider"></div>
-                <div class="stat-item">
-                    <span class="stat-number stat-text">M.S.</span>
-                    <span class="stat-label">Cybersecurity</span>
+                <label for="probe-input" class="sr-only">Paste a prompt to classify against the jailbreak taxonomy</label>
+                <textarea id="probe-input" class="probe-input" rows="2" spellcheck="false"
+                          placeholder="Paste a prompt — or load one of the attacks below."></textarea>
+                <div class="probe-controls">
+                    <div class="probe-examples" role="group" aria-label="Load an example prompt">
+                        <button type="button" class="probe-chip" data-example="role-play">Role-play override</button>
+                        <button type="button" class="probe-chip" data-example="authority">Authority impersonation</button>
+                        <button type="button" class="probe-chip" data-example="multi-vector">Layered attack</button>
+                        <button type="button" class="probe-chip" data-example="benign">Benign request</button>
+                    </div>
+                    <button type="button" id="probe-run" class="probe-run" disabled>Classify</button>
                 </div>
-                <div class="stat-divider"></div>
-                <div class="stat-item">
-                    <span class="stat-number" data-target="3">3</span>
-                    <span class="stat-suffix">.7</span>
-                    <span class="stat-label">GPA (M.S.)</span>
-                </div>
+                <div id="probe-results" class="probe-results" role="status" aria-live="polite"></div>
+                <a href="demo/index.html" class="probe-link">
+                    Open the full detector — all 10 categories, matched patterns, and the reasoning
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+                <noscript><p class="probe-noscript">The classifier needs JavaScript. The <a href="demo/index.html">full detector page</a> explains the taxonomy without it.</p></noscript>
             </div>
         </div>
-        <div class="scroll-indicator">
-            <span>Scroll</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </section>
+
+    <!-- PROOF — three artifacts, first scroll reward -->
+    <section id="work" class="proof-section">
+        <div class="section-container">
+            <h2 class="section-title">Selected work</h2>
+            <p class="section-subtitle">Three things I built. Each one names what it demonstrates.</p>
+
+            <div class="artifact-grid">
+                <article class="artifact artifact-lead">
+                    <p class="artifact-kind">Interactive · client-side</p>
+                    <h3><a href="demo/index.html">AI Red Team Pattern Detector</a></h3>
+                    <p class="artifact-desc">
+                        My jailbreak taxonomy as a working classifier. Ten categories, each defined by
+                        mechanism rather than phrasing, with the matched pattern shown for every hit —
+                        because a detection you can't explain isn't a detection.
+                    </p>
+                    <p class="artifact-proves"><span>Demonstrates</span> taxonomy design, detection logic, explainable output</p>
+                </article>
+
+                <article class="artifact">
+                    <p class="artifact-kind">Case study</p>
+                    <h3><a href="portfolio/case-studies/adverse-insight.html">Adverse Insight</a></h3>
+                    <p class="artifact-desc">
+                        Three chained agents that extract contract clauses, red-team each one for hidden
+                        risk, then draft the counter-proposal. Built in 48 hours.
+                    </p>
+                    <p class="artifact-proves"><span>Demonstrates</span> multi-agent architecture, adversarial scoring</p>
+                </article>
+
+                <article class="artifact">
+                    <p class="artifact-kind">Writing</p>
+                    <h3><a href="blog/posts/detecting-prompt-injection.html">Detecting Prompt Injection</a></h3>
+                    <p class="artifact-desc">
+                        Why traditional SIEM primitives partially fail against prompt injection, three
+                        places rule-writing can actually start, and what stays hard.
+                    </p>
+                    <p class="artifact-proves"><span>Demonstrates</span> detection engineering, a point of view</p>
+                </article>
+            </div>
         </div>
     </section>
 
@@ -184,7 +214,7 @@
     <section id="about" class="about">
         <div class="section-container">
             <h2 class="section-title">
-                <span class="section-number">01.</span> About Me
+                About Me
             </h2>
             <div class="about-grid">
                 <div class="about-text">
@@ -276,7 +306,7 @@
     <section id="expertise" class="expertise">
         <div class="section-container">
             <h2 class="section-title">
-                <span class="section-number">02.</span> Dual Expertise
+                Dual Expertise
             </h2>
             <p class="section-subtitle">I operate at the intersection of two critical security domains</p>
             
@@ -398,9 +428,9 @@
     <section id="portfolio" class="portfolio">
         <div class="section-container">
             <h2 class="section-title">
-                <span class="section-number">03.</span> Portfolio
+                More work
             </h2>
-            <p class="section-subtitle">Published frameworks, case studies, and professional work</p>
+            <p class="section-subtitle">Frameworks, repositories, and professional work beyond the three above.</p>
             
             <div class="portfolio-grid">
                 <!-- Adverse Insight — Live App (featured) -->
@@ -523,7 +553,7 @@
     <section id="certifications" class="certifications">
         <div class="section-container">
             <h2 class="section-title">
-                <span class="section-number">04.</span> Certifications
+                Certifications
             </h2>
             <p class="section-subtitle">Industry certifications and applied training across cybersecurity, AI security, and IT infrastructure</p>
             
@@ -581,7 +611,7 @@
     <section id="techstack" class="tech-stack">
         <div class="section-container">
             <h2 class="section-title">
-                <span class="section-number">05.</span> Tech Stack
+                Tech Stack
             </h2>
             <p class="section-subtitle">Tools, platforms, and technologies I work with daily</p>
             <div class="stack-grid">
@@ -621,7 +651,7 @@
     <section id="timeline" class="timeline-section">
         <div class="section-container">
             <h2 class="section-title">
-                <span class="section-number">06.</span> Career Trajectory
+                Career Trajectory
             </h2>
             <p class="section-subtitle">A decade of progressive growth — from IT support to AI security specialist</p>
             
@@ -817,7 +847,7 @@
     <section id="trust" class="social-proof">
         <div class="section-container">
             <h2 class="section-title">
-                <span class="section-number">07.</span> Trust Signals
+                Trust Signals
             </h2>
             <div class="proof-grid">
                 <div class="proof-card">
@@ -848,7 +878,7 @@
     <section id="terminal-demo" class="terminal-section">
         <div class="section-container">
             <h2 class="section-title">
-                <span class="section-number">08.</span> Interactive Terminal
+                Interactive Terminal
             </h2>
             <p class="section-subtitle">Explore my experience through a command-line interface. Try it.</p>
             
@@ -893,7 +923,7 @@
     <section id="contact" class="contact">
         <div class="section-container">
             <h2 class="section-title">
-                <span class="section-number">09.</span> Contact
+                Contact
             </h2>
             <p class="section-subtitle">I'm currently available for AI security roles, SOC analyst positions, red teaming engagements, and consulting opportunities.</p>
             
@@ -970,15 +1000,11 @@
             <div class="footer-top">
                 <a href="#" class="footer-logo">CU<span class="accent">.</span></a>
                 <div class="footer-links">
-                    <a href="#home">Home</a>
-                    <a href="#about">About</a>
-                    <a href="#expertise">Expertise</a>
-                    <a href="#portfolio">Portfolio</a>
-                    <a href="#timeline">Career</a>
-                    <a href="#trust">Trust</a>
-                    <a href="#terminal-demo">Terminal</a>
-                    <a href="blog/index.html">Writing</a>
+                    <a href="#work">Work</a>
                     <a href="demo/index.html">Demo</a>
+                    <a href="blog/index.html">Writing</a>
+                    <a href="#about">About</a>
+                    <a href="resume/index.html">Résumé</a>
                     <a href="now/index.html">Now</a>
                     <a href="#contact">Contact</a>
                 </div>
@@ -1001,6 +1027,7 @@
     </footer>
 
     <!-- JavaScript -->
+    <script src="js/lib/taxonomy.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
