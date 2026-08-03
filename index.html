@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Chima Ukachukwu — AI Security Analyst & Red Teamer. SOC-trained. AI-specialized. Certified Cybersecurity Educator. Portfolio showcasing AI red teaming frameworks and cybersecurity operations.">
-    <meta name="keywords" content="AI security, red teaming, cybersecurity, SOC analyst, LLM security, prompt injection, threat intelligence, Chima Ukachukwu">
     <meta name="author" content="Chima Ukachukwu">
     <meta name="robots" content="index, follow">
-    
+    <meta name="theme-color" content="#0a0e14">
+
+    <link rel="canonical" href="https://chimaukachukwu.com/">
+
     <!-- Open Graph -->
     <meta property="og:title" content="Chima Ukachukwu — AI Security Analyst & Red Teamer">
     <meta property="og:description" content="SOC-trained. AI-specialized. I secure systems — whether they run on code or neural networks.">
@@ -78,8 +80,9 @@
     }
     </script>
 
-    <!-- hCaptcha — privacy-friendly bot protection for the contact form -->
-    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+    <!-- hCaptcha protects the contact form. The script is ~200KB of third-party
+         JS for a form most visitors never reach, so js/main.js injects it on
+         first interaction with the form rather than on every page view. -->
 
     <!-- Privacy-friendly analytics by Plausible -->
     <script async src="https://plausible.io/js/pa-CULpUfeL2Juc-qRc9ARc9.js"></script>
@@ -507,7 +510,7 @@
                     </div>
                     <h3>Full GitHub Portfolio</h3>
                     <p>Complete code repositories, frameworks, and ongoing security research projects.</p>
-                    <a href="https://github.com/chima-ukachukwu-sec" class="btn btn-card" target="_blank">
+                    <a href="https://github.com/chima-ukachukwu-sec" class="btn btn-card" target="_blank" rel="noopener">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                         Visit Profile
                     </a>
@@ -622,11 +625,12 @@
             </h2>
             <p class="section-subtitle">A decade of progressive growth — from IT support to AI security specialist</p>
             
-            <div class="timeline-controls">
-                <button class="timeline-btn active" data-view="all">Full Journey</button>
-                <button class="timeline-btn" data-view="growth">Growth Leaps</button>
-                <button class="timeline-btn" data-view="security">Security Focus</button>
+            <div class="timeline-controls" role="group" aria-label="Filter career milestones">
+                <button type="button" class="timeline-btn active" data-view="all" aria-pressed="true">Full Journey</button>
+                <button type="button" class="timeline-btn" data-view="growth" aria-pressed="false">Growth Leaps</button>
+                <button type="button" class="timeline-btn" data-view="security" aria-pressed="false">Security Focus</button>
             </div>
+            <p id="timeline-status" class="sr-only" role="status" aria-live="polite"></p>
 
             <div class="timeline-container">
                 <div class="timeline-line"></div>
@@ -873,12 +877,12 @@
                         <p class="terminal-hint">Type <span class="cmd-highlight">help</span> to see available commands, or <span class="cmd-highlight">whoami</span> to start.</p>
                         <div class="terminal-divider"></div>
                     </div>
-                    <div id="terminal-output"></div>
+                    <div id="terminal-output" role="log" aria-live="polite" aria-atomic="false"></div>
                     <div class="terminal-input-line">
                         <span class="terminal-prompt">┌──(chima㉿portfolio)-[~]</span>
                         <span class="terminal-prompt-arrow">└─$</span>
                         <label for="terminal-input" class="sr-only">Terminal command</label>
-                        <input type="text" id="terminal-input" class="terminal-input" autofocus autocomplete="off" spellcheck="false" aria-label="Enter a terminal command (try 'help')">
+                        <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false" aria-label="Enter a terminal command (try 'help')">
                     </div>
                 </div>
             </div>
@@ -906,14 +910,14 @@
                                 <span>chima.ukachukwu.sec@gmail.com</span>
                             </div>
                         </a>
-                        <a href="https://linkedin.com/in/chima-anthony-u" target="_blank" class="contact-method">
+                        <a href="https://linkedin.com/in/chima-anthony-u" target="_blank" rel="noopener" class="contact-method">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
                             <div>
                                 <strong>LinkedIn</strong>
                                 <span>linkedin.com/in/chima-anthony-u</span>
                             </div>
                         </a>
-                        <a href="https://github.com/chima-ukachukwu-sec" target="_blank" class="contact-method">
+                        <a href="https://github.com/chima-ukachukwu-sec" target="_blank" rel="noopener" class="contact-method">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
                             <div>
                                 <strong>GitHub</strong>
@@ -941,7 +945,6 @@
                             <label for="message">Message</label>
                             <textarea id="message" name="message" rows="5" placeholder="Tell me about your project, role, or opportunity..." required></textarea>
                         </div>
-                        <!-- hCaptcha widget — replace data-sitekey with your real site key from hcaptcha.com -->
                         <div class="form-group">
                             <div class="h-captcha" data-sitekey="b54e067e-33d6-4f22-aa04-9fac33580390" data-theme="dark"></div>
                         </div>
@@ -980,10 +983,10 @@
                     <a href="#contact">Contact</a>
                 </div>
                 <div class="footer-social">
-                    <a href="https://linkedin.com/in/chima-anthony-u" target="_blank" aria-label="LinkedIn">
+                    <a href="https://linkedin.com/in/chima-anthony-u" target="_blank" rel="noopener" aria-label="LinkedIn">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
                     </a>
-                    <a href="https://github.com/chima-ukachukwu-sec" target="_blank" aria-label="GitHub">
+                    <a href="https://github.com/chima-ukachukwu-sec" target="_blank" rel="noopener" aria-label="GitHub">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
                     </a>
                     <a href="mailto:chima.ukachukwu.sec@gmail.com" aria-label="Email">

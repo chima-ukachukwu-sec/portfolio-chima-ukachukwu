@@ -138,6 +138,55 @@ img {
     display: block;
 }
 
+/* ---------- MOTION UTILITIES ----------
+   Reveal state is expressed as classes rather than inline styles, and the
+   hidden state is only applied by JS when an IntersectionObserver exists to
+   undo it — so a script failure can never leave content invisible. */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Compounded with .timeline-item so these win over the base rule's
+   `opacity: 1`, which is defined further down the file. */
+.timeline-item.reveal-timeline {
+    opacity: 0;
+    transform: translateX(30px);
+    transition:
+        opacity 0.5s ease var(--reveal-delay, 0s),
+        transform 0.5s ease var(--reveal-delay, 0s);
+}
+
+.timeline-item.reveal-timeline.left {
+    transform: translateX(-30px);
+}
+
+.reveal-on-scroll.is-revealed,
+.timeline-item.reveal-timeline.is-revealed {
+    opacity: 1;
+    transform: none;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 50%, 90% { transform: translateX(-6px); }
+    30%, 70% { transform: translateX(6px); }
+}
+
+.shake {
+    animation: shake 0.5s ease;
+}
+
+@keyframes btn-spin {
+    to { transform: rotate(360deg); }
+}
+
+.btn-spinner {
+    animation: btn-spin 0.8s linear infinite;
+    flex-shrink: 0;
+}
+
 /* ---------- SCROLLBAR ---------- */
 ::-webkit-scrollbar {
     width: 6px;
@@ -1276,6 +1325,17 @@ section {
     font-size: 0.95rem;
 }
 
+.form-error {
+    margin-top: 12px;
+    padding: 12px 14px;
+    border: 1px solid var(--accent-danger);
+    border-radius: var(--radius-sm);
+    background: rgba(248, 81, 73, 0.1);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
 .hidden {
     display: none;
 }
@@ -1887,23 +1947,22 @@ section {
 
 .terminal-skill-item {
     display: flex;
-    align-items: center;
-    gap: 8px;
+    align-items: baseline;
+    gap: 12px;
+    padding: 3px 0;
 }
 
-.terminal-skill-bar {
-    width: 100px;
-    height: 6px;
-    background: var(--border-color);
-    border-radius: 3px;
-    overflow: hidden;
+.terminal-skill-name {
+    flex-shrink: 0;
+    min-width: 170px;
+    font-size: 0.8rem;
+    color: var(--accent-primary);
 }
 
-.terminal-skill-fill {
-    height: 100%;
-    border-radius: 3px;
-    background: var(--gradient-primary);
-    transition: width 1s ease;
+.terminal-skill-proof {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
 }
 
 .terminal-table {
@@ -1941,8 +2000,13 @@ section {
         font-size: 0.78rem;
     }
 
-    .terminal-skill-bar {
-        width: 60px;
+    .terminal-skill-item {
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .terminal-skill-name {
+        min-width: 0;
     }
 }
 
@@ -2439,4 +2503,57 @@ section {
 @media (max-width: 720px) {
     .resume-role-header { flex-direction: column; gap: 4px; }
     .resume-role-dates { font-size: 0.8rem; }
+}
+
+/* ============================================
+   REDUCED MOTION
+   Must stay last in the file so these overrides win the cascade.
+   Durations collapse to ~0 rather than `none` so any transitionend /
+   animationend listeners still fire.
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    /* Anything JS may have marked for reveal is simply shown. */
+    .reveal-on-scroll,
+    .reveal-timeline {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    /* Decorative motion has no reduced-motion equivalent — remove it. */
+    .pulse-dot,
+    .timeline-pulse,
+    .scroll-indicator,
+    .hero-greeting {
+        animation: none !important;
+    }
+
+    .timeline-pulse {
+        display: none;
+    }
+
+    .hero-greeting {
+        opacity: 1;
+    }
+
+    .hero-bg-grid {
+        transform: none !important;
+    }
+
+    .cursor {
+        animation: none !important;
+        opacity: 1;
+    }
 }

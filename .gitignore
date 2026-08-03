@@ -10,3 +10,7 @@ _github-profile-readme/
 
 # Local-only context for Claude sessions (Claude Code, Cowork, etc.)
 CLAUDE.md
+.claude/
+
+# Internal working notes — candid self-critique, not for the public repo
+AUDIT.md
