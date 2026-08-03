@@ -37,7 +37,10 @@ const PARTIALS = path.join(ROOT, 'partials');
 const PAGES = {
   'index.html':                                        { root: '',       home: '',                 active: '' },
   '404.html':                                          { root: '/',      home: '/',                active: '' },
-  'demo/index.html':                                   { root: '../',    home: '../index.html',    active: 'demo' },
+  'demo/index.html':                                   { root: '../',    home: '../index.html',    active: '' }, // redirect stub
+  'lab/index.html':                                    { root: '../',    home: '../index.html',    active: 'lab' },
+  'lab/pattern-detector/index.html':                   { root: '../../', home: '../../index.html', active: 'lab' },
+  'lab/red-team-atlas/index.html':                     { root: '../../', home: '../../index.html', active: 'lab' },
   'blog/index.html':                                   { root: '../',    home: '../index.html',    active: 'writing' },
   'now/index.html':                                    { root: '../',    home: '../index.html',    active: '' },
   'resume/index.html':                                 { root: '../',    home: '../index.html',    active: '' },

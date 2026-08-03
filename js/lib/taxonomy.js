@@ -202,6 +202,68 @@ window.RedTeamTaxonomy = (function () {
         return { level: 'critical', label: 'Critical · ' + n + ' categories matched', detail: 'A heavily layered attack combining most of the taxonomy in a single payload. In real engagements, prompts at this density are usually deliberately constructed test cases (or seriously hostile inputs). A production system should refuse and log.' };
     }
 
+    /* ------------------------------------------------------------------
+       ATLAS — reference content for /lab/red-team-atlas/.
+       Kept separate from TAXONOMY so the detection data stays untouched:
+       TAXONOMY is what the classifier runs on, ATLAS is what humans read.
+
+       `owasp` maps to the OWASP Top 10 for LLM Applications (2025).
+       `signal` describes what a detection rule would key on.
+       `mitigation` is defensive guidance, not a guarantee.
+       ------------------------------------------------------------------ */
+    const ATLAS = {
+        'role-play': {
+            owasp: 'LLM01 Prompt Injection',
+            signal: 'Imperative persona verbs ("pretend", "act as", "you are now") within the first few tokens of a turn, or any reference to a named bypass persona.',
+            mitigation: 'Anchor identity in the system prompt and re-assert it per turn. Persona instructions arriving from user input should never be able to restate the model\'s operating rules.'
+        },
+        'hypothetical': {
+            owasp: 'LLM01 Prompt Injection',
+            signal: 'Fiction and academic framings ("in a hypothetical", "for educational purposes", "for a novel") wrapped around an otherwise refusable request.',
+            mitigation: 'Evaluate the payload, not the frame. A request does not become safe because it is nested inside a story — the output is the same either way.'
+        },
+        'context-dilution': {
+            owasp: 'LLM01 Prompt Injection',
+            signal: 'Long inputs whose sensitive request sits in the tail. The classifier flags 600+ characters with a sensitive term in the final 300.',
+            mitigation: 'Score the whole input rather than a prefix window, and weight the tail. Filters that sample the opening of a long document are the reason this works.'
+        },
+        'token-smuggling': {
+            owasp: 'LLM01 Prompt Injection · LLM05 Improper Output Handling',
+            signal: 'Encoding markers (base64, ROT13, hex, URL escapes) or long high-entropy strings paired with a decode instruction.',
+            mitigation: 'Decode before you filter. A guardrail that inspects only the literal surface text is inspecting a different string than the model acts on.'
+        },
+        'multi-turn': {
+            owasp: 'LLM01 Prompt Injection',
+            signal: 'Claims about prior turns ("as we agreed", "you said earlier") that the conversation history does not support.',
+            mitigation: 'Treat asserted history as untrusted. If a claim about a previous turn matters, verify it against the actual transcript rather than the user\'s summary of it.'
+        },
+        'indirect-injection': {
+            owasp: 'LLM01 Prompt Injection',
+            signal: 'Instruction-shaped text arriving from a retrieved document, tool return or web page — HTML comments, "system note:", bracketed override markers.',
+            mitigation: 'Keep a hard boundary between instructions and data. Content the model retrieved is data, and no amount of imperative phrasing inside it should change that.'
+        },
+        'extraction': {
+            owasp: 'LLM07 System Prompt Leakage',
+            signal: 'Direct requests for initial, original, hidden or system instructions, often socially framed as debugging or transparency.',
+            mitigation: 'Assume the system prompt will leak and design so that it leaking is survivable. Secrets belong in authorisation, not in a prompt.'
+        },
+        'prefix-leakage': {
+            owasp: 'LLM01 Prompt Injection',
+            signal: 'Completion-shaped constraints — "start your response with", "complete this sentence", fill-in-the-blank framings.',
+            mitigation: 'Filter on the response as well as the request. This category attacks next-token prediction, so a request-only guardrail never sees the harm.'
+        },
+        'authority': {
+            owasp: 'LLM01 Prompt Injection',
+            signal: 'Asserted identity or permission from inside the message body — claims of staff, developer, researcher or approval status.',
+            mitigation: 'Authorisation is a property of the session, never of the message. Text claiming clearance is a claim, not a credential.'
+        },
+        'capability-negotiation': {
+            owasp: 'LLM01 Prompt Injection',
+            signal: 'Argumentation against the policy itself — "ethics aside", "the usual rules don\'t apply", "just this once", "make an exception".',
+            mitigation: 'Policy is not negotiable at inference time. A model that can be argued out of a rule does not have that rule.'
+        }
+    };
+
     function escapeHtml(s) {
         return String(s)
             .replace(/&/g, '&amp;')
@@ -213,6 +275,7 @@ window.RedTeamTaxonomy = (function () {
 
     return {
         TAXONOMY: TAXONOMY,
+        ATLAS: ATLAS,
         EXAMPLES: EXAMPLES,
         analyze: analyze,
         scoreFromMatches: scoreFromMatches,

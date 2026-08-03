@@ -57,18 +57,33 @@
     <lastmod>2026-04-29</lastmod>
   </url>
 
-  <url>
-    <loc>https://chimaukachukwu.com/demo/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <lastmod>2026-04-29</lastmod>
-  </url>
 
   <url>
     <loc>https://chimaukachukwu.com/now/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <lastmod>2026-05-15</lastmod>
+  </url>
+
+  <url>
+    <loc>https://chimaukachukwu.com/lab/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <lastmod>2026-08-03</lastmod>
+  </url>
+
+  <url>
+    <loc>https://chimaukachukwu.com/lab/pattern-detector/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-08-03</lastmod>
+  </url>
+
+  <url>
+    <loc>https://chimaukachukwu.com/lab/red-team-atlas/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-08-03</lastmod>
   </url>
 
 </urlset>

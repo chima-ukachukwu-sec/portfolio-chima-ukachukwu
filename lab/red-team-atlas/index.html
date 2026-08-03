@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Red Team Atlas · Chima Ukachukwu</title>
+    <meta name="description" content="A browsable atlas of ten LLM jailbreak categories organised by mechanism: how each one works, what a detection rule keys on, the mitigation that addresses it, and its OWASP LLM Top 10 mapping.">
+    <meta name="author" content="Chima Anthony Ukachukwu">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Red Team Atlas — ten LLM jailbreak categories by mechanism">
+    <meta property="og:description" content="Mechanism, detection signal, mitigation and OWASP mapping for each category in my jailbreak taxonomy. Organised by mechanism, so the categories outlive the exploits.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://chimaukachukwu.com/lab/red-team-atlas/">
+    <meta property="og:image" content="https://chimaukachukwu.com/assets/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Chima Anthony Ukachukwu — AI Security Analyst & Red Teamer">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://chimaukachukwu.com/assets/images/og-image.png">
+
+    <link rel="canonical" href="https://chimaukachukwu.com/lab/red-team-atlas/">
+
+    <!-- build:head-assets -->
+    <meta name="theme-color" content="#0a0e14">
+
+    <!-- Favicon — "C" brand mark -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%2300d4aa'/%3E%3Cstop offset='100%25' style='stop-color:%2300a3ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Ctext x='50' y='72' text-anchor='middle' fill='%230a0e14' font-family='Inter,sans-serif' font-weight='900' font-size='62'%3EC%3C/text%3E%3C/svg%3E">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+    <!-- /build:head-assets -->
+
+    <!-- build:head-analytics -->
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://plausible.io/js/pa-CULpUfeL2Juc-qRc9ARc9.js"></script>
+    <script>
+        window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+        plausible.init()
+    </script>
+    <!-- /build:head-analytics -->
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<nav class="navbar" aria-label="Primary">
+    <div class="nav-container">
+        <a href="../../index.html" class="nav-logo">CU<span class="accent">.</span></a>
+        <!-- build:nav -->
+        <ul class="nav-menu">
+            <li><a href="../../index.html#work" class="nav-link">Work</a></li>
+            <li><a href="../../lab/index.html" class="nav-link active">Lab</a></li>
+            <li><a href="../../blog/index.html" class="nav-link">Writing</a></li>
+            <li><a href="../../index.html#about" class="nav-link">About</a></li>
+            <li><a href="../../index.html#contact" class="nav-link">Contact</a></li>
+            <li class="nav-cta-item"><a href="../../resume/index.html" class="nav-cta">Résumé <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></li>
+        </ul>
+        <!-- /build:nav -->
+        <button class="nav-toggle" id="mobile-menu" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </button>
+    </div>
+</nav>
+
+<main id="main-content" class="post-main">
+    <article class="post-article">
+        <header class="post-header">
+            <p class="post-eyebrow"><a href="../index.html">← Lab</a></p>
+            <h1 class="post-title">Red Team Atlas</h1>
+            <p class="post-dek">
+                Ten jailbreak categories from active red teaming, organised by <em>mechanism</em>
+                rather than by phrasing. Specific working exploits change with every model release.
+                The mechanisms don't — when a new family of jailbreaks appears it almost always slots
+                into an existing category, which is the entire point of taxonomising this way.
+            </p>
+            <p class="post-meta">Maps to the OWASP Top 10 for LLM Applications (2025) · Sanitized, NDA-compliant</p>
+        </header>
+
+        <div class="post-body">
+            <p>
+                Each entry below carries four things: the <strong>mechanism</strong> that makes it
+                work, the <strong>detection signal</strong> a rule would key on, a
+                <strong>mitigation</strong> that addresses the mechanism rather than the wording, and
+                the <strong>OWASP</strong> entry it maps to. The detection patterns are the live ones
+                — the <a href="../pattern-detector/index.html">Pattern Detector</a> runs on exactly
+                this data.
+            </p>
+
+            <p class="atlas-caveat">
+                No working exploits appear here, by design. Mechanism and methodology are publishable;
+                anything that would let a reader reproduce a current-day attack is not.
+            </p>
+
+            <nav class="atlas-toc" aria-label="Categories">
+                <h2 class="atlas-toc-title">Categories</h2>
+                <ol id="atlas-toc-list" class="atlas-toc-list"></ol>
+            </nav>
+
+            <div id="atlas-entries" class="atlas-entries"></div>
+
+            <noscript>
+                <p><strong>This atlas renders from the shared taxonomy module, which needs
+                JavaScript.</strong> The <a href="../../portfolio/case-studies/ai-red-teaming-frameworks.html">case
+                study</a> covers the same framework as prose.</p>
+            </noscript>
+
+            <h2>Why mechanism, not phrasing</h2>
+            <p>
+                A taxonomy built on wording is obsolete the moment a model ships. "Pretend you are
+                DAN" stops working; the <em>persona override</em> it relies on does not. Sorting by
+                mechanism means a new jailbreak is usually a new instance of a known category rather
+                than a new category — which is what makes the framework useful for planning coverage
+                instead of just cataloguing what already happened.
+            </p>
+            <p>
+                It also translates. Each mechanism implies a defence, and those defences are what a
+                blue team can actually build against. That translation — offensive finding to
+                defensive control — is the part of this work that transfers directly from SOC
+                practice, and it's covered further in
+                <a href="../../blog/posts/detecting-prompt-injection.html">Detecting Prompt Injection</a>.
+            </p>
+
+            <p class="post-back"><a href="../index.html">← Back to the Lab</a></p>
+        </div>
+    </article>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-brand">
+            <span class="footer-logo">CU<span class="accent">.</span></span>
+            <p>AI Security Analyst &amp; Red Teamer</p>
+        </div>
+        <!-- build:footer-links -->
+        <div class="footer-links">
+            <a href="../../index.html#work">Work</a>
+            <a href="../../lab/index.html">Lab</a>
+            <a href="../../blog/index.html">Writing</a>
+            <a href="../../index.html#about">About</a>
+            <a href="../../resume/index.html">Résumé</a>
+            <a href="../../now/index.html">Now</a>
+            <a href="../../index.html#contact">Contact</a>
+        </div>
+        <!-- /build:footer-links -->
+        <!-- build:footer-social -->
+        <div class="footer-social">
+            <a href="https://linkedin.com/in/chima-anthony-u" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://github.com/chima-ukachukwu-sec" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </a>
+            <a href="mailto:chima.ukachukwu.sec@gmail.com" aria-label="Email">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+        </div>
+        <!-- /build:footer-social -->
+        <p class="footer-copyright">© 2026 Chima Anthony Ukachukwu</p>
+    </div>
+</footer>
+
+<script src="../../js/lib/taxonomy.js"></script>
+<script src="../../js/main.js"></script>
+<script>
+(function () {
+    'use strict';
+    var lib = window.RedTeamTaxonomy;
+    var list = document.getElementById('atlas-toc-list');
+    var host = document.getElementById('atlas-entries');
+    if (!lib || !list || !host) return;
+
+    var esc = lib.escapeHtml;
+
+    lib.TAXONOMY.forEach(function (cat, i) {
+        var ref = lib.ATLAS[cat.id] || {};
+        var n = String(i + 1).padStart(2, '0');
+        var patternCount = (cat.patterns || []).length;
+
+        list.insertAdjacentHTML('beforeend',
+            '<li><a href="#cat-' + esc(cat.id) + '">' + esc(cat.name) + '</a></li>');
+
+        host.insertAdjacentHTML('beforeend',
+            '<section class="atlas-entry" id="cat-' + esc(cat.id) + '">' +
+                '<p class="atlas-num">' + n + '</p>' +
+                '<h3 class="atlas-name">' + esc(cat.name) + '</h3>' +
+                '<dl class="atlas-fields">' +
+                    '<dt>Mechanism</dt><dd>' + esc(cat.mechanism) + '</dd>' +
+                    (ref.signal ? '<dt>Detection signal</dt><dd>' + esc(ref.signal) + '</dd>' : '') +
+                    (ref.mitigation ? '<dt>Mitigation</dt><dd>' + esc(ref.mitigation) + '</dd>' : '') +
+                '</dl>' +
+                '<p class="atlas-tags">' +
+                    (ref.owasp ? '<span class="atlas-owasp">' + esc(ref.owasp) + '</span>' : '') +
+                    '<span class="atlas-count">' +
+                        (patternCount ? patternCount + ' detection pattern' + (patternCount === 1 ? '' : 's')
+                                      : 'length heuristic') +
+                    '</span>' +
+                '</p>' +
+            '</section>');
+    });
+})();
+</script>
+</body>
+</html>
