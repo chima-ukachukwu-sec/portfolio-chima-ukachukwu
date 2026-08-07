@@ -39,10 +39,12 @@ const PAGES = {
   '404.html':                                          { root: '/',      home: '/',                active: '' },
   'demo/index.html':                                   { root: '../',    home: '../index.html',    active: '' }, // redirect stub
   'lab/index.html':                                    { root: '../',    home: '../index.html',    active: 'lab' },
+  'lab/ctf/index.html':                                { root: '../../', home: '../../index.html', active: 'lab' },
   'lab/injection-sim/index.html':                      { root: '../../', home: '../../index.html', active: 'lab' },
   'lab/pattern-detector/index.html':                   { root: '../../', home: '../../index.html', active: 'lab' },
   'lab/red-team-atlas/index.html':                     { root: '../../', home: '../../index.html', active: 'lab' },
   'blog/index.html':                                   { root: '../',    home: '../index.html',    active: 'writing' },
+  'colophon/index.html':                                { root: '../',    home: '../index.html',    active: '' },
   'now/index.html':                                    { root: '../',    home: '../index.html',    active: '' },
   'resume/index.html':                                 { root: '../',    home: '../index.html',    active: '' },
   'blog/posts/the-defence-that-cant-see-the-attack.html': { root: '../../', home: '../../index.html', active: 'writing' },

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Colophon · Chima Ukachukwu</title>
+    <meta name="description" content="How this site is built: zero runtime dependencies, two author-time generators, five CI checks, deterministic client-side exhibits, and the decisions behind each.">
+    <meta name="author" content="Chima Anthony Ukachukwu">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Colophon — how this site is built">
+    <meta property="og:description" content="Zero runtime dependencies, two generators, five CI checks, and the reasoning behind each decision. A security engineer's site, held to the standard he'd hold yours to.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://chimaukachukwu.com/colophon/">
+    <meta property="og:image" content="https://chimaukachukwu.com/assets/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Chima Anthony Ukachukwu — AI Security Analyst & Red Teamer">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://chimaukachukwu.com/assets/images/og-image.png">
+
+    <link rel="canonical" href="https://chimaukachukwu.com/colophon/">
+
+    <!-- build:head-assets -->
+    <meta name="theme-color" content="#0a0e14">
+
+    <!-- Favicon — "C" brand mark -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%2300d4aa'/%3E%3Cstop offset='100%25' style='stop-color:%2300a3ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Ctext x='50' y='72' text-anchor='middle' fill='%230a0e14' font-family='Inter,sans-serif' font-weight='900' font-size='62'%3EC%3C/text%3E%3C/svg%3E">
+
+    <!-- Fonts are self-hosted (assets/fonts/), so there is no third-party request
+         and no render-blocking round trip to another origin. Preloaded because the
+         stylesheet that declares them is itself a blocking resource — without this
+         the browser only discovers the fonts after parsing the CSS. -->
+    <link rel="preload" href="../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- /build:head-assets -->
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://chimaukachukwu.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Colophon", "item": "https://chimaukachukwu.com/colophon/" }
+  ]
+}
+    </script>
+
+    <!-- build:head-analytics -->
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://plausible.io/js/pa-CULpUfeL2Juc-qRc9ARc9.js"></script>
+    <script>
+        window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+        plausible.init()
+    </script>
+    <!-- /build:head-analytics -->
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<nav class="navbar" aria-label="Primary">
+    <div class="nav-container">
+        <a href="../index.html" class="nav-logo">CU<span class="accent">.</span></a>
+        <!-- build:nav -->
+        <ul class="nav-menu">
+            <li><a href="../index.html#work" class="nav-link">Work</a></li>
+            <li><a href="../lab/index.html" class="nav-link">Lab</a></li>
+            <li><a href="../blog/index.html" class="nav-link">Writing</a></li>
+            <li><a href="../index.html#about" class="nav-link">About</a></li>
+            <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+            <li class="nav-cta-item"><a href="../resume/index.html" class="nav-cta">Résumé <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></li>
+        </ul>
+        <!-- /build:nav -->
+        <button class="nav-toggle" id="mobile-menu" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </button>
+    </div>
+</nav>
+
+<main id="main-content" class="post-main">
+    <article class="post-article">
+        <header class="post-header">
+            <p class="post-eyebrow">Colophon</p>
+            <h1 class="post-title">How this site is built</h1>
+            <p class="post-dek">
+                I do security work. It would be strange to argue for engineering rigour on a site
+                that didn&rsquo;t have any, so here is the whole thing: what it&rsquo;s made of, what it
+                deliberately isn&rsquo;t, and where it&rsquo;s still weak.
+            </p>
+        </header>
+
+        <div class="post-body">
+            <div class="colophon-stats">
+                <div><dt>Runtime dependencies</dt><dd>0</dd></div>
+                <div><dt>Build step to deploy</dt><dd>None</dd></div>
+                <div><dt>CSS</dt><dd>85 KB</dd></div>
+                <div><dt>JavaScript</dt><dd>82 KB</dd></div>
+                <div><dt>Fonts</dt><dd>77 KB, self-hosted</dd></div>
+                <div><dt>CI checks</dt><dd>5</dd></div>
+            </div>
+
+            <h2>Zero dependencies is a decision, not an accident</h2>
+            <p>
+                There is no framework here. No bundler, no CSS library, no icon package, no
+                <code>node_modules</code> directory, and nothing to <code>npm install</code> before
+                the site will run. Every page is HTML that a browser reads directly.
+            </p>
+            <p>
+                This isn&rsquo;t nostalgia. A dependency is a supply chain, and a supply chain is an
+                attack surface — that&rsquo;s <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" rel="noopener">LLM03</a>
+                in the OWASP LLM Top 10 and it has been in the general application list far longer.
+                Every package I add is code I did not write, executing in my visitors&rsquo; browsers,
+                updated by someone I have never met. For a personal site the honest cost/benefit
+                almost never favours the package.
+            </p>
+            <p>
+                The practical effect is that this site cannot be compromised through a dependency,
+                because it has none. That is a small claim about a small site. It is also the kind
+                of claim most sites cannot make.
+            </p>
+
+            <h2>Two generators, run by hand, output committed</h2>
+            <p>
+                Zero dependencies at runtime does not mean zero tooling. Two Node scripts run at
+                author time, and their output is committed so the repository stays a plain static
+                site that deploys with <code>git push</code>.
+            </p>
+            <p>
+                <strong><code>tools/build-pages.js</code></strong> stamps shared markup — navigation,
+                footer, head assets, analytics — into all 17 pages. It exists because of a specific
+                failure: the navigation was hand-copied across every page, I changed an anchor on
+                the homepage, and ten sub-pages silently kept pointing at a section that no longer
+                existed. Nothing caught it because nothing could. Now a partial changes in one place
+                and CI fails if any page is out of date.
+            </p>
+            <p>
+                <strong><code>tools/build-blog.js</code></strong> generates the writing index,
+                related-post rails ranked by tag overlap, next/prev links, and the RSS feed from a
+                single <code>data/posts.json</code>. Adding a post used to mean four hand-edits in
+                four files that could disagree with each other. Now it is one entry and the body.
+            </p>
+            <p>
+                Both use the same convention: a marked region in the file, an idempotent rewrite,
+                and a <code>--check</code> mode that exits non-zero if the committed output has
+                drifted. That last part is what makes them trustworthy rather than merely
+                convenient.
+            </p>
+
+            <h2>The Lab runs on rules, not on a model</h2>
+            <p>
+                Every interactive exhibit — the <a href="../lab/injection-sim/index.html">injection
+                simulator</a>, the <a href="../lab/pattern-detector/index.html">pattern
+                detector</a>, the <a href="../lab/red-team-atlas/index.html">atlas</a> — is
+                deterministic and runs entirely in your browser. No backend, no API key, no model
+                call, nothing sent anywhere.
+            </p>
+            <p>
+                Partly that is forced: this is a static site on GitHub Pages, so there is no server
+                and therefore nowhere safe to keep a key. But the constraint produced a better
+                artefact than the unconstrained version would have. A rule engine gives the same
+                answer to the same input every time, which is what lets the simulator demonstrate
+                that toggling one specific control changed one specific outcome. A sampled model
+                could only ever show correlation.
+            </p>
+            <p>
+                It also means the classifier and the atlas read from one shared module, so the
+                reference documentation structurally cannot describe a detection rule the tool
+                doesn&rsquo;t actually have.
+            </p>
+
+            <h2>Accessibility, verified rather than assumed</h2>
+            <p>
+                Colour contrast is checked with a compositing-aware sweep over every text node on
+                the page — resolving alpha layers and inherited opacity down to the real background
+                rather than eyeballing swatches. Every page currently passes WCAG AA with zero
+                failures, and the sweep runs again after any visual change.
+            </p>
+            <p>
+                That method has caught things review would not. A recruiter-mode design that dimmed
+                de-emphasised sections to 55% opacity looked fine and failed on eleven elements; it
+                was removed rather than tuned, because reducing the contrast of content someone may
+                still want to read is not a trade worth making for visual hierarchy.
+            </p>
+            <p>
+                Everything else follows the same rule — <code>prefers-reduced-motion</code>
+                throughout with substitutions rather than removals, 44px touch targets, visible
+                focus rings, one <code>h1</code> per page, skip links, live regions on anything that
+                updates. The only <code>!important</code> declarations in the stylesheet are inside
+                the reduced-motion block, where overriding is the entire point.
+            </p>
+
+            <h2>Performance, and what it cost</h2>
+            <p>
+                Fonts are self-hosted variable WOFF2, <code>latin</code> subset only, preloaded.
+                Dropping the third-party stylesheet removed a render-blocking round trip to another
+                origin; dropping <code>latin-ext</code> removed 94 KB after a scan of every page
+                found zero characters that needed it.
+            </p>
+            <p>
+                Images are sized to their slot and served as WebP with a JPEG fallback, with
+                dimensions declared so nothing shifts as they load. Third-party scripts are
+                deferred until they are needed — the captcha loads on first interaction with the
+                contact form rather than on every page view, since almost nobody reaches that form.
+            </p>
+            <p>
+                Not everything survived measurement. An SVG sprite was planned until I measured it:
+                stripping every inline icon from the homepage saves 0.7 KB gzipped, because repeated
+                markup is precisely what gzip handles best. The icons stayed inline. A social
+                preview image is still 140 KB, which is more than it should be.
+            </p>
+
+            <h2>What CI actually checks</h2>
+            <p>
+                Five jobs, chosen for the failures a static site really has rather than the ones a
+                template suggests:
+            </p>
+            <p>
+                <strong>Generated markup is current</strong> — the failure that already happened
+                once. <strong>Link checking</strong> — with pages at three directory depths, a
+                broken relative path is the most likely regression and the most damaging when a
+                recruiter hits it. <strong>Type checking</strong> — <code>checkJs</code> over plain
+                JavaScript, no compile step, nothing shipped; it found dead code in the simulator
+                and a documentation comment that disagreed with its own function.
+                <strong>Asset budget</strong> — a guard against someone dropping in a 2 MB image or
+                a library &ldquo;just this once&rdquo;.
+            </p>
+
+            <h2>Where it&rsquo;s weak</h2>
+            <p>
+                A colophon that only lists strengths is a brochure. So:
+            </p>
+            <p>
+                <strong>The stylesheet is one 85 KB file.</strong> It is organised and tokenised,
+                but it is still a single file that everything reads from, and it will get harder to
+                reason about before it gets easier.
+            </p>
+            <p>
+                <strong>There are no unit tests.</strong> Verification is a link check, a type
+                check, and manual browser passes. That is proportionate to a static site today, but
+                the simulator&rsquo;s rule engine has real branching logic and deserves better than my
+                confidence that I checked the truth table once.
+            </p>
+            <p>
+                <strong>No light mode.</strong> A dark-only site is a choice that also happens to
+                be the easy one.
+            </p>
+            <p>
+                <strong>Assets are cached for ten minutes by GitHub Pages</strong> and I do not
+                control the headers. Filename hashing would fix it; it is not worth the machinery
+                at this update frequency.
+            </p>
+
+            <h2>Why this page exists</h2>
+            <p>
+                I ask people to trust my judgement about systems. This is the one system I control
+                end to end, so it is the most honest evidence I can offer about how I actually make
+                decisions — including the ones I reversed, the estimate that did not survive
+                measurement, and the parts I have not got to yet.
+            </p>
+            <p>
+                <a href="https://github.com/chima-ukachukwu-sec/portfolio-chima-ukachukwu" target="_blank" rel="noopener">The whole thing is on GitHub →</a>
+            </p>
+
+            <p class="post-back"><a href="../index.html">← Back home</a></p>
+        </div>
+    </article>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-brand">
+            <span class="footer-logo">CU<span class="accent">.</span></span>
+            <p>AI Security Analyst &amp; Red Teamer</p>
+        </div>
+        <!-- build:footer-links -->
+        <div class="footer-links">
+            <a href="../index.html#work">Work</a>
+            <a href="../lab/index.html">Lab</a>
+            <a href="../blog/index.html">Writing</a>
+            <a href="../index.html#about">About</a>
+            <a href="../resume/index.html">Résumé</a>
+            <a href="../now/index.html">Now</a>
+            <a href="../colophon/index.html">Colophon</a>
+            <a href="../index.html#contact">Contact</a>
+        </div>
+        <!-- /build:footer-links -->
+        <!-- build:footer-social -->
+        <div class="footer-social">
+            <a href="https://linkedin.com/in/chima-anthony-u" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://github.com/chima-ukachukwu-sec" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </a>
+            <a href="mailto:chima.ukachukwu.sec@gmail.com" aria-label="Email">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+        </div>
+        <!-- /build:footer-social -->
+        <p class="footer-copyright">© 2026 Chima Anthony Ukachukwu</p>
+    </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

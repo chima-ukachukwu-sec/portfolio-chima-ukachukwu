@@ -107,4 +107,18 @@
     <lastmod>2026-08-07</lastmod>
   </url>
 
+  <url>
+    <loc>https://chimaukachukwu.com/colophon/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <lastmod>2026-08-07</lastmod>
+  </url>
+
+  <url>
+    <loc>https://chimaukachukwu.com/lab/ctf/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-08-07</lastmod>
+  </url>
+
 </urlset>

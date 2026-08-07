@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Red Team Atlas · Chima Ukachukwu</title>
-    <meta name="description" content="A browsable atlas of ten LLM jailbreak categories organised by mechanism: how each one works, what a detection rule keys on, the mitigation that addresses it, and its OWASP LLM Top 10 mapping.">
+    <title>Prompt Injection CTF · Chima Ukachukwu</title>
+    <meta name="description" content="Six progressive prompt injection levels. Each adds a control; each is beaten by the technique that control does not cover. Deterministic, client-side, no model.">
     <meta name="author" content="Chima Anthony Ukachukwu">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Red Team Atlas — ten LLM jailbreak categories by mechanism">
-    <meta property="og:description" content="Mechanism, detection signal, mitigation and OWASP mapping for each category in my jailbreak taxonomy. Organised by mechanism, so the categories outlive the exploits.">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://chimaukachukwu.com/lab/red-team-atlas/">
+    <meta property="og:title" content="Prompt Injection CTF — six levels, six controls, six ways through">
+    <meta property="og:description" content="Each level adds a defence. Each is beaten by finding what that defence does not cover.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://chimaukachukwu.com/lab/ctf/">
     <meta property="og:image" content="https://chimaukachukwu.com/assets/images/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -20,7 +20,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://chimaukachukwu.com/assets/images/og-image.png">
 
-    <link rel="canonical" href="https://chimaukachukwu.com/lab/red-team-atlas/">
+    <link rel="canonical" href="https://chimaukachukwu.com/lab/ctf/">
 
     <!-- build:head-assets -->
     <meta name="theme-color" content="#0a0e14">
@@ -59,8 +59,8 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Red Team Atlas",
-      "item": "https://chimaukachukwu.com/lab/red-team-atlas/"
+      "name": "Prompt Injection CTF",
+      "item": "https://chimaukachukwu.com/lab/ctf/"
     }
   ]
 }
@@ -97,68 +97,78 @@
     </div>
 </nav>
 
-<main id="main-content" class="post-main">
-    <article class="post-article">
-        <header class="post-header">
-            <p class="post-eyebrow"><a href="../index.html">← Lab</a></p>
-            <h1 class="post-title">Red Team Atlas</h1>
-            <p class="post-dek">
-                Ten jailbreak categories from active red teaming, organised by <em>mechanism</em>
-                rather than by phrasing. Specific working exploits change with every model release.
-                The mechanisms don't — when a new family of jailbreaks appears it almost always slots
-                into an existing category, which is the entire point of taxonomising this way.
-            </p>
-            <p class="post-meta">Maps to the OWASP Top 10 for LLM Applications (2025) · Sanitized, NDA-compliant</p>
-        </header>
+<main id="main-content" class="sim-main">
+    <header class="sim-header">
+        <p class="post-eyebrow"><a href="../index.html">← Lab</a></p>
+        <h1 class="sim-title">Prompt Injection CTF</h1>
+        <p class="sim-dek">
+            Six levels. Each one adds a control on top of the last, and each is beaten by finding
+            the technique the new control <em>doesn&rsquo;t</em> cover. That is the whole exercise — and
+            it is the same reasoning a real engagement runs on, compressed to about five minutes.
+        </p>
+        <p class="sim-sub">
+            Deterministic, like everything in the Lab. No model, no backend, nothing sent anywhere.
+            Your progress is kept in this browser only. Levels are ordered so the lesson accumulates:
+            it is entirely possible to clear level 5 and then fail level 6 with the same payload.
+        </p>
+    </header>
 
-        <div class="post-body">
-            <p>
-                Each entry below carries four things: the <strong>mechanism</strong> that makes it
-                work, the <strong>detection signal</strong> a rule would key on, a
-                <strong>mitigation</strong> that addresses the mechanism rather than the wording, and
-                the <strong>OWASP</strong> entry it maps to. The detection patterns are the live ones
-                — the <a href="../pattern-detector/index.html">Pattern Detector</a> runs on exactly
-                this data.
-            </p>
+    <div class="ctf-progress">
+        <div class="ctf-track" id="ctf-track" role="list" aria-label="Levels"></div>
+        <p class="ctf-count" id="ctf-count" role="status" aria-live="polite">0 of 6 captured.</p>
+        <button type="button" id="ctf-reset" class="sim-reset">Reset progress</button>
+    </div>
 
-            <p class="atlas-caveat">
-                No working exploits appear here, by design. Mechanism and methodology are publishable;
-                anything that would let a reader reproduce a current-day attack is not.
-            </p>
-
-            <nav class="atlas-toc" aria-label="Categories">
-                <h2 class="atlas-toc-title">Categories</h2>
-                <ol id="atlas-toc-list" class="atlas-toc-list"></ol>
-            </nav>
-
-            <div id="atlas-entries" class="atlas-entries"></div>
-
-            <noscript>
-                <p><strong>This atlas renders from the shared taxonomy module, which needs
-                JavaScript.</strong> The <a href="../../portfolio/case-studies/ai-red-teaming-frameworks.html">case
-                study</a> covers the same framework as prose.</p>
-            </noscript>
-
-            <h2>Why mechanism, not phrasing</h2>
-            <p>
-                A taxonomy built on wording is obsolete the moment a model ships. "Pretend you are
-                DAN" stops working; the <em>persona override</em> it relies on does not. Sorting by
-                mechanism means a new jailbreak is usually a new instance of a known category rather
-                than a new category — which is what makes the framework useful for planning coverage
-                instead of just cataloguing what already happened.
-            </p>
-            <p>
-                It also translates. Each mechanism implies a defence, and those defences are what a
-                blue team can actually build against. That translation — offensive finding to
-                defensive control — is the part of this work that transfers directly from SOC
-                practice, and it's covered further in
-                <a href="../../blog/posts/detecting-prompt-injection.html">Detecting Prompt Injection</a>.
-            </p>
-
-            <p class="post-back"><a href="../index.html">← Back to the Lab</a></p>
+    <section class="ctf-stage" aria-labelledby="ctf-level-name">
+        <div class="ctf-level-head">
+            <span class="ctf-level-num" id="ctf-level-num">01</span>
+            <div>
+                <h2 id="ctf-level-name">—</h2>
+                <p id="ctf-level-brief"></p>
+            </div>
         </div>
-    </article>
+
+        <div class="ctf-defences" id="ctf-defences" aria-label="Controls active on this level"></div>
+
+        <form id="ctf-form" class="sim-form">
+            <label for="ctf-input" class="sr-only">Your attempt</label>
+            <textarea id="ctf-input" class="sim-input" rows="2" spellcheck="false"
+                      placeholder="Type your attack…"></textarea>
+            <button type="submit" id="ctf-send" class="sim-send" disabled>Submit</button>
+        </form>
+
+        <div class="ctf-controls">
+            <button type="button" id="ctf-hint" class="sim-preset">Show hint</button>
+            <button type="button" id="ctf-prev" class="sim-preset">← Previous</button>
+            <button type="button" id="ctf-next" class="sim-preset">Next →</button>
+        </div>
+
+        <p class="ctf-hint" id="ctf-hint-text" hidden></p>
+        <div class="ctf-result" id="ctf-result" role="status" aria-live="polite"></div>
+    </section>
+
+    <section class="sim-notes">
+        <h2>What the levels are actually teaching</h2>
+        <p>
+            The progression is not arbitrary. It is roughly the order real systems adopt controls,
+            and each level fails the way that control fails in production: a system prompt that
+            competes with user instructions rather than overriding them, a blocklist defeated by
+            vocabulary, an exact-match output filter defeated by any transformation, identity
+            anchoring that pushes the attacker from the direct path to the indirect one.
+        </p>
+        <p>
+            Level 6 is the one worth sitting with. Every direct route is closed and tool output is
+            tagged as data — and the way through is that a system which refuses to <em>state</em> a
+            secret will often happily <em>describe</em> it. Length, format, first character. That is
+            not a bypass of the controls; it is a gap none of them were pointed at.
+        </p>
+        <p class="sim-notes-links">
+            <a href="../injection-sim/index.html">The defence matrix, in full →</a>
+            <a href="../../blog/posts/the-defence-that-cant-see-the-attack.html">Why one control is never enough →</a>
+        </p>
+    </section>
 </main>
+
 
 <footer class="footer">
     <div class="footer-container">
@@ -195,45 +205,8 @@
     </div>
 </footer>
 
-<script src="../../js/lib/taxonomy.js"></script>
+<script src="../../js/lib/ctf.js"></script>
 <script src="../../js/main.js"></script>
-<script>
-(function () {
-    'use strict';
-    var lib = window.RedTeamTaxonomy;
-    var list = document.getElementById('atlas-toc-list');
-    var host = document.getElementById('atlas-entries');
-    if (!lib || !list || !host) return;
-
-    var esc = lib.escapeHtml;
-
-    lib.TAXONOMY.forEach(function (cat, i) {
-        var ref = lib.ATLAS[cat.id] || {};
-        var n = String(i + 1).padStart(2, '0');
-        var patternCount = (cat.patterns || []).length;
-
-        list.insertAdjacentHTML('beforeend',
-            '<li><a href="#cat-' + esc(cat.id) + '">' + esc(cat.name) + '</a></li>');
-
-        host.insertAdjacentHTML('beforeend',
-            '<section class="atlas-entry" id="cat-' + esc(cat.id) + '">' +
-                '<p class="atlas-num">' + n + '</p>' +
-                '<h3 class="atlas-name">' + esc(cat.name) + '</h3>' +
-                '<dl class="atlas-fields">' +
-                    '<dt>Mechanism</dt><dd>' + esc(cat.mechanism) + '</dd>' +
-                    (ref.signal ? '<dt>Detection signal</dt><dd>' + esc(ref.signal) + '</dd>' : '') +
-                    (ref.mitigation ? '<dt>Mitigation</dt><dd>' + esc(ref.mitigation) + '</dd>' : '') +
-                '</dl>' +
-                '<p class="atlas-tags">' +
-                    (ref.owasp ? '<span class="atlas-owasp">' + esc(ref.owasp) + '</span>' : '') +
-                    '<span class="atlas-count">' +
-                        (patternCount ? patternCount + ' detection pattern' + (patternCount === 1 ? '' : 's')
-                                      : 'length heuristic') +
-                    '</span>' +
-                '</p>' +
-            '</section>');
-    });
-})();
-</script>
+<script src="ctf-ui.js"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Lab · Chima Ukachukwu</title>
-    <meta name="description" content="Interactive AI security exhibits. Deterministic, client-side tools built from active red teaming work — a prompt injection sandbox, a jailbreak classifier and a browsable attack-technique atlas.">
+    <meta name="description" content="Interactive AI security exhibits. Deterministic, client-side tools built from active red teaming work — a prompt injection sandbox, a six-level CTF, a jailbreak classifier and a browsable attack-technique atlas.">
     <meta name="author" content="Chima Anthony Ukachukwu">
 
     <!-- Open Graph -->
@@ -112,6 +112,33 @@
         <article class="exhibit">
             <div class="exhibit-meta">
                 <span class="exhibit-num">02</span>
+                <span class="exhibit-kind">Challenge</span>
+            </div>
+            <div class="exhibit-body">
+                <h2><a href="ctf/index.html">Prompt Injection CTF</a></h2>
+                <p>
+                    Six levels, each adding one control on top of the last, each beaten by finding
+                    the technique that control doesn't cover. Level 6 is the one worth sitting with:
+                    every direct route is closed, and the way through is that a system which refuses
+                    to state a secret will happily describe it.
+                </p>
+                <ul class="exhibit-facts">
+                    <li><span>Format</span> Six progressive levels, flags to capture</li>
+                    <li><span>Method</span> Deterministic — no model, progress stays in your browser</li>
+                    <li><span>Demonstrates</span> Control layering, bypass reasoning</li>
+                </ul>
+                <p class="exhibit-links">
+                    <a class="exhibit-cta" href="ctf/index.html">Start at level 1
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </a>
+                    <a class="exhibit-source" href="https://github.com/chima-ukachukwu-sec/portfolio-chima-ukachukwu/blob/main/js/lib/ctf.js" target="_blank" rel="noopener">View source</a>
+                </p>
+            </div>
+        </article>
+
+        <article class="exhibit">
+            <div class="exhibit-meta">
+                <span class="exhibit-num">03</span>
                 <span class="exhibit-kind">Interactive classifier</span>
             </div>
             <div class="exhibit-body">
@@ -137,7 +164,7 @@
 
         <article class="exhibit">
             <div class="exhibit-meta">
-                <span class="exhibit-num">03</span>
+                <span class="exhibit-num">04</span>
                 <span class="exhibit-kind">Reference</span>
             </div>
             <div class="exhibit-body">
@@ -198,6 +225,7 @@
             <a href="../index.html#about">About</a>
             <a href="../resume/index.html">Résumé</a>
             <a href="../now/index.html">Now</a>
+            <a href="../colophon/index.html">Colophon</a>
             <a href="../index.html#contact">Contact</a>
         </div>
         <!-- /build:footer-links -->

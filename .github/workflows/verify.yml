@@ -73,8 +73,11 @@ jobs:
               echo "ok  $path  ${size}KB / ${limit}KB"
             fi
           }
-          check css/style.css 100
-          check js 80
+          check css/style.css 110
+          # Raised from 80KB when the CTF and live-metadata modules landed.
+          # Deliberate: three Lab exhibits carry real logic. Revisit if it
+          # climbs again without a feature behind it.
+          check js 110
           check assets/fonts 120
           check assets/images 400
           exit $fail

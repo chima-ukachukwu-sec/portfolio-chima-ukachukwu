@@ -26,4 +26,16 @@ interface Window {
     DEFENCES: Record<string, { name: string; blurb: string; caveat: string }>;
     respond(input: string, defences: Record<string, boolean>): any;
   };
+  /** js/lib/github-live.js */
+  GitHubLive?: {
+    hydrate(root?: Document | Element): Promise<number>;
+    since(iso: string): string;
+    USER: string;
+  };
+  /** js/lib/ctf.js */
+  AICTF?: {
+    LEVELS: Array<{ n: number; name: string; brief: string; defences: string[]; hint: string; lesson: string }>;
+    attempt(level: number, text: string): { ok: boolean; flag?: string; why: string; blocked?: string };
+    count: number;
+  };
 }
