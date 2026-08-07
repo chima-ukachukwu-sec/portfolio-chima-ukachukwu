@@ -87,7 +87,10 @@ window.InjectionSim = (function () {
     /**
      * @param {string} input     what the visitor typed
      * @param {object} defences  { [id]: boolean }
-     * @returns {{reply:string, trace:Array, outcome:'blocked'|'refused'|'leaked-secret'|'leaked-prompt'|'normal', leaked:boolean}}
+     * @returns {{reply:string, trace:Array, outcome:string, leaked:boolean, nearMiss?:boolean, path?:string}}
+     *   outcome is one of: blocked | refused | leaked-secret | leaked-prompt | normal.
+     *   nearMiss is set when the agent complied but the output filter caught it.
+     *   path names the technique, and is only present when an attack succeeded.
      */
     function respond(input, defences) {
         const text = (input || '').trim();
@@ -109,9 +112,10 @@ window.InjectionSim = (function () {
             status: 'info'
         });
 
-        /* --- Defence 1: classify the turn before the agent sees it --- */
-        const risky = intents.filter((i) => i !== 'extract-prompt' || true).length;
-        const classifierTriggers = intents.filter((i) => i !== 'persona' || true);
+        /* --- Defence 1: classify the turn before the agent sees it ---
+           Threshold is two matched categories: one signal alone is usually a
+           benign phrasing coincidence, two stacking rarely is. */
+        const classifierTriggers = intents;
         if (on('input-classifier') && classifierTriggers.length >= 2) {
             trace.push({
                 stage: 'Input classifier',

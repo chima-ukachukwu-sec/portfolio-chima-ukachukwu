@@ -1,0 +1,22 @@
+{
+  "// Purpose": [
+    "Editor and CI type checking only. Nothing here is compiled and nothing is",
+    "shipped — `noEmit` is on and the site remains plain JS served as-is.",
+    "Run: npx tsc --noEmit"
+  ],
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowJs": true,
+    "checkJs": true,
+    "noEmit": true,
+    "strict": false,
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "skipLibCheck": true
+  },
+  "include": ["js/**/*.js", "lab/**/*.js", "types/**/*.d.ts"],
+  "exclude": ["tools"]
+}

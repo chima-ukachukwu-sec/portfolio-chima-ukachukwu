@@ -60,7 +60,8 @@ function initMobileMenu() {
     });
 
     document.addEventListener('click', (e) => {
-        if (!menu.contains(e.target) && !toggle.contains(e.target) && menu.classList.contains('active')) {
+        const target = /** @type {Node} */ (e.target);
+        if (!menu.contains(target) && !toggle.contains(target) && menu.classList.contains('active')) {
             setOpen(false);
         }
     });
@@ -76,7 +77,7 @@ function initMobileMenu() {
 /* ---------- NAVBAR SCROLL STATE ----------
    scrollY only; coalesced to one class write per frame. */
 function initNavbarScrollState() {
-    const navbar = document.querySelector('.navbar');
+    const navbar = /** @type {HTMLElement} */ (document.querySelector('.navbar'));
     if (!navbar) return;
 
     const update = rafThrottle(() => {
@@ -177,7 +178,7 @@ function initRecruiterMode() {
     });
 
     /* Pre-fill the outreach email so a reply arrives already labelled. */
-    const mail = document.getElementById('brief-mail');
+    const mail = /** @type {HTMLAnchorElement} */ (document.getElementById('brief-mail'));
     if (mail) {
         const ref = readRef();
         const subject = 'Role enquiry' + (ref ? ' (' + ref + ')' : '');
@@ -204,8 +205,8 @@ function initReferralTag() {
    detector at /lab/pattern-detector/. The
    taxonomy itself lives in js/lib/taxonomy.js so the two can never drift. */
 function initHeroProbe() {
-    const input = document.getElementById('probe-input');
-    const runBtn = document.getElementById('probe-run');
+    const input = /** @type {HTMLTextAreaElement} */ (document.getElementById('probe-input'));
+    const runBtn = /** @type {HTMLButtonElement} */ (document.getElementById('probe-run'));
     const results = document.getElementById('probe-results');
     const chips = document.querySelectorAll('.probe-chip');
     const lib = window.RedTeamTaxonomy;
@@ -286,7 +287,7 @@ function initSmoothScroll() {
 
             e.preventDefault();
 
-            const navHeight = document.querySelector('.navbar')?.offsetHeight || 0;
+            const navHeight = /** @type {HTMLElement|null} */ (document.querySelector('.navbar'))?.offsetHeight || 0;
             const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
 
             window.scrollTo({
@@ -337,7 +338,7 @@ function initActiveNavHighlight() {
    Coalesced to one transform write per frame, and disabled for reduced motion,
    touch input, and small viewports. */
 function initHeroParallax() {
-    const grid = document.querySelector('.hero-bg-grid');
+    const grid = /** @type {HTMLElement|null} */ (document.querySelector('.hero-bg-grid'));
     if (!grid) return;
     if (prefersReducedMotion()) return;
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
@@ -357,7 +358,7 @@ const SPINNER_SVG = '<svg class="btn-spinner" width="16" height="16" viewBox="0 
 const REDO_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>';
 
 function initContactForm() {
-    const form = document.getElementById('contact-form');
+    const form = /** @type {HTMLFormElement} */ (document.getElementById('contact-form'));
     const successMessage = document.getElementById('form-success');
 
     if (!form) return;
@@ -380,9 +381,9 @@ function initContactForm() {
     form.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const message = document.getElementById('message').value.trim();
+        const name = /** @type {HTMLInputElement} */ (document.getElementById('name')).value.trim();
+        const email = /** @type {HTMLInputElement} */ (document.getElementById('email')).value.trim();
+        const message = /** @type {HTMLTextAreaElement} */ (document.getElementById('message')).value.trim();
 
         // Name is optional now — only email and message gate submission.
         if (!email || !message) {
@@ -391,7 +392,7 @@ function initContactForm() {
         }
 
         if (!isValidEmail(email)) {
-            const emailInput = document.getElementById('email');
+            const emailInput = /** @type {HTMLInputElement} */ (document.getElementById('email'));
             emailInput.style.borderColor = 'var(--accent-danger)';
             emailInput.focus();
             setTimeout(() => {
@@ -402,10 +403,10 @@ function initContactForm() {
 
         const captchaResponse = (typeof hcaptcha !== 'undefined')
             ? hcaptcha.getResponse()
-            : (document.querySelector('[name="h-captcha-response"]')?.value || '');
+            : (/** @type {HTMLInputElement|null} */ (document.querySelector('[name="h-captcha-response"]'))?.value || '');
         if (!captchaResponse) {
             shakeElement(form);
-            const captchaWidget = document.querySelector('.h-captcha');
+            const captchaWidget = /** @type {HTMLElement} */ (document.querySelector('.h-captcha'));
             if (captchaWidget) {
                 captchaWidget.style.outline = '2px solid var(--accent-danger)';
                 setTimeout(() => { captchaWidget.style.outline = ''; }, 2000);
@@ -413,7 +414,7 @@ function initContactForm() {
             return;
         }
 
-        const submitBtn = form.querySelector('.btn-submit');
+        const submitBtn = /** @type {HTMLButtonElement} */ (form.querySelector('.btn-submit'));
         const originalText = submitBtn.innerHTML;
         submitBtn.innerHTML = `${SPINNER_SVG} Sending...`;
         submitBtn.disabled = true;
@@ -482,7 +483,7 @@ function isValidEmail(email) {
     return regex.test(email);
 }
 
-function shakeElement(element) {
+function shakeElement(/** @type {HTMLElement} */ element) {
     if (prefersReducedMotion()) return;
     element.classList.remove('shake');
     void element.offsetWidth; // restart the animation
@@ -492,7 +493,7 @@ function shakeElement(element) {
 
 /* ---------- INTERACTIVE TERMINAL ---------- */
 function initTerminal() {
-    const input = document.getElementById('terminal-input');
+    const input = /** @type {HTMLInputElement} */ (document.getElementById('terminal-input'));
     const output = document.getElementById('terminal-output');
     const body = document.getElementById('terminal-body');
 
@@ -782,7 +783,7 @@ ${commandHistory.map((cmd, i) => `<span class="output-subtitle">${i + 1}.</span>
     // Clicking the terminal chrome focuses the prompt, but never steal focus
     // from something the visitor is actually interacting with.
     body.addEventListener('click', (e) => {
-        if (e.target.closest('button, a, input')) return;
+        if (/** @type {Element} */ (e.target).closest('button, a, input')) return;
         input.focus();
     });
 

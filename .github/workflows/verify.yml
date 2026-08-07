@@ -36,3 +36,44 @@ jobs:
             --exclude '^https://(www\.)?linkedin\.com'
             './**/*.html'
           fail: true
+
+  types:
+    name: Type check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      # checkJs over plain JS — no build step, nothing compiled, nothing shipped.
+      # It has already caught dead code and a JSDoc comment that disagreed with
+      # the function it documented.
+      - run: npx --yes -p typescript@5 tsc --noEmit
+
+  budget:
+    name: Asset budget
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # A cheap guard against the thing that actually regresses on a static
+      # site: someone drops in a 2MB hero image or a library "just this once".
+      - name: Check asset sizes
+        run: |
+          fail=0
+          check() {
+            local path="$1" limit="$2"
+            [ -e "$path" ] || return 0
+            local size
+            size=$(du -sk "$path" | cut -f1)
+            if [ "$size" -gt "$limit" ]; then
+              echo "::error::$path is ${size}KB, over the ${limit}KB budget"
+              fail=1
+            else
+              echo "ok  $path  ${size}KB / ${limit}KB"
+            fi
+          }
+          check css/style.css 100
+          check js 80
+          check assets/fonts 120
+          check assets/images 400
+          exit $fail

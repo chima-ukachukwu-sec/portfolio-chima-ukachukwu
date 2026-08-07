@@ -5,9 +5,9 @@
 
     const Sim = window.InjectionSim;
     const logEl = document.getElementById('sim-log');
-    const form = document.getElementById('sim-form');
-    const input = document.getElementById('sim-input');
-    const sendBtn = document.getElementById('sim-send');
+    const form = /** @type {HTMLFormElement} */ (document.getElementById('sim-form'));
+    const input = /** @type {HTMLTextAreaElement} */ (document.getElementById('sim-input'));
+    const sendBtn = /** @type {HTMLButtonElement} */ (document.getElementById('sim-send'));
     const traceEl = document.getElementById('sim-trace');
     const traceHint = document.getElementById('sim-trace-hint');
     const defencesEl = document.getElementById('sim-defences');
@@ -51,7 +51,8 @@
             '</div>'
         )).join('');
 
-        defencesEl.querySelectorAll('input[data-defence]').forEach((box) => {
+        defencesEl.querySelectorAll('input[data-defence]').forEach((el) => {
+            const box = /** @type {HTMLInputElement} */ (el);
             box.addEventListener('change', () => {
                 defences[box.getAttribute('data-defence')] = box.checked;
                 syncToggleAll();
