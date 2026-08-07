@@ -2708,6 +2708,432 @@ section {
 }
 
 /* ============================================
+   PROMPT INJECTION SIMULATOR (/lab/injection-sim/)
+   ============================================ */
+.sim-main {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: var(--space-16) var(--space-8) var(--space-14);
+}
+
+.sim-header { margin-bottom: var(--space-11); }
+
+.sim-title {
+    margin: var(--space-6) 0 var(--space-7);
+    font-size: var(--text-display-md);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+}
+
+.sim-dek {
+    max-width: 68ch;
+    margin-bottom: var(--space-6);
+    color: var(--text-secondary);
+    font-size: var(--text-xl);
+    line-height: 1.65;
+}
+
+.sim-dek strong { color: var(--text-primary); font-weight: 600; }
+
+.sim-sub {
+    max-width: 68ch;
+    padding-left: var(--space-7);
+    border-left: 2px solid var(--color-brand);
+    color: var(--text-muted);
+    font-size: var(--text-md);
+    line-height: 1.7;
+}
+
+/* ---------- objectives ---------- */
+.sim-objectives {
+    margin-bottom: var(--space-9);
+    padding: var(--space-7);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+}
+
+.sim-objectives h2,
+.sim-trace-title,
+.sim-panel-head h2 {
+    margin: 0 0 var(--space-5);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.sim-objectives ul { margin: 0; padding: 0; list-style: none; }
+
+.sim-objectives li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    padding: var(--space-3) 0;
+    color: var(--text-secondary);
+    font-size: var(--text-md);
+}
+
+.goal-box {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    border: 1px solid var(--border-hover);
+    border-radius: 3px;
+}
+
+.sim-objectives li.is-found { color: var(--text-primary); }
+
+.sim-objectives li.is-found .goal-box {
+    background: var(--color-status-ok);
+    border-color: var(--color-status-ok);
+}
+
+.sim-objectives-note {
+    margin: var(--space-5) 0 0;
+    color: var(--color-brand);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+}
+
+/* ---------- layout ---------- */
+.sim-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: var(--space-8);
+    align-items: start;
+}
+
+.sim-chat-col,
+.sim-defence-col {
+    padding: var(--space-7);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+}
+
+.sim-panel-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-5);
+}
+
+.sim-reset {
+    padding: var(--space-2) var(--space-5);
+    min-height: 32px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    cursor: pointer;
+    transition: color var(--duration-fast) var(--ease-out),
+                border-color var(--duration-fast) var(--ease-out);
+}
+
+.sim-reset:hover { color: var(--color-interactive); border-color: var(--color-interactive); }
+
+/* ---------- conversation ---------- */
+.sim-log {
+    height: 380px;
+    overflow-y: auto;
+    padding: var(--space-5);
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+}
+
+.sim-msg { margin-bottom: var(--space-6); }
+
+.sim-msg-who {
+    margin: 0 0 var(--space-2);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-3xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.sim-msg-body {
+    margin: 0;
+    padding: var(--space-5);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-md);
+    line-height: 1.6;
+}
+
+.sim-msg-user .sim-msg-body {
+    background: rgba(0, 163, 255, 0.07);
+    border: 1px solid rgba(0, 163, 255, 0.2);
+    color: var(--text-primary);
+}
+
+.sim-msg-agent .sim-msg-body {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+.sim-msg-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin: var(--space-3) 0 0;
+}
+
+.sim-verdict,
+.sim-path {
+    padding: var(--space-1) var(--space-4);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: var(--text-3xs);
+}
+
+.sim-verdict.bad     { background: rgba(248, 81, 73, 0.12); border: 1px solid rgba(248, 81, 73, 0.4); color: #ff9d97; }
+.sim-verdict.good    { background: rgba(63, 185, 80, 0.10); border: 1px solid rgba(63, 185, 80, 0.35); color: #7ee787; }
+.sim-verdict.warn    { background: rgba(210, 153, 29, 0.12); border: 1px solid rgba(210, 153, 29, 0.4); color: #e3b341; }
+.sim-verdict.neutral { border: 1px solid var(--border-color); color: var(--text-muted); }
+
+.sim-path {
+    flex: 1 1 100%;
+    color: var(--text-muted);
+    border: 1px dashed var(--border-color);
+    line-height: 1.5;
+}
+
+.sim-note {
+    margin: var(--space-5) 0;
+    padding: var(--space-3) var(--space-5);
+    border-left: 2px solid var(--color-brand);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-3xs);
+    line-height: 1.5;
+}
+
+.sim-form {
+    display: flex;
+    gap: var(--space-5);
+    align-items: flex-end;
+    margin-top: var(--space-6);
+}
+
+.sim-input {
+    flex: 1;
+    padding: var(--space-5);
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    resize: vertical;
+    transition: border-color var(--duration-fast) var(--ease-out);
+}
+
+.sim-input::placeholder { color: var(--text-muted); }
+
+.sim-input:focus {
+    outline: none;
+    border-color: var(--color-focus);
+    box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.14);
+}
+
+.sim-send {
+    min-height: 44px;
+    padding: var(--space-4) var(--space-7);
+    background: var(--color-interactive);
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--bg-primary);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.sim-send:hover:not(:disabled) { opacity: 0.85; }
+.sim-send:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.sim-presets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+}
+
+.sim-preset {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    padding: var(--space-2) var(--space-5);
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 100px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    cursor: pointer;
+    transition: color var(--duration-fast) var(--ease-out),
+                border-color var(--duration-fast) var(--ease-out);
+}
+
+.sim-preset:hover,
+.sim-preset:focus-visible { color: var(--color-interactive); border-color: var(--color-interactive); }
+
+/* ---------- defences ---------- */
+.sim-defences { margin-bottom: var(--space-9); }
+
+.sim-defence {
+    padding: var(--space-5) 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sim-defence:last-child { border-bottom: none; }
+
+.sim-defence-head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    min-height: 32px;
+    cursor: pointer;
+}
+
+.sim-defence-head input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--color-brand);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.sim-defence-name {
+    color: var(--text-primary);
+    font-size: var(--text-md);
+    font-weight: 600;
+}
+
+.sim-defence-blurb {
+    margin: var(--space-2) 0 0 calc(16px + var(--space-5));
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    line-height: 1.55;
+}
+
+.sim-defence-caveat {
+    margin: var(--space-2) 0 0 calc(16px + var(--space-5));
+    color: var(--text-muted);
+    font-size: var(--text-2xs);
+    font-style: italic;
+    line-height: 1.5;
+}
+
+/* ---------- defender trace ---------- */
+.sim-trace-hint {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+}
+
+.sim-trace {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+}
+
+.sim-trace-step {
+    position: relative;
+    padding: var(--space-4) 0 var(--space-4) var(--space-7);
+    border-left: 2px solid var(--border-color);
+}
+
+.sim-trace-step.status-blocked   { border-left-color: var(--color-status-ok); }
+.sim-trace-step.status-exploited { border-left-color: var(--color-status-error); }
+.sim-trace-step.status-pass      { border-left-color: var(--border-hover); }
+
+.sim-trace-stage {
+    margin: 0 0 var(--space-2);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    letter-spacing: 0.04em;
+}
+
+.sim-trace-step.status-blocked .sim-trace-stage   { color: var(--color-status-ok); }
+.sim-trace-step.status-exploited .sim-trace-stage { color: var(--color-status-error); }
+
+.sim-trace-detail {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+}
+
+/* ---------- closing notes ---------- */
+.sim-notes {
+    margin-top: var(--space-13);
+    padding-top: var(--space-11);
+    border-top: 1px solid var(--border-color);
+}
+
+.sim-notes h2 {
+    margin-bottom: var(--space-6);
+    font-size: var(--text-3xl);
+    font-weight: 600;
+}
+
+.sim-notes p {
+    max-width: 68ch;
+    margin-bottom: var(--space-6);
+    color: var(--text-secondary);
+    font-size: var(--text-lg);
+    line-height: 1.7;
+}
+
+.sim-notes strong { color: var(--text-primary); font-weight: 600; }
+
+.sim-notes-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-8);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+}
+
+.sim-notes-links a {
+    color: var(--color-interactive);
+    transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.sim-notes-links a:hover { opacity: 0.75; }
+
+@media (max-width: 1100px) {
+    .sim-grid { grid-template-columns: 1fr; }
+    .sim-log { height: 320px; }
+}
+
+@media (max-width: 768px) {
+    .sim-main { padding: var(--space-14) var(--space-7) var(--space-13); }
+    .sim-dek { font-size: var(--text-lg); }
+    .sim-form { flex-direction: column; align-items: stretch; }
+    .sim-send { width: 100%; }
+    .sim-preset { min-height: 44px; }
+    .sim-defence-head { min-height: 44px; }
+    .sim-reset { min-height: 40px; }
+    .sim-msg-meta { flex-direction: column; align-items: flex-start; }
+}
+
+/* ============================================
    REDUCED MOTION
    Must stay last in the file so these overrides win the cascade.
    Durations collapse to ~0 rather than `none` so any transitionend /

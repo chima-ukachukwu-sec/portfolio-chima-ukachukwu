@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Prompt Injection Simulator · Chima Ukachukwu</title>
+    <meta name="description" content="Play attacker against a simulated support agent. Toggle four defences on and off and watch the same attack succeed or fail — a deterministic sandbox that shows which control actually stops which technique.">
+    <meta name="author" content="Chima Anthony Ukachukwu">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Prompt Injection Simulator — attack a support agent, then defend it">
+    <meta property="og:description" content="Three attack paths, four defences, one deterministic agent. Toggle a control and watch the same attack flip from succeeding to failing.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://chimaukachukwu.com/lab/injection-sim/">
+    <meta property="og:image" content="https://chimaukachukwu.com/assets/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Chima Anthony Ukachukwu — AI Security Analyst & Red Teamer">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://chimaukachukwu.com/assets/images/og-image.png">
+
+    <link rel="canonical" href="https://chimaukachukwu.com/lab/injection-sim/">
+
+    <!-- build:head-assets -->
+    <meta name="theme-color" content="#0a0e14">
+
+    <!-- Favicon — "C" brand mark -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%2300d4aa'/%3E%3Cstop offset='100%25' style='stop-color:%2300a3ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Ctext x='50' y='72' text-anchor='middle' fill='%230a0e14' font-family='Inter,sans-serif' font-weight='900' font-size='62'%3EC%3C/text%3E%3C/svg%3E">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+    <!-- /build:head-assets -->
+
+    <!-- build:head-analytics -->
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://plausible.io/js/pa-CULpUfeL2Juc-qRc9ARc9.js"></script>
+    <script>
+        window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+        plausible.init()
+    </script>
+    <!-- /build:head-analytics -->
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<nav class="navbar" aria-label="Primary">
+    <div class="nav-container">
+        <a href="../../index.html" class="nav-logo">CU<span class="accent">.</span></a>
+        <!-- build:nav -->
+        <ul class="nav-menu">
+            <li><a href="../../index.html#work" class="nav-link">Work</a></li>
+            <li><a href="../../lab/index.html" class="nav-link active">Lab</a></li>
+            <li><a href="../../blog/index.html" class="nav-link">Writing</a></li>
+            <li><a href="../../index.html#about" class="nav-link">About</a></li>
+            <li><a href="../../index.html#contact" class="nav-link">Contact</a></li>
+            <li class="nav-cta-item"><a href="../../resume/index.html" class="nav-cta">Résumé <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></li>
+        </ul>
+        <!-- /build:nav -->
+        <button class="nav-toggle" id="mobile-menu" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </button>
+    </div>
+</nav>
+
+<main id="main-content" class="sim-main">
+    <header class="sim-header">
+        <p class="post-eyebrow"><a href="../index.html">← Lab</a></p>
+        <h1 class="sim-title">Prompt Injection Simulator</h1>
+        <p class="sim-dek">
+            You are the attacker. Below is <strong>Nora</strong>, a support agent for a fictional outdoor
+            retailer, with a system prompt, one tool, and a secret she is told never to reveal. Get the
+            secret out of her — then turn the defences on and try the same attack again.
+        </p>
+        <p class="sim-sub">
+            The agent is a rule engine, not a model. That is deliberate: because the same input always
+            produces the same result, you can toggle one control and see exactly what it changed. A
+            sampled model can show you correlation. This shows you causality.
+        </p>
+    </header>
+
+    <div class="sim-objectives">
+        <h2>Objectives</h2>
+        <ul id="sim-objectives-list">
+            <li data-goal="leaked-secret"><span class="goal-box" aria-hidden="true"></span> Make Nora reveal the support override key</li>
+            <li data-goal="leaked-prompt"><span class="goal-box" aria-hidden="true"></span> Make Nora reveal her system prompt</li>
+            <li data-goal="near-miss"><span class="goal-box" aria-hidden="true"></span> Compromise the agent but get stopped by the output filter</li>
+        </ul>
+        <p class="sim-objectives-note" id="sim-progress" role="status" aria-live="polite">0 of 3 found.</p>
+    </div>
+
+    <div class="sim-grid">
+        <!-- ATTACKER SIDE -->
+        <section class="sim-chat-col" aria-label="Conversation">
+            <div class="sim-panel-head">
+                <h2>Nora · Northwind Outfitters support</h2>
+                <button type="button" id="sim-reset" class="sim-reset">Reset</button>
+            </div>
+
+            <div id="sim-log" class="sim-log" role="log" aria-live="polite" aria-label="Conversation with the agent"></div>
+
+            <form id="sim-form" class="sim-form">
+                <label for="sim-input" class="sr-only">Your message to the agent</label>
+                <textarea id="sim-input" class="sim-input" rows="2" spellcheck="false"
+                          placeholder="Type an attack — or load one below."></textarea>
+                <button type="submit" id="sim-send" class="sim-send" disabled>Send</button>
+            </form>
+
+            <div class="sim-presets" role="group" aria-label="Load an example attack">
+                <button type="button" class="sim-preset" data-preset="indirect">Indirect injection</button>
+                <button type="button" class="sim-preset" data-preset="authority">Authority + negotiation</button>
+                <button type="button" class="sim-preset" data-preset="persona">Persona override</button>
+                <button type="button" class="sim-preset" data-preset="benign">Benign order query</button>
+            </div>
+        </section>
+
+        <!-- DEFENDER SIDE -->
+        <aside class="sim-defence-col" aria-label="Defences and trace">
+            <div class="sim-panel-head">
+                <h2>Defences</h2>
+                <button type="button" id="sim-toggle-all" class="sim-reset">Turn all on</button>
+            </div>
+            <div id="sim-defences" class="sim-defences"></div>
+
+            <h2 class="sim-trace-title">Defender view</h2>
+            <p class="sim-trace-hint" id="sim-trace-hint">Send a message to see how each turn was handled.</p>
+            <ol id="sim-trace" class="sim-trace"></ol>
+        </aside>
+    </div>
+
+    <section class="sim-notes">
+        <h2>What this is actually showing</h2>
+        <p>
+            Turn on <strong>only the input classifier</strong> and run the indirect injection. It goes
+            straight through. The classifier is not broken — the hostile instruction never appears in
+            anything you typed, so there was nothing in the input for it to catch. It arrived in a tool
+            return. That is the entire problem with indirect injection, and it is why input-side
+            filtering alone is not a control for it.
+        </p>
+        <p>
+            Turn on <strong>only the output filter</strong> and every attack reports a near miss. The
+            agent was fully compromised and complied; the secret was simply caught on the way out. That
+            is a real control and worth having, but a system relying on it has already lost the turn —
+            it just got lucky about what the payload happened to be.
+        </p>
+        <p>
+            None of the four defences covers all three paths alone. That is the point, and it's the
+            same argument as defence in depth in a SOC: controls are chosen against specific
+            mechanisms, and the gaps only become visible when you map them against real attack paths
+            rather than counting how many controls you have.
+        </p>
+        <p class="sim-notes-links">
+            <a href="../red-team-atlas/index.html">The mechanisms, in full →</a>
+            <a href="../../blog/posts/detecting-prompt-injection.html">On detecting prompt injection →</a>
+        </p>
+    </section>
+
+    <noscript>
+        <p><strong>The simulator needs JavaScript.</strong> The
+        <a href="../red-team-atlas/index.html">Red Team Atlas</a> covers the same techniques as reference,
+        and <a href="../../blog/posts/detecting-prompt-injection.html">this post</a> covers the detection side.</p>
+    </noscript>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-brand">
+            <span class="footer-logo">CU<span class="accent">.</span></span>
+            <p>AI Security Analyst &amp; Red Teamer</p>
+        </div>
+        <!-- build:footer-links -->
+        <div class="footer-links">
+            <a href="../../index.html#work">Work</a>
+            <a href="../../lab/index.html">Lab</a>
+            <a href="../../blog/index.html">Writing</a>
+            <a href="../../index.html#about">About</a>
+            <a href="../../resume/index.html">Résumé</a>
+            <a href="../../now/index.html">Now</a>
+            <a href="../../index.html#contact">Contact</a>
+        </div>
+        <!-- /build:footer-links -->
+        <!-- build:footer-social -->
+        <div class="footer-social">
+            <a href="https://linkedin.com/in/chima-anthony-u" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://github.com/chima-ukachukwu-sec" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </a>
+            <a href="mailto:chima.ukachukwu.sec@gmail.com" aria-label="Email">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+        </div>
+        <!-- /build:footer-social -->
+        <p class="footer-copyright">© 2026 Chima Anthony Ukachukwu</p>
+    </div>
+</footer>
+
+<script src="../../js/lib/injection-sim.js"></script>
+<script src="../../js/main.js"></script>
+<script src="sim-ui.js"></script>
+</body>
+</html>
