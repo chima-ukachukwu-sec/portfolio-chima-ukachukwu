@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Colophon · Chima Ukachukwu</title>
-    <meta name="description" content="How this site is built: zero runtime dependencies, two author-time generators, five CI checks, deterministic client-side exhibits, and the decisions behind each.">
+    <meta name="description" content="How this site is built: zero runtime dependencies, two author-time generators, CI checks that fail the build, deterministic client-side exhibits, and the decisions behind each.">
     <meta name="author" content="Chima Anthony Ukachukwu">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Colophon — how this site is built">
-    <meta property="og:description" content="Zero runtime dependencies, two generators, five CI checks, and the reasoning behind each decision. A security engineer's site, held to the standard he'd hold yours to.">
+    <meta property="og:description" content="Zero runtime dependencies, two generators, real CI checks, and the reasoning behind each decision. A security engineer's site, held to the standard he'd hold yours to.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://chimaukachukwu.com/colophon/">
     <meta property="og:image" content="https://chimaukachukwu.com/assets/images/og-image.png">
@@ -94,14 +94,20 @@
         </header>
 
         <div class="post-body">
+            <!-- These are measured by tools/build-pages.js at build time, not typed.
+                 The first version of this page was hand-written and was wrong within
+                 one commit. -->
+            <!-- build:colophon-stats -->
             <div class="colophon-stats">
                 <div><dt>Runtime dependencies</dt><dd>0</dd></div>
                 <div><dt>Build step to deploy</dt><dd>None</dd></div>
-                <div><dt>CSS</dt><dd>85 KB</dd></div>
-                <div><dt>JavaScript</dt><dd>82 KB</dd></div>
-                <div><dt>Fonts</dt><dd>77 KB, self-hosted</dd></div>
+                <div><dt>Pages</dt><dd>19</dd></div>
+                <div><dt>CSS</dt><dd>92 KB</dd></div>
+                <div><dt>JavaScript</dt><dd>96 KB</dd></div>
+                <div><dt>Fonts</dt><dd>78 KB, self-hosted</dd></div>
                 <div><dt>CI checks</dt><dd>5</dd></div>
             </div>
+            <!-- /build:colophon-stats -->
 
             <h2>Zero dependencies is a decision, not an accident</h2>
             <p>
@@ -131,7 +137,7 @@
             </p>
             <p>
                 <strong><code>tools/build-pages.js</code></strong> stamps shared markup — navigation,
-                footer, head assets, analytics — into all 17 pages. It exists because of a specific
+                footer, head assets, analytics — into every page. It exists because of a specific
                 failure: the navigation was hand-copied across every page, I changed an anchor on
                 the homepage, and ten sub-pages silently kept pointing at a section that no longer
                 existed. Nothing caught it because nothing could. Now a partial changes in one place
@@ -197,8 +203,8 @@
             <p>
                 Fonts are self-hosted variable WOFF2, <code>latin</code> subset only, preloaded.
                 Dropping the third-party stylesheet removed a render-blocking round trip to another
-                origin; dropping <code>latin-ext</code> removed 94 KB after a scan of every page
-                found zero characters that needed it.
+                origin; dropping <code>latin-ext</code> removed more weight than everything now shipped, after a
+                scan of every page found zero characters that needed it.
             </p>
             <p>
                 Images are sized to their slot and served as WebP with a JPEG fallback, with
@@ -208,14 +214,14 @@
             </p>
             <p>
                 Not everything survived measurement. An SVG sprite was planned until I measured it:
-                stripping every inline icon from the homepage saves 0.7 KB gzipped, because repeated
-                markup is precisely what gzip handles best. The icons stayed inline. A social
-                preview image is still 140 KB, which is more than it should be.
+                stripping every inline icon from the homepage saved well under a kilobyte gzipped,
+                because repeated markup is precisely what gzip handles best. The icons stayed inline. The social
+                preview image is still heavier than it should be.
             </p>
 
             <h2>What CI actually checks</h2>
             <p>
-                Five jobs, chosen for the failures a static site really has rather than the ones a
+                The checks are chosen for the failures a static site really has rather than the ones a
                 template suggests:
             </p>
             <p>
@@ -234,7 +240,7 @@
                 A colophon that only lists strengths is a brochure. So:
             </p>
             <p>
-                <strong>The stylesheet is one 85 KB file.</strong> It is organised and tokenised,
+                <strong>The stylesheet is a single file.</strong> It is organised and tokenised,
                 but it is still a single file that everything reads from, and it will get harder to
                 reason about before it gets easier.
             </p>

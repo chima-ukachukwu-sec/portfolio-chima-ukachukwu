@@ -3528,12 +3528,14 @@ section {
 }
 
 /* ---------- COLOPHON ---------- */
+/* Cells carry their own borders rather than showing a gap-coloured container
+   through. With an odd number of stats the old approach painted the empty
+   trailing cells as a solid block. */
 .colophon-stats {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1px;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
     margin: var(--space-9) 0 var(--space-11);
-    background: var(--border-color);
+    background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
     overflow: hidden;
@@ -3541,7 +3543,8 @@ section {
 
 .colophon-stats > div {
     padding: var(--space-6);
-    background: var(--bg-card);
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .colophon-stats dt {
@@ -3562,6 +3565,7 @@ section {
 
 @media (max-width: 768px) {
     .colophon-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .colophon-stats dd { font-size: var(--text-xl); }
 }
 
 /* ---------- CTF ---------- */

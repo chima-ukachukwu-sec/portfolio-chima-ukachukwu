@@ -56,6 +56,66 @@ const PAGES = {
   'portfolio/case-studies/ai-red-teaming-frameworks.html': { root: '../../', home: '../../index.html', active: 'work' },
 };
 
+
+/* ---------- measured facts ----------
+   The colophon states numbers about this repository. Numbers in prose rot:
+   the page shipped claiming 82KB of JavaScript and was wrong within one
+   commit, because the commit that added the claim also added two modules.
+   So they are measured here at build time instead of typed. */
+function kb(paths) {
+  const total = paths.reduce((sum, rel) => {
+    const abs = path.join(ROOT, rel);
+    if (!fs.existsSync(abs)) return sum;
+    return sum + fs.statSync(abs).size;
+  }, 0);
+  return Math.round(total / 1024) + ' KB';
+}
+
+function listFiles(dir, ext) {
+  const abs = path.join(ROOT, dir);
+  if (!fs.existsSync(abs)) return [];
+  return fs.readdirSync(abs).filter((f) => f.endsWith(ext)).map((f) => path.join(dir, f));
+}
+
+function measured() {
+  const js = ['js/main.js']
+    .concat(listFiles('js/lib', '.js'))
+    .concat(['lab/injection-sim/sim-ui.js', 'lab/ctf/ctf-ui.js']);
+
+  const workflow = fs.existsSync(path.join(ROOT, '.github/workflows/verify.yml'))
+    ? fs.readFileSync(path.join(ROOT, '.github/workflows/verify.yml'), 'utf8')
+    : '';
+  const ciJobs = (workflow.match(/^  [a-z-]+:$/gm) || []).length;
+
+  const hasPkg = fs.existsSync(path.join(ROOT, 'package.json'));
+
+  return {
+    deps: hasPkg ? 'see package.json' : '0',
+    build: 'None',
+    css: kb(['css/style.css']),
+    js: kb(js),
+    fonts: kb(listFiles('assets/fonts', '.woff2')) + ', self-hosted',
+    ci: String(ciJobs),
+    pages: String(Object.keys(PAGES).length)
+  };
+}
+
+function colophonStats() {
+  const m = measured();
+  const rows = [
+    ['Runtime dependencies', m.deps],
+    ['Build step to deploy', m.build],
+    ['Pages', m.pages],
+    ['CSS', m.css],
+    ['JavaScript', m.js],
+    ['Fonts', m.fonts],
+    ['CI checks', m.ci]
+  ];
+  return '<div class="colophon-stats">\n' +
+    rows.map(([k, v]) => `    <div><dt>${k}</dt><dd>${v}</dd></div>`).join('\n') +
+    '\n</div>';
+}
+
 const PARTIAL_NAMES = ['head-assets', 'head-analytics', 'nav', 'footer-links', 'footer-social'];
 
 const partials = Object.fromEntries(
@@ -80,6 +140,16 @@ function indent(block, pad) {
 
 function stamp(source, page, file) {
   let out = source;
+
+  // Generated, measured content — currently only the colophon's stat grid.
+  if (out.includes('<!-- build:colophon-stats -->')) {
+    out = out.replace(
+      /([ \t]*)<!-- build:colophon-stats -->[\s\S]*?<!-- \/build:colophon-stats -->/,
+      (_m, pad) => `${pad}<!-- build:colophon-stats -->\n` +
+                   indent(colophonStats(), pad) +
+                   `\n${pad}<!-- /build:colophon-stats -->`
+    );
+  }
 
   for (const name of PARTIAL_NAMES) {
     const re = new RegExp(
