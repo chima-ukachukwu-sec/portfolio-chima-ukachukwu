@@ -3396,6 +3396,117 @@ section {
 }
 
 /* ============================================
+   WRITING — related rails, pager, drafting signal
+   ============================================ */
+.post-related,
+.post-pager {
+    max-width: 760px;
+    margin: var(--space-12) auto 0;
+    padding-top: var(--space-9);
+    border-top: 1px solid var(--border-color);
+}
+
+.post-related h2 {
+    margin: 0 0 var(--space-6);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.post-related ul { margin: 0; padding: 0; list-style: none; }
+
+.post-related li {
+    padding: var(--space-5) 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.post-related li:last-child { border-bottom: none; }
+
+.post-related li a {
+    display: block;
+    margin-bottom: var(--space-2);
+    color: var(--color-interactive);
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    line-height: 1.35;
+    transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.post-related li a:hover { opacity: 0.75; }
+
+.post-related li span {
+    color: var(--text-muted);
+    font-size: var(--text-md);
+    line-height: 1.55;
+}
+
+.post-pager {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    margin-top: var(--space-9);
+}
+
+.post-pager a {
+    display: block;
+    padding: var(--space-6);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: var(--text-md);
+    font-weight: 600;
+    line-height: 1.4;
+    transition: border-color var(--duration-fast) var(--ease-out),
+                color var(--duration-fast) var(--ease-out);
+}
+
+.post-pager a:hover { border-color: var(--color-interactive); color: var(--color-interactive); }
+
+.post-pager a span {
+    display: block;
+    margin-bottom: var(--space-3);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.post-pager-next { text-align: right; }
+
+/* A blog with a stated next post reads as a practice; one without reads as
+   two posts and a pause. */
+.post-drafting {
+    margin-top: var(--space-9);
+    padding: var(--space-6) var(--space-7);
+    border: 1px dashed var(--border-hover);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-size: var(--text-md);
+    line-height: 1.6;
+}
+
+.post-drafting span {
+    display: block;
+    margin-bottom: var(--space-2);
+    color: var(--color-brand);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+    .post-pager { grid-template-columns: 1fr; }
+    .post-pager-next { text-align: left; }
+    .post-related li a { font-size: var(--text-xl); }
+}
+
+/* ============================================
    REDUCED MOTION
    Must stay last in the file so these overrides win the cascade.
    Durations collapse to ~0 rather than `none` so any transitionend /

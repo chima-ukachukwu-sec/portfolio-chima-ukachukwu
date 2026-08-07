@@ -1,43 +1,56 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>Chima Ukachukwu — Writing</title>
-    <description>Notes on AI security, LLM red teaming, SOC operations, and the intersection of traditional cybersecurity and frontier AI.</description>
-    <link>https://chimaukachukwu.com/blog/</link>
-    <atom:link href="https://chimaukachukwu.com/blog/feed.xml" rel="self" type="application/rss+xml" />
-    <language>en-us</language>
-    <managingEditor>chima.ukachukwu.sec@gmail.com (Chima Anthony Ukachukwu)</managingEditor>
-    <webMaster>chima.ukachukwu.sec@gmail.com (Chima Anthony Ukachukwu)</webMaster>
-    <copyright>© 2026 Chima Anthony Ukachukwu</copyright>
-    <lastBuildDate>Sun, 17 May 2026 12:00:00 -0500</lastBuildDate>
-    <generator>Hand-maintained — no SSG. To add a new post: copy this item block, update the four fields.</generator>
-
-    <item>
-      <title>Detecting Prompt Injection: The Playbook Your SIEM Doesn't Have Yet</title>
-      <link>https://chimaukachukwu.com/blog/posts/detecting-prompt-injection.html</link>
-      <guid isPermaLink="true">https://chimaukachukwu.com/blog/posts/detecting-prompt-injection.html</guid>
-      <pubDate>Sun, 17 May 2026 12:00:00 -0500</pubDate>
-      <author>chima.ukachukwu.sec@gmail.com (Chima Anthony Ukachukwu)</author>
-      <category>AI Security</category>
-      <category>SOC</category>
-      <category>Detection Engineering</category>
-      <category>Prompt Injection</category>
-      <category>LLM Security</category>
-      <description>Prompt injection is succeeding in production right now, and most SOCs can't see it. Why traditional detection primitives partially-fail, three places where they can work, and what's still hard.</description>
-    </item>
-
-    <item>
-      <title>The Bridge — Why AI Security Needs SOC People, and SOC Needs AI Red Teamers</title>
-      <link>https://chimaukachukwu.com/blog/posts/the-bridge.html</link>
-      <guid isPermaLink="true">https://chimaukachukwu.com/blog/posts/the-bridge.html</guid>
-      <pubDate>Tue, 28 Apr 2026 12:00:00 -0500</pubDate>
-      <author>chima.ukachukwu.sec@gmail.com (Chima Anthony Ukachukwu)</author>
-      <category>AI Security</category>
-      <category>SOC</category>
-      <category>LLM Security</category>
-      <category>Career</category>
-      <description>Two communities that should be talking to each other are mostly not. Here's what each side is missing — and what bridging them looks like in practice.</description>
-    </item>
-
-  </channel>
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Chima Ukachukwu — Writing</title>
+  <link>https://chimaukachukwu.com/blog/</link>
+  <atom:link href="https://chimaukachukwu.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
+  <description>Notes on AI security, SOC operations, and the bridge between them.</description>
+  <language>en-us</language>
+  <lastBuildDate>Fri, 07 Aug 2026 12:00:00 GMT</lastBuildDate>
+  <item>
+    <title>The Defence That Can&#39;t See the Attack</title>
+    <link>https://chimaukachukwu.com/blog/posts/the-defence-that-cant-see-the-attack.html</link>
+    <guid isPermaLink="true">https://chimaukachukwu.com/blog/posts/the-defence-that-cant-see-the-attack.html</guid>
+    <pubDate>Fri, 07 Aug 2026 12:00:00 GMT</pubDate>
+    <description>I built a prompt injection sandbox with no model in it. The most useful thing it does is show you a control failing for a reason that has nothing to do with how good the control is.</description>
+    <category>AI Security</category>
+    <category>Prompt Injection</category>
+    <category>Detection Engineering</category>
+    <category>Agent Security</category>
+  </item>
+  <item>
+    <title>Taxonomies That Outlive the Exploit</title>
+    <link>https://chimaukachukwu.com/blog/posts/taxonomies-that-outlive-the-exploit.html</link>
+    <guid isPermaLink="true">https://chimaukachukwu.com/blog/posts/taxonomies-that-outlive-the-exploit.html</guid>
+    <pubDate>Fri, 07 Aug 2026 12:00:00 GMT</pubDate>
+    <description>Every jailbreak list I bookmarked in 2024 is now useless. The categories underneath them are not. Sorting attacks by mechanism instead of by phrasing is the difference between a framework and a changelog.</description>
+    <category>AI Security</category>
+    <category>Red Teaming</category>
+    <category>Frameworks</category>
+    <category>LLM Security</category>
+  </item>
+  <item>
+    <title>Detecting Prompt Injection: The Playbook Your SIEM Doesn&#39;t Have Yet</title>
+    <link>https://chimaukachukwu.com/blog/posts/detecting-prompt-injection.html</link>
+    <guid isPermaLink="true">https://chimaukachukwu.com/blog/posts/detecting-prompt-injection.html</guid>
+    <pubDate>Sun, 17 May 2026 12:00:00 GMT</pubDate>
+    <description>Prompt injection is succeeding in production right now, and most SOCs can&#39;t see it. Why traditional detection primitives partially-fail, three places where they can work, and what&#39;s still hard.</description>
+    <category>AI Security</category>
+    <category>SOC</category>
+    <category>Detection Engineering</category>
+    <category>Prompt Injection</category>
+    <category>LLM Security</category>
+  </item>
+  <item>
+    <title>The Bridge — Why AI Security Needs SOC People, and SOC Needs AI Red Teamers</title>
+    <link>https://chimaukachukwu.com/blog/posts/the-bridge.html</link>
+    <guid isPermaLink="true">https://chimaukachukwu.com/blog/posts/the-bridge.html</guid>
+    <pubDate>Tue, 28 Apr 2026 12:00:00 GMT</pubDate>
+    <description>Two communities that should be talking to each other are mostly not. Here&#39;s what each side is missing — and what bridging them looks like in practice.</description>
+    <category>AI Security</category>
+    <category>SOC</category>
+    <category>LLM Security</category>
+    <category>Career</category>
+  </item>
+</channel>
 </rss>

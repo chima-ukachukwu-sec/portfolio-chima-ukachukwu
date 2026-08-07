@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>The Defence That Can't See the Attack · Chima Ukachukwu</title>
+    <meta name="description" content="I built a prompt injection sandbox with no model in it. The most useful thing it does is show you a control failing for a reason that has nothing to do with how good the control is.">
+    <meta name="author" content="Chima Anthony Ukachukwu">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="The Defence That Can't See the Attack">
+    <meta property="og:description" content="I built a prompt injection sandbox with no model in it. The most useful thing it does is show you a control failing for a reason that has nothing to do with how good the control is.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://chimaukachukwu.com/blog/posts/the-defence-that-cant-see-the-attack.html">
+    <meta property="og:image" content="https://chimaukachukwu.com/assets/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Chima Anthony Ukachukwu — AI Security Analyst & Red Teamer">
+    <meta property="article:published_time" content="2026-08-07">
+    <meta property="article:author" content="Chima Anthony Ukachukwu">
+    <meta property="article:section" content="AI Security">
+    <meta property="article:tag" content="AI Security">
+    <meta property="article:tag" content="SOC">
+    <meta property="article:tag" content="Detection Engineering">
+    <meta property="article:tag" content="Prompt Injection">
+    <meta property="article:tag" content="LLM Security">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://chimaukachukwu.com/assets/images/og-image.png">
+
+    <link rel="canonical" href="https://chimaukachukwu.com/blog/posts/the-defence-that-cant-see-the-attack.html">
+    <link rel="alternate" type="application/rss+xml" title="Chima Ukachukwu — Writing (RSS)" href="https://chimaukachukwu.com/blog/feed.xml">
+
+    <!-- build:head-assets -->
+    <meta name="theme-color" content="#0a0e14">
+
+    <!-- Favicon — "C" brand mark -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%2300d4aa'/%3E%3Cstop offset='100%25' style='stop-color:%2300a3ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Ctext x='50' y='72' text-anchor='middle' fill='%230a0e14' font-family='Inter,sans-serif' font-weight='900' font-size='62'%3EC%3C/text%3E%3C/svg%3E">
+
+    <!-- Fonts are self-hosted (assets/fonts/), so there is no third-party request
+         and no render-blocking round trip to another origin. Preloaded because the
+         stylesheet that declares them is itself a blocking resource — without this
+         the browser only discovers the fonts after parsing the CSS. -->
+    <link rel="preload" href="../../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+    <!-- /build:head-assets -->
+
+    <!-- JSON-LD Article schema for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "The Defence That Can't See the Attack",
+      "description": "Prompt injection is succeeding in production, and most SOCs can't see it. Here's why traditional detection primitives partially-fail, three places where they can work, and what's still hard.",
+      "author": {
+        "@type": "Person",
+        "name": "Chima Anthony Ukachukwu",
+        "url": "https://chimaukachukwu.com"
+      },
+      "datePublished": "2026-08-07",
+      "url": "https://chimaukachukwu.com/blog/posts/the-defence-that-cant-see-the-attack.html",
+      "publisher": {
+        "@type": "Person",
+        "name": "Chima Anthony Ukachukwu"
+      },
+      "image": "https://chimaukachukwu.com/assets/images/og-image.png"
+    }
+    </script>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://chimaukachukwu.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Writing",
+      "item": "https://chimaukachukwu.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "The Defence That Can't See the Attack",
+      "item": "https://chimaukachukwu.com/blog/posts/the-defence-that-cant-see-the-attack.html"
+    }
+  ]
+}
+    </script>
+
+    <!-- build:head-analytics -->
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://plausible.io/js/pa-CULpUfeL2Juc-qRc9ARc9.js"></script>
+    <script>
+        window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+        plausible.init()
+    </script>
+    <!-- /build:head-analytics -->
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="../../index.html" class="nav-logo">CU<span class="accent">.</span></a>
+        <!-- build:nav -->
+        <ul class="nav-menu">
+            <li><a href="../../index.html#work" class="nav-link">Work</a></li>
+            <li><a href="../../lab/index.html" class="nav-link">Lab</a></li>
+            <li><a href="../../blog/index.html" class="nav-link active">Writing</a></li>
+            <li><a href="../../index.html#about" class="nav-link">About</a></li>
+            <li><a href="../../index.html#contact" class="nav-link">Contact</a></li>
+            <li class="nav-cta-item"><a href="../../resume/index.html" class="nav-cta">Résumé <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></li>
+        </ul>
+        <!-- /build:nav -->
+    </div>
+</nav>
+
+<main id="main-content" class="post-main">
+    <article class="post-article">
+        <header class="post-header">
+            <p class="post-eyebrow"><a href="../index.html">← All writing</a></p>
+            <h1 class="post-title">The Defence That Can't See the Attack</h1>
+            <p class="post-dek">I built a prompt injection sandbox with no model in it. The most useful thing it does is show you a control failing for a reason that has nothing to do with how good the control is.</p>
+            <p class="post-meta">
+                <span class="post-meta-item">By Chima Anthony Ukachukwu</span>
+                <span class="post-meta-divider">·</span>
+                <time datetime="2026-08-07">August 7, 2026</time>
+                <span class="post-meta-divider">·</span>
+                <span class="post-meta-item">7 min read</span>
+            </p>
+        </header>
+
+        <div class="post-body">
+
+            <p>
+                I spent a weekend building a prompt injection sandbox for my site. It has a support
+                agent with a system prompt, one tool, and a secret it&rsquo;s told never to reveal. You
+                play the attacker. Four defences can be switched on and off while you work.
+            </p>
+            <p>
+                There is no model in it. The agent is a rule engine — a few hundred lines of
+                deterministic JavaScript. I want to explain why that turned out to be the right call,
+                and then show you the one configuration that taught me something I hadn&rsquo;t properly
+                internalised, even though I could have recited it as a fact beforehand.
+            </p>
+
+            <h2>Why the agent isn&rsquo;t a model</h2>
+            <p>
+                The obvious build is to put a real LLM behind it. Give the visitor a live target,
+                let them find genuinely novel attacks. It&rsquo;s more impressive in a demo.
+            </p>
+            <p>
+                It&rsquo;s also worse at the only job that matters here. A sampled model gives you a
+                different answer to the same input, which means when a visitor toggles a defence and
+                the outcome changes, they cannot tell whether the defence did that or whether the
+                model simply rolled differently. You can show correlation. You cannot show causality.
+                And causality is the entire pedagogical payload — the thing I actually want someone
+                to walk away with is <em>this control stops that mechanism, and this one doesn&rsquo;t</em>.
+            </p>
+            <p>
+                A rule engine gives you a reproducible target. Same input, same defences, same
+                result, every time. Toggle one control, re-run the identical attack, and the delta
+                you observe is attributable to exactly one variable. That is an experiment. The
+                model-backed version is an anecdote.
+            </p>
+            <p>
+                There&rsquo;s a second benefit I didn&rsquo;t anticipate: the rules are readable. Every
+                decision the agent makes is a branch someone can go and look at. A defence that
+                works for reasons you can&rsquo;t inspect is a defence you&rsquo;re trusting rather than
+                understanding, and I&rsquo;d rather hand someone the former than ask them to take my
+                word for the latter.
+            </p>
+
+            <h2>The four defences</h2>
+            <p>
+                The sandbox implements four controls, each mapped to a mechanism rather than to a
+                product category:
+            </p>
+            <p>
+                <strong>Input classifier.</strong> Screens the incoming turn against a jailbreak
+                taxonomy and refuses anything scoring medium risk or above.
+                <strong>Identity re-assertion.</strong> Re-states the agent role each turn so
+                instructions arriving from the user can&rsquo;t redefine who the agent is.
+                <strong>Instruction/data separation.</strong> Marks tool and retrieval output as
+                data, so imperative text inside a tool return is never eligible to execute.
+                <strong>Output filter.</strong> Scans the drafted reply for the secret before
+                anything is sent.
+            </p>
+            <p>
+                Three attack paths reach the secret. Social escalation — claimed authority plus an
+                argument that the rules don&rsquo;t apply here. Persona override into system prompt
+                extraction. And indirect injection, where one of the orders in the fake database
+                carries a hostile &ldquo;customer note&rdquo; that the agent reads when it looks the order up.
+            </p>
+
+            <h2>The configuration that matters</h2>
+            <p>
+                Turn on <em>only</em> the input classifier. Run the indirect injection. It succeeds.
+            </p>
+            <p>
+                I knew this. I could have told you this before I built it. It is, in a sentence, the
+                defining property of indirect prompt injection and I have written about instruction-
+                versus-data confusion before. And yet watching a control I&rsquo;d just implemented sail
+                past an attack while reporting no findings landed differently than knowing it did.
+            </p>
+            <p>
+                The classifier is not broken. It is not misconfigured, and it is not a bad control.
+                It examined the user&rsquo;s turn — <em>&ldquo;Hi, can you check the status of order 4471 for
+                me please?&rdquo;</em> — and correctly determined there was nothing adversarial in it,
+                because there wasn&rsquo;t. The hostile instruction was never in the input. It arrived in
+                a tool return, after the classifier had already done its job and gone home.
+            </p>
+            <p>
+                This is a different failure mode from the one security tooling usually has. A
+                signature that misses a novel payload has a coverage problem — you fix it by
+                improving the signature. A classifier that misses indirect injection has a
+                <em>placement</em> problem. No amount of improving it helps, because it is not
+                looking at the thing that attacks the system. You could achieve a perfect true
+                positive rate on every prompt a human will ever type and remain exactly this
+                vulnerable.
+            </p>
+            <p>
+                The SOC analogue is a network IDS at the perimeter and an attacker already inside
+                on a VPN. The sensor is fine. The sensor is in the wrong place for that threat.
+            </p>
+
+            <h2>What each control actually covers</h2>
+            <p>
+                Running the matrix produces a result worth stating plainly:
+                <strong>none of the four defences stops all three paths on its own.</strong>
+            </p>
+            <p>
+                Instruction/data separation stops indirect injection cleanly and does nothing for
+                social escalation. Identity re-assertion is the inverse — it kills the persona and
+                authority paths and is completely bypassed by the tool-borne payload, for the same
+                reason the classifier is. The input classifier catches the two multi-signal social
+                attacks and misses the indirect one entirely.
+            </p>
+            <p>
+                The output filter is the interesting one. Enable it alone and all three attacks
+                report a near miss: the agent was fully compromised, complied with the attacker, and
+                drafted a reply containing the secret — which was then caught on the way out. That
+                is a real control and I would ship it. But a system that depends on it has already
+                lost the turn. It got lucky about what the payload happened to be. The next attacker
+                asks for a paraphrase instead of the literal string and walks straight through.
+            </p>
+
+            <h2>Why this is a defence-in-depth argument, not an AI argument</h2>
+            <p>
+                Nothing above is novel as security thinking. Controls are selected against specific
+                mechanisms; gaps appear where a mechanism has no control pointed at it; the gaps are
+                invisible if you audit by counting controls rather than by mapping them onto attack
+                paths. Any competent blue team knows this.
+            </p>
+            <p>
+                What is new is that AI security is currently being sold as though one control is the
+                answer. Buy the guardrail. Add the classifier. Turn on the filter. The vendor
+                framing is singular, and the sandbox makes the plural obvious in about ninety
+                seconds — which is the reason I think a toy with four checkboxes has more teaching
+                value than the essay you are currently reading.
+            </p>
+            <p>
+                It also cuts the other way. If you are coming from AI safety and this reads as
+                obvious, that instinct is exactly what SOC practice has spent thirty years
+                formalising. The mapping discipline — control to mechanism to attack path — is a
+                skill that transfers directly, and most AI security teams are currently rebuilding
+                it from scratch because they hired away from ML rather than away from operations.
+            </p>
+
+            <h2>What I&rsquo;d build next</h2>
+            <p>
+                The obvious gap in the sandbox is that the defences are binary. Real controls have
+                thresholds, and the interesting question is not whether the classifier is on but
+                where you set it — because every notch you tighten it buys coverage and costs false
+                positives, and past a certain point the false positives cost you more than the
+                attack does. That trade is the actual job. A version with a slider instead of a
+                checkbox would teach more than this one does.
+            </p>
+            <p>
+                The other gap is multi-turn. Every attack in the sandbox is single-shot, and the
+                slow-ramp attacks — the ones that build context over six turns and never look
+                hostile in any individual message — are both harder to detect and closer to what a
+                patient attacker actually does.
+            </p>
+            <p>
+                Both of those are on the list. In the meantime the sandbox is on my site, it runs
+                entirely in your browser, and the rules are in a single file you can read. If you
+                find a path through it that I haven&rsquo;t modelled, I&rsquo;d genuinely like to hear about
+                it.
+            </p>
+            <p>
+                <a href="../../lab/injection-sim/index.html">Try the simulator →</a>
+            </p>
+
+        </div>
+
+        <!-- blog:rail -->
+        <nav class="post-related" aria-label="Related writing">
+            <h2>Related</h2>
+            <ul>
+                <li>
+                    <a href="detecting-prompt-injection.html">Detecting Prompt Injection: The Playbook Your SIEM Doesn&#39;t Have Yet</a>
+                    <span>Prompt injection is succeeding in production right now, and most SOCs can&#39;t see it. Why traditional detection primiti…</span>
+                </li>
+                <li>
+                    <a href="taxonomies-that-outlive-the-exploit.html">Taxonomies That Outlive the Exploit</a>
+                    <span>Every jailbreak list I bookmarked in 2024 is now useless. The categories underneath them are not. Sorting attacks by …</span>
+                </li>
+            </ul>
+        </nav>
+        <nav class="post-pager" aria-label="More writing">
+            <a class="post-pager-prev" href="taxonomies-that-outlive-the-exploit.html"><span>Older</span>Taxonomies That Outlive the Exploit</a>
+            <span></span>
+        </nav>
+        <!-- /blog:rail -->
+
+        <footer class="post-footer">
+            <p class="post-author-card">
+                <strong>Chima Anthony Ukachukwu</strong> is an AI Security Analyst &amp; Red Teamer based in Oklahoma City. He runs adversarial testing against frontier LLMs, automates SOC threat intelligence, and is currently open to AI security and SOC analyst roles.
+                <br><br>
+                <a href="../../index.html#contact">Get in touch →</a> · <a href="https://linkedin.com/in/chima-anthony-u" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/chima-ukachukwu-sec" target="_blank" rel="noopener">GitHub</a>
+            </p>
+
+            <p class="post-share">
+                Share this post:
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://chimaukachukwu.com/blog/posts/the-defence-that-cant-see-the-attack.html" target="_blank" rel="noopener">LinkedIn</a> ·
+                <a href="https://twitter.com/intent/tweet?text=The%20Defence%20That%20Can%27t%20See%20the%20Attack&url=https://chimaukachukwu.com/blog/posts/the-defence-that-cant-see-the-attack.html" target="_blank" rel="noopener">X / Twitter</a>
+            </p>
+
+            <p class="post-back"><a href="../index.html">← All writing</a></p>
+        </footer>
+    </article>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-brand">
+            <span class="footer-logo">CU<span class="accent">.</span></span>
+            <p>AI Security Analyst &amp; Red Teamer</p>
+        </div>
+        <!-- build:footer-links -->
+        <div class="footer-links">
+            <a href="../../index.html#work">Work</a>
+            <a href="../../lab/index.html">Lab</a>
+            <a href="../../blog/index.html">Writing</a>
+            <a href="../../index.html#about">About</a>
+            <a href="../../resume/index.html">Résumé</a>
+            <a href="../../now/index.html">Now</a>
+            <a href="../../index.html#contact">Contact</a>
+        </div>
+        <!-- /build:footer-links -->
+        <!-- build:footer-social -->
+        <div class="footer-social">
+            <a href="https://linkedin.com/in/chima-anthony-u" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://github.com/chima-ukachukwu-sec" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </a>
+            <a href="mailto:chima.ukachukwu.sec@gmail.com" aria-label="Email">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+        </div>
+        <!-- /build:footer-social -->
+        <p class="footer-copyright">© 2026 Chima Anthony Ukachukwu</p>
+    </div>
+</footer>
+
+</body>
+</html>

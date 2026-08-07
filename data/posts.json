@@ -1,0 +1,38 @@
+{
+  "_comment": "Single source of truth for the writing index, related rails, next/prev and the RSS feed. Newest first. tools/build-blog.js reads this.",
+  "posts": [
+    {
+      "slug": "the-defence-that-cant-see-the-attack",
+      "title": "The Defence That Can't See the Attack",
+      "dek": "I built a prompt injection sandbox with no model in it. The most useful thing it does is show you a control failing for a reason that has nothing to do with how good the control is.",
+      "date": "2026-08-07",
+      "read": "7 min read",
+      "tags": ["AI Security", "Prompt Injection", "Detection Engineering", "Agent Security"]
+    },
+    {
+      "slug": "taxonomies-that-outlive-the-exploit",
+      "title": "Taxonomies That Outlive the Exploit",
+      "dek": "Every jailbreak list I bookmarked in 2024 is now useless. The categories underneath them are not. Sorting attacks by mechanism instead of by phrasing is the difference between a framework and a changelog.",
+      "date": "2026-08-07",
+      "read": "6 min read",
+      "tags": ["AI Security", "Red Teaming", "Frameworks", "LLM Security"]
+    },
+    {
+      "slug": "detecting-prompt-injection",
+      "title": "Detecting Prompt Injection: The Playbook Your SIEM Doesn't Have Yet",
+      "dek": "Prompt injection is succeeding in production right now, and most SOCs can't see it. Why traditional detection primitives partially-fail, three places where they can work, and what's still hard.",
+      "date": "2026-05-17",
+      "read": "8 min read",
+      "tags": ["AI Security", "SOC", "Detection Engineering", "Prompt Injection", "LLM Security"]
+    },
+    {
+      "slug": "the-bridge",
+      "title": "The Bridge — Why AI Security Needs SOC People, and SOC Needs AI Red Teamers",
+      "dek": "Two communities that should be talking to each other are mostly not. Here's what each side is missing — and what bridging them looks like in practice.",
+      "date": "2026-04-28",
+      "read": "8 min read",
+      "tags": ["AI Security", "SOC", "LLM Security", "Career"]
+    }
+  ],
+  "drafting": "Threshold tuning for LLM guardrails — where the false-positive cost overtakes the attack cost."
+}

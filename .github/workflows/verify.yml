@@ -7,7 +7,7 @@ on:
 
 jobs:
   pages-up-to-date:
-    name: Shared partials are stamped
+    name: Generated markup is current
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -18,6 +18,7 @@ jobs:
       # hand-edited a generated region. This is the check that would have
       # caught the stale navigation on ten sub-pages.
       - run: node tools/build-pages.js --check
+      - run: node tools/build-blog.js --check
 
   links:
     name: No broken links

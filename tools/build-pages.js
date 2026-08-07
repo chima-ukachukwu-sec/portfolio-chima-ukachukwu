@@ -45,6 +45,8 @@ const PAGES = {
   'blog/index.html':                                   { root: '../',    home: '../index.html',    active: 'writing' },
   'now/index.html':                                    { root: '../',    home: '../index.html',    active: '' },
   'resume/index.html':                                 { root: '../',    home: '../index.html',    active: '' },
+  'blog/posts/the-defence-that-cant-see-the-attack.html': { root: '../../', home: '../../index.html', active: 'writing' },
+  'blog/posts/taxonomies-that-outlive-the-exploit.html': { root: '../../', home: '../../index.html', active: 'writing' },
   'blog/posts/the-bridge.html':                        { root: '../../', home: '../../index.html', active: 'writing' },
   'blog/posts/detecting-prompt-injection.html':        { root: '../../', home: '../../index.html', active: 'writing' },
   'portfolio/case-studies/adverse-insight.html':       { root: '../../', home: '../../index.html', active: 'work' },
