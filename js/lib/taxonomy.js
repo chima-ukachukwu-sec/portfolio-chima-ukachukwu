@@ -225,7 +225,7 @@ window.RedTeamTaxonomy = (function () {
         'context-dilution': {
             owasp: 'LLM01 Prompt Injection',
             signal: 'Long inputs whose sensitive request sits in the tail. The classifier flags 600+ characters with a sensitive term in the final 300.',
-            mitigation: 'Score the whole input rather than a prefix window, and weight the tail. Filters that sample the opening of a long document are the reason this works.'
+            mitigation: 'Score the whole input rather than a prefix window, and weight the tail. Two separate things make dilution work — input filters that sample only the opening, and the model\'s own attention thinning across a long context — so widening the filter window addresses one of them and not the other.'
         },
         'token-smuggling': {
             owasp: 'LLM01 Prompt Injection · LLM05 Improper Output Handling',
