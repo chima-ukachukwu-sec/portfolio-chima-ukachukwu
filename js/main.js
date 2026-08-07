@@ -524,6 +524,7 @@ function initTerminal() {
 <span class="output-success">skills</span>        — Skills, and the work that evidences them
 <span class="output-success">certs</span>         — Certifications list
 <span class="output-success">experience</span>    — Career summary
+<span class="output-success">lab</span>           — Interactive exhibits you can actually use
 <span class="output-success">redteam</span>       — AI red teaming methodology
 <span class="output-success">soc</span>           — SOC & defensive tools
 <span class="output-success">education</span>     — Academic background
@@ -576,6 +577,27 @@ SOC-trained cybersecurity analyst operating at the intersection of traditional s
 <span class="output-subtitle">Every line above maps to a repo, a case study, or a role — not a self-rating.</span>`;
         },
 
+        lab: () => `
+<span class="output-title">Interactive exhibits</span>
+<span class="output-divider">─────────────────────────────────────</span>
+<span class="output-success">injection simulator</span>  Attack a support agent, then defend it. Four controls,
+                      three attack paths, no single control covers all three.
+  → <span class="output-link">/lab/injection-sim/</span>
+
+<span class="output-success">ctf</span>                  Six levels. Each adds a control; each is beaten by what
+                      that control does not cover.
+  → <span class="output-link">/lab/ctf/</span>
+
+<span class="output-success">pattern detector</span>     Paste a prompt, see which of ten adversarial categories
+                      it matches and which pattern fired.
+  → <span class="output-link">/lab/pattern-detector/</span>
+
+<span class="output-success">red team atlas</span>       The ten categories as reference: mechanism, detection
+                      signal, mitigation, OWASP mapping.
+  → <span class="output-link">/lab/red-team-atlas/</span>
+
+<span class="output-subtitle">All deterministic and client-side. No model, no backend, nothing sent anywhere.</span>`,
+
         certs: () => `
 <span class="output-title">Certifications & Training</span>
 <span class="output-divider">─────────────────────────────────────</span>
@@ -613,7 +635,8 @@ SOC-trained cybersecurity analyst operating at the intersection of traditional s
 <span class="output-success">4.</span> Structured Evaluation — Governance-aligned safety frameworks
 <span class="output-success">5.</span> Public Frameworks — Sanitized, NDA-compliant on GitHub
 
-<span class="output-subtitle">github.com/chima-ukachukwu-sec/ai-red-teaming-frameworks</span>`,
+<span class="output-subtitle">Repo: github.com/chima-ukachukwu-sec/ai-red-teaming-frameworks</span>
+<span class="output-subtitle">Or run <span class="cmd-highlight">lab</span> — the taxonomy and the methodology are live on this site.</span>`,
 
         soc: () => `
 <span class="output-title">SOC & Defensive Stack</span>
@@ -654,7 +677,7 @@ GPA: 3.7 / 4.0
 <span class="output-success">GitHub:</span>    <span class="output-link">github.com/chima-ukachukwu-sec</span>
 <span class="output-success">Portfolio:</span> <span class="output-link">chimaukachukwu.com</span>
 
-<span class="output-subtitle">Open to: SOC Analyst | AI Security Analyst | AI Red Teamer | Consulting</span>`,
+<span class="output-subtitle">Open to: AI Security | AI Red Team | SOC Analyst | GRC — entry to mid level</span>`,
 
         github: () => `
 <span class="output-title">GitHub Repositories</span>
@@ -683,7 +706,7 @@ GPA: 3.7 / 4.0
 <span class="output-success">Download:</span> <span class="output-link">assets/resume/chima-ukachukwu-resume.pdf</span>
 <span class="output-success">Web version:</span> <span class="output-link">chimaukachukwu.com/resume/</span>
 
-<span class="output-subtitle">Type <span class="cmd-highlight">experience</span> for career summary</span>`,
+<span class="output-subtitle">Type <span class="cmd-highlight">experience</span> for career summary, or <span class="cmd-highlight">lab</span> for things you can use.</span>`,
 
         'whois chima': () => `
 <span class="output-title">WHOIS: chima-ukachukwu</span>

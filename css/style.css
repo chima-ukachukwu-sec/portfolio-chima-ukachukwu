@@ -3779,6 +3779,89 @@ section {
 }
 
 /* ============================================
+   PRINT
+   Résumés get printed. Without this, Cmd+P on /resume/ produces the navigation,
+   the footer, a dark background and light text — which most browsers will
+   either render as a wall of ink or drop to unreadable grey.
+   ============================================ */
+@media print {
+    /* Ink, not screen. */
+    :root {
+        --bg-primary: #fff;
+        --bg-secondary: #fff;
+        --bg-tertiary: #fff;
+        --bg-card: #fff;
+        --text-primary: #000;
+        --text-secondary: #1a1a1a;
+        --text-muted: #444;
+        --border-color: #ccc;
+        --border-hover: #999;
+        --accent-primary: #007a63;
+        --color-brand: #007a63;
+        --color-interactive: #007a63;
+    }
+
+    body {
+        background: #fff;
+        color: #000;
+        font-size: 11pt;
+        line-height: 1.45;
+    }
+
+    /* Chrome that means nothing on paper. */
+    .navbar,
+    .nav-toggle,
+    .recruiter-toggle,
+    .footer,
+    .skip-link,
+    .hero-bg-grid,
+    .hero-probe,
+    .post-share,
+    .post-related,
+    .post-pager,
+    .post-back,
+    .post-drafting,
+    .terminal-section,
+    .sim-grid,
+    .sim-presets,
+    .ctf-progress,
+    .ctf-stage,
+    .recruiter-brief,
+    .contact-form-wrapper,
+    .repo-live {
+        display: none !important;
+    }
+
+    .post-main,
+    .lab-main,
+    .sim-main,
+    main {
+        max-width: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Keep headings with the text they introduce. */
+    h1, h2, h3 { break-after: avoid; page-break-after: avoid; }
+    li, .resume-role, .credential-list li, .track-list li { break-inside: avoid; page-break-inside: avoid; }
+
+    /* A printed link is only useful if you can read where it goes. */
+    .post-body a[href^="http"]::after,
+    .resume-section a[href^="http"]::after {
+        content: ' (' attr(href) ')';
+        font-size: 9pt;
+        color: #444;
+        word-break: break-all;
+    }
+
+    a { color: #000; text-decoration: underline; }
+
+    img { max-width: 100% !important; }
+
+    @page { margin: 15mm; }
+}
+
+/* ============================================
    REDUCED MOTION
    Must stay last in the file so these overrides win the cascade.
    Durations collapse to ~0 rather than `none` so any transitionend /

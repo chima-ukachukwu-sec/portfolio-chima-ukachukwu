@@ -79,5 +79,10 @@ jobs:
           # climbs again without a feature behind it.
           check js 110
           check assets/fonts 120
-          check assets/images 400
+          # Raised for the ten per-page social cards. These are fetched only by
+          # social scrapers when a link is shared — never by a visitor loading a
+          # page — so they cost nothing on the critical path. Split out so the
+          # images that DO load stay under a tight limit.
+          check assets/images/og 750
+          check assets/images 1000
           exit $fail
