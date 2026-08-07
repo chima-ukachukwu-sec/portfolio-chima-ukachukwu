@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initNavbarScrollState();
     initScrollReveal();
     initHeroProbe();
+    initGitHubLive();
     initRecruiterMode();
     initReferralTag();
     initSmoothScroll();
@@ -198,6 +199,17 @@ function initRecruiterMode() {
 function initReferralTag() {
     const ref = readRef();
     if (ref && window.plausible) plausible('referred-visit', { props: { ref: ref } });
+}
+
+
+/* ---------- LIVE REPO METADATA ----------
+   Progressive enhancement over the curated list in #work. The static markup
+   is complete without this; a failure here is invisible. */
+function initGitHubLive() {
+    if (!window.GitHubLive) return;
+    window.GitHubLive.hydrate(document).then((n) => {
+        if (n && window.plausible) plausible('gh-live-hydrated', { props: { rows: String(n) } });
+    });
 }
 
 /* ---------- HERO PROBE ----------
