@@ -3134,6 +3134,241 @@ section {
 }
 
 /* ============================================
+   RECRUITER MODE
+   A view, not a page. Nothing is removed — the brief is promoted above the
+   long-form and the rest of the site stays exactly where it was.
+   ============================================ */
+.recruiter-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: 34px;
+    padding: var(--space-2) var(--space-5);
+    margin-left: var(--space-6);
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 100px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    cursor: pointer;
+    transition: color var(--duration-fast) var(--ease-out),
+                border-color var(--duration-fast) var(--ease-out);
+}
+
+.recruiter-toggle:hover { color: var(--color-interactive); border-color: var(--color-interactive); }
+
+.recruiter-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--border-hover);
+    flex-shrink: 0;
+    transition: background var(--duration-fast) var(--ease-out);
+}
+
+.recruiter-toggle[aria-pressed="true"] {
+    color: var(--color-brand);
+    border-color: rgba(0, 212, 170, 0.4);
+    background: rgba(0, 212, 170, 0.06);
+}
+
+.recruiter-toggle[aria-pressed="true"] .recruiter-dot { background: var(--color-brand); }
+
+/* ---------- the brief ---------- */
+.recruiter-brief {
+    padding: var(--space-11) var(--space-8);
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    scroll-margin-top: var(--nav-height);
+}
+
+.recruiter-brief:focus { outline: none; }
+
+.brief-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-9);
+}
+
+.brief-head h2 {
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.brief-exit {
+    min-height: 34px;
+    padding: var(--space-2) var(--space-5);
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    cursor: pointer;
+    transition: color var(--duration-fast) var(--ease-out),
+                border-color var(--duration-fast) var(--ease-out);
+}
+
+.brief-exit:hover { color: var(--color-interactive); border-color: var(--color-interactive); }
+
+.brief-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: var(--space-11);
+    align-items: start;
+}
+
+.brief-facts dl { margin: 0; }
+
+.brief-facts dl > div {
+    display: grid;
+    grid-template-columns: 190px minmax(0, 1fr);
+    gap: var(--space-6);
+    padding: var(--space-5) 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.brief-facts dl > div:first-child { padding-top: 0; }
+
+.brief-facts dt {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.brief-facts dd {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: var(--text-md);
+    line-height: 1.55;
+}
+
+.brief-proof h3,
+.brief-facts h3 {
+    margin-bottom: var(--space-6);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.brief-proof ul { margin: 0 0 var(--space-9); padding: 0; list-style: none; }
+
+.brief-proof li {
+    padding: var(--space-5) 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.brief-proof li a {
+    display: block;
+    margin-bottom: var(--space-2);
+    color: var(--color-interactive);
+    font-size: var(--text-md);
+    font-weight: 600;
+    transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.brief-proof li a:hover { opacity: 0.75; }
+
+.brief-proof li span {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    line-height: 1.55;
+}
+
+.brief-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+}
+
+.brief-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: 44px;
+    padding: var(--space-4) var(--space-7);
+    background: var(--color-interactive);
+    border-radius: var(--radius-sm);
+    color: var(--bg-primary);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.brief-cta:hover { opacity: 0.85; }
+.brief-cta svg { transition: transform var(--duration-fast) var(--ease-out); }
+.brief-cta:hover svg { transform: translateX(3px); }
+
+.brief-cta.secondary {
+    background: transparent;
+    border: 1px solid var(--border-hover);
+    color: var(--text-primary);
+}
+
+.brief-cta.secondary:hover { border-color: var(--color-interactive); color: var(--color-interactive); opacity: 1; }
+
+.brief-reply {
+    margin-top: var(--space-5);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+}
+
+/* In recruiter mode the hero tightens and the interactive probe steps aside so
+   the brief lands above the fold.
+
+   An earlier version also dimmed the long-form sections to opacity 0.55. That
+   was removed: it pushed legible body text below 4.5:1 and failed WCAG AA on
+   eleven elements. Ordering already does the prioritising, and reducing the
+   contrast of content a reader may still want is not a trade worth making. */
+.mode-recruiter .hero { min-height: auto; padding-bottom: var(--space-11); }
+.mode-recruiter .hero-probe { display: none; }
+
+.label-optional {
+    margin-left: var(--space-3);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-3xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+@media (max-width: 1100px) {
+    .brief-grid { grid-template-columns: 1fr; gap: var(--space-9); }
+}
+
+@media (max-width: 768px) {
+    .recruiter-toggle {
+        margin-left: 0;
+        margin-right: var(--space-5);
+        min-height: 40px;
+    }
+    .recruiter-toggle-label { display: none; }
+    .recruiter-toggle::after {
+        content: 'Recruiter';
+        font-family: var(--font-mono);
+        font-size: var(--text-2xs);
+    }
+    .recruiter-brief { padding: var(--space-9) var(--space-7); }
+    .brief-facts dl > div { grid-template-columns: 1fr; gap: var(--space-2); }
+    .brief-cta { width: 100%; justify-content: center; }
+}
+
+/* ============================================
    REDUCED MOTION
    Must stay last in the file so these overrides win the cascade.
    Durations collapse to ~0 rather than `none` so any transitionend /

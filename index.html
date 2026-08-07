@@ -112,6 +112,10 @@
                 <li class="nav-cta-item"><a href="resume/index.html" class="nav-cta">Résumé <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></li>
             </ul>
             <!-- /build:nav -->
+            <button type="button" class="recruiter-toggle" id="recruiter-toggle" aria-pressed="false">
+                <span class="recruiter-dot" aria-hidden="true"></span>
+                <span class="recruiter-toggle-label">Recruiter view</span>
+            </button>
             <button class="nav-toggle" id="mobile-menu" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -167,6 +171,62 @@
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </a>
                 <noscript><p class="probe-noscript">The classifier needs JavaScript. The <a href="lab/pattern-detector/index.html">full detector page</a> explains the taxonomy without it.</p></noscript>
+            </div>
+        </div>
+    </section>
+
+    <!-- RECRUITER BRIEF — hidden by default, revealed by ?mode=recruiter or the
+         nav toggle. Nothing is removed in recruiter mode; the logistics a hiring
+         decision actually needs are simply promoted above the long-form. -->
+    <section id="recruiter-brief" class="recruiter-brief" hidden aria-labelledby="brief-title">
+        <div class="section-container">
+            <div class="brief-head">
+                <h2 id="brief-title">The 90-second version</h2>
+                <button type="button" class="brief-exit" data-recruiter-off>Show the full site</button>
+            </div>
+
+            <div class="brief-grid">
+                <div class="brief-facts">
+                    <dl>
+                        <div><dt>Status</dt><dd>Actively interviewing</dd></div>
+                        <div><dt>Target roles</dt><dd>AI Security · AI Red Team · SOC Analyst · GRC — entry to mid level</dd></div>
+                        <div><dt>Location</dt><dd>Oklahoma City, OK · open to U.S.-remote</dd></div>
+                        <div><dt>Work authorization</dt><dd>U.S. Green Card holder — no sponsorship required</dd></div>
+                        <div><dt>Clearance</dt><dd>Eligible for Secret · does not currently hold an active clearance</dd></div>
+                        <div><dt>Education</dt><dd>M.S. Cybersecurity, Oklahoma City University (2025) · GPA 3.7</dd></div>
+                        <div><dt>Notable</dt><dd>Fortune 500 SOC internship · ongoing frontier-LLM red team contract work</dd></div>
+                    </dl>
+                </div>
+
+                <div class="brief-side">
+                    <div class="brief-proof">
+                        <h3>If you only open one thing</h3>
+                        <ul>
+                            <li>
+                                <a href="lab/injection-sim/index.html">Prompt Injection Simulator</a>
+                                <span>Agent sandbox — attack it, then defend it. Shows threat modelling and defence in depth.</span>
+                            </li>
+                            <li>
+                                <a href="portfolio/case-studies/hobby-lobby-misp.html">MISP automation case study</a>
+                                <span>The defensive side: threat-intel pipeline built in a live enterprise SOC.</span>
+                            </li>
+                            <li>
+                                <a href="blog/posts/detecting-prompt-injection.html">Detecting Prompt Injection</a>
+                                <span>Written point of view on where AI security and SOC practice actually meet.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="brief-actions">
+                        <a class="brief-cta" href="resume/index.html">
+                            Résumé
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </a>
+                        <a class="brief-cta secondary" href="assets/resume/chima-ukachukwu-resume.pdf" download>Download PDF</a>
+                        <a class="brief-cta secondary" id="brief-mail" href="mailto:chima.ukachukwu.sec@gmail.com">Email me</a>
+                    </div>
+                    <p class="brief-reply">Replies within 24 hours, weekdays.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -528,21 +588,20 @@
                 
                 <div class="contact-form-wrapper">
                     <form id="contact-form" class="contact-form">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" placeholder="Your name" required>
-                        </div>
+                        <!-- Two required fields. A subject line is noise when the
+                             message is right there, and a required name is friction
+                             on the one action the site exists to produce. -->
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="Your email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" placeholder="What's this about?">
+                            <input type="email" id="email" name="email" placeholder="you@company.com" required>
                         </div>
                         <div class="form-group">
                             <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" placeholder="Tell me about your project, role, or opportunity..." required></textarea>
+                            <textarea id="message" name="message" rows="5" placeholder="A role, a project, or a question — whatever brought you here." required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Name <span class="label-optional">optional</span></label>
+                            <input type="text" id="name" name="name" placeholder="Who am I replying to?">
                         </div>
                         <div class="form-group">
                             <div class="h-captcha" data-sitekey="b54e067e-33d6-4f22-aa04-9fac33580390" data-theme="dark"></div>

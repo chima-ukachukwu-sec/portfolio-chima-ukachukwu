@@ -27,6 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initNavbarScrollState();
     initScrollReveal();
     initHeroProbe();
+    initRecruiterMode();
+    initReferralTag();
     initSmoothScroll();
     initContactForm();
     initActiveNavHighlight();
@@ -111,8 +113,95 @@ function initScrollReveal() {
     });
 }
 
+
+/* ---------- REFERRAL TAG ----------
+   ?ref=acme-soc on a link pasted into an application tells you which
+   application produced the visit.
+
+   Sanitised once, here, and used everywhere: encodeURIComponent alone would
+   stop mailto header injection, but stripping CRLF and everything outside a
+   conservative allowlist means the value is safe wherever it ends up. */
+function readRef() {
+    const raw = new URLSearchParams(window.location.search).get('ref');
+    if (!raw) return '';
+    return raw.slice(0, 40).replace(/[^\w .-]/g, '');
+}
+
+/* ---------- RECRUITER MODE ----------
+   A view, not a page. Same URL, so a link pasted into an application lands the
+   reader straight in it. Nothing is hidden — the logistics a hiring decision
+   needs are promoted above the long-form, and the full site is one click away. */
+function initRecruiterMode() {
+    const toggle = document.getElementById('recruiter-toggle');
+    const brief = document.getElementById('recruiter-brief');
+    if (!toggle || !brief) return;
+
+    const KEY = 'cu:recruiter-mode';
+    const params = new URLSearchParams(window.location.search);
+
+    const setMode = (on, opts) => {
+        const o = opts || {};
+        document.body.classList.toggle('mode-recruiter', on);
+        brief.hidden = !on;
+        toggle.setAttribute('aria-pressed', String(on));
+        toggle.querySelector('.recruiter-toggle-label').textContent = on ? 'Recruiter view on' : 'Recruiter view';
+
+        try { on ? localStorage.setItem(KEY, '1') : localStorage.removeItem(KEY); } catch (e) { /* private mode */ }
+
+        if (on && o.scroll) {
+            brief.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
+            brief.setAttribute('tabindex', '-1');
+            brief.focus({ preventScroll: true });
+        }
+        if (o.track && window.plausible) plausible('recruiter-mode', { props: { state: on ? 'on' : 'off' } });
+    };
+
+    let stored = false;
+    try { stored = localStorage.getItem(KEY) === '1'; } catch (e) { /* private mode */ }
+
+    // ?mode=recruiter wins over whatever was stored, so a pasted link is predictable.
+    const fromUrl = params.get('mode') === 'recruiter';
+    setMode(fromUrl || stored, { scroll: fromUrl });
+
+    toggle.addEventListener('click', () => {
+        setMode(!document.body.classList.contains('mode-recruiter'), { scroll: true, track: true });
+    });
+
+    document.querySelectorAll('[data-recruiter-off]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            setMode(false, { track: true });
+            document.getElementById('work')?.scrollIntoView({
+                behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start'
+            });
+        });
+    });
+
+    /* Pre-fill the outreach email so a reply arrives already labelled. */
+    const mail = document.getElementById('brief-mail');
+    if (mail) {
+        const ref = readRef();
+        const subject = 'Role enquiry' + (ref ? ' (' + ref + ')' : '');
+        const body = [
+            'Hi Chima,', '',
+            'Role:', 'Company:', 'Location / remote:', 'Level:', '',
+            'What caught my attention:', ''
+        ].join('\n');
+        mail.href = 'mailto:chima.ukachukwu.sec@gmail.com'
+            + '?subject=' + encodeURIComponent(subject)
+            + '&body=' + encodeURIComponent(body);
+    }
+}
+
+/* Recorded as a Plausible prop only — nothing is stored client-side, and the
+   value never leaves the analytics call. */
+function initReferralTag() {
+    const ref = readRef();
+    if (ref && window.plausible) plausible('referred-visit', { props: { ref: ref } });
+}
+
 /* ---------- HERO PROBE ----------
-   A compact front end over the same classifier that powers /demo/. The
+   A compact front end over the same classifier that powers the full
+   detector at /lab/pattern-detector/. The
    taxonomy itself lives in js/lib/taxonomy.js so the two can never drift. */
 function initHeroProbe() {
     const input = document.getElementById('probe-input');
@@ -295,7 +384,8 @@ function initContactForm() {
         const email = document.getElementById('email').value.trim();
         const message = document.getElementById('message').value.trim();
 
-        if (!name || !email || !message) {
+        // Name is optional now — only email and message gate submission.
+        if (!email || !message) {
             shakeElement(form);
             return;
         }
@@ -337,7 +427,6 @@ function initContactForm() {
             body: JSON.stringify({
                 name: name,
                 email: email,
-                subject: document.getElementById('subject').value.trim(),
                 message: message,
                 'h-captcha-response': captchaResponse
             })
