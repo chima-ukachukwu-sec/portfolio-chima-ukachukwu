@@ -171,6 +171,19 @@
 
             <p>I treat this taxonomy the way a SOC team treats its detection categories: a living document, revised as new patterns emerge, with explicit versioning so I can talk about "these were the categories I tested against in March 2026" rather than waving at a vague "current standards" claim.</p>
 
+            <figure class="post-figure">
+                <img src="../../assets/images/shots/pattern-detector-multi-vector.webp"
+                     width="1200" height="2128" loading="lazy" decoding="async"
+                     alt="The Pattern Detector scoring a prompt as high risk with five categories
+                          matched. Each category lists the exact phrase that triggered it, such as
+                          &quot;Pretend you are&quot; for role-play coercion and &quot;ethics aside&quot;
+                          for capability negotiation.">
+                <figcaption>The taxonomy running as a classifier in the
+                    <a href="../../lab/pattern-detector/index.html">Lab</a>. Every hit shows the
+                    pattern that fired, because a detection you cannot explain is not one an analyst
+                    can tune. Try it against your own prompt.</figcaption>
+            </figure>
+
             <h3>2. Prompt Injection Testing Framework</h3>
 
             <p>A five-phase methodology for evaluating any LLM-integrated application (RAG system, agent, plugin host, browser tool) for prompt injection vulnerabilities.</p>

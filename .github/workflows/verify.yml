@@ -84,5 +84,12 @@ jobs:
           # page — so they cost nothing on the critical path. Split out so the
           # images that DO load stay under a tight limit.
           check assets/images/og 750
-          check assets/images 1000
+          # Case-study screenshots. Unlike the og/ cards these DO load for a
+          # reader, so they get their own tight cap and are lazy-loaded in the
+          # markup. Two images at 1200px wide, WebP q62. If this needs raising
+          # again, ask whether the page needs another screenshot first.
+          check assets/images/shots 160
+          # Raised from 1000 for assets/images/shots. Everything else under
+          # here is unchanged.
+          check assets/images 1160
           exit $fail

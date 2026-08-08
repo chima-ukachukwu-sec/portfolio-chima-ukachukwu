@@ -220,6 +220,19 @@
                 because there wasn&rsquo;t. The hostile instruction was never in the input. It arrived in
                 a tool return, after the classifier had already done its job and gone home.
             </p>
+
+            <figure class="post-figure">
+                <img src="../../assets/images/shots/injection-sim-classifier-bypassed.webp"
+                     width="1200" height="1041" loading="lazy" decoding="async"
+                     alt="The simulator with only the input classifier enabled. The agent replies with
+                          the support override key NW-7731-ALPHA, marked Secret leaked. The defender
+                          view reads: Input classifier, no categories matched, passed through.">
+                <figcaption>The whole argument in one frame. Input classifier on, the other three
+                    controls off, and the secret still leaves the building. The defender view records
+                    the classifier passing the turn, correctly, because nothing adversarial was in it.
+                    Reproduce it in the
+                    <a href="../../lab/injection-sim/index.html">simulator</a>.</figcaption>
+            </figure>
             <p>
                 This is a different failure mode from the one security tooling usually has. A
                 signature that misses a novel payload has a coverage problem. You fix it by

@@ -2249,6 +2249,30 @@ section {
     white-space: nowrap;
 }
 
+/* Screenshots inside long-form pages. These are evidence, not decoration, so
+   the caption states what the reader is looking at and why it matters rather
+   than restating the alt text. Images are lazy-loaded and carry explicit
+   width/height in the markup so they reserve their space and do not shift
+   layout while loading. */
+.post-figure {
+    margin: var(--space-10) 0;
+}
+
+.post-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+}
+
+.post-figure figcaption {
+    margin-top: var(--space-4);
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+}
+
 /* Muted small print. .post-note is the same thing on a content page — an
    honest caveat under a call to action, not a disclaimer nobody reads. */
 .credential-note,
