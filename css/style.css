@@ -2249,7 +2249,10 @@ section {
     white-space: nowrap;
 }
 
-.credential-note {
+/* Muted small print. .post-note is the same thing on a content page — an
+   honest caveat under a call to action, not a disclaimer nobody reads. */
+.credential-note,
+.post-note {
     margin-top: var(--space-6);
     color: var(--text-muted);
     font-size: var(--text-sm);
