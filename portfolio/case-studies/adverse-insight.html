@@ -225,11 +225,15 @@
             </table>
             </div>
 
-            <p><strong>The attack failed, and not for the reason I expected.</strong> Nothing in this system defends against prompt injection, because I never built anything that does. What stopped it was the Extractor, by accident of what it is for. It does not pass the document through to the Scorer. It emits a short source quote per clause, and in both runs the directive was cut during that step. In the free-form test the payload vanished entirely and the clause came back holding only its innocuous trailing sentence. In the clause-shaped test the first sentence survived and the sentence carrying the instruction did not.</p>
+            <p><strong>The attack failed, and not for the reason I expected.</strong> Nothing in this system defends against prompt injection, because I never built anything that does. What stopped it was the Extractor, by accident of what it is for. It does not hand the document to the Scorer. It emits a short source quote per clause, and in both runs the directive was cut during that step.</p>
+
+            <p>In the free-form test the payload vanished entirely, and the clause came back holding only its innocuous trailing sentence. In the clause-shaped test the first sentence survived and the sentence carrying the instruction did not.</p>
 
             <p>So the Scorer never saw the attack. A narrowing step sat between untrusted text and the agent worth attacking, and it behaved like an instruction/data boundary without being designed as one.</p>
 
-            <p><strong>It resisted the attack without ever detecting it.</strong> That is the finding I care about. In both runs the injected paragraph surfaced in the interface as a green, low-risk <em>"Clause 9: Other"</em> scoring 0 to 10 out of 100, with the rationale "No significant risks identified." A reader would see nothing unusual. The tool has no way to say "this document contained text addressed to me," because nothing is looking for it. Getting away with something is not the same as catching it, and a control that only holds by side effect is one refactor away from not holding at all. Narrow the Extractor's job, or widen its quote window, and the boundary quietly disappears.</p>
+            <p><strong>It resisted the attack without ever detecting it.</strong> That is the finding I care about. In both runs the injected paragraph surfaced in the interface as a green, low-risk <em>"Clause 9: Other"</em> scoring 0 to 10 out of 100, with the rationale "No significant risks identified." A reader would see nothing unusual.</p>
+
+            <p>The tool has no way to say "this document contained text addressed to me," because nothing is looking for it. Getting away with something is not the same as catching it. A control that holds by side effect is one refactor from not holding: narrow the Extractor's job, or widen its quote window, and the boundary quietly disappears.</p>
 
             <p><strong>One more thing worth naming.</strong> The same unmodified contract scored 100/100 on one run and 90/100 on another. That is ordinary sampling variance, and it is exactly why the exhibits in <a href="../../lab/index.html">the Lab</a> are deterministic instead: when the output moves on its own, you cannot attribute a change to the control you just toggled.</p>
 
@@ -247,7 +251,9 @@
 
             <h2>What I'd do differently</h2>
 
-            <p><strong>Make the injection boundary deliberate, and make it visible.</strong> The Extractor currently stops these attacks as a side effect of emitting short quotes. I would rather that were a decision than an accident: mark extracted text as data explicitly, and add a check that flags a clause whose language is addressed to a reviewer rather than to the parties. The point is not only to block it. It is to surface it, so the reader learns their document contained a paragraph aimed at the tool. Right now that is the one thing the interface cannot tell them.</p>
+            <p><strong>Make the injection boundary deliberate, and make it visible.</strong> The Extractor currently stops these attacks as a side effect of emitting short quotes. I would rather that were a decision than an accident: mark extracted text as data explicitly, and add a check that flags a clause whose language is addressed to a reviewer rather than to the parties.</p>
+
+            <p>Blocking it is half the job. The other half is surfacing it, so the reader learns their document contained a paragraph aimed at the tool. Right now that is the one thing the interface cannot tell them.</p>
 
             <p><strong>A second-opinion agent.</strong> Right now the Scorer's call is final. Adding a second agent that argues the opposite position ("here's why this clause is fine") and a third that reconciles them would catch overcalls. This is the same pattern as having two reviewers + a tiebreaker on a security finding.</p>
 
