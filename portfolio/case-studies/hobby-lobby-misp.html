@@ -259,6 +259,10 @@
 
             <p>Each feed had its own quirks: different rate limits, different schemas, different reliability profiles. The scripts handled them per-source with proper error handling and logging, so a partial feed failure didn't take down the whole ingestion run.</p>
 
+            <p>My estimate is that this took roughly 40% of the manual effort out of that loop: the pulling, reformatting and re-entering that had previously been done by hand.</p>
+
+            <p>I want to be straight about what kind of number that is. I did not instrument the before state, so it is a practitioner's read, not a measurement. Doing it again I would time the manual process for a week first, because then the figure would be worth something to the next person who has to justify the work.</p>
+
             <h3>3. Documentation</h3>
 
             <p>A setup runbook for the deployment, an analyst quick-start guide for using MISP in daily work, and architecture notes explaining the design choices for future maintainers. This was the deliverable I expected to spend the least time on and ended up spending the most. Good documentation is harder than it looks.</p>
