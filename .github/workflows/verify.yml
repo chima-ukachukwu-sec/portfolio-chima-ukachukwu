@@ -28,13 +28,25 @@ jobs:
       # With 11 pages of hand-written relative paths at three directory depths,
       # a broken link is the most likely regression and the most damaging one
       # when a recruiter hits it.
+      # partials/ holds templates, not pages: their hrefs are {{root}} and
+      # {{home}} placeholders that build-pages.js substitutes per depth. Lychee
+      # cannot resolve a placeholder, so it reported every one as broken. The
+      # stamped pages carry the resolved paths and are still checked, so
+      # excluding the templates costs no coverage.
+      #
+      # The Streamlit demo sleeps when idle and answers 303 into its own wake
+      # endpoint. That is documented behaviour, not a dead link, and it cannot
+      # be checked reliably from CI. Excluded by host rather than by accepting
+      # 303 everywhere, which would hide genuinely moved links elsewhere.
       - uses: lycheeverse/lychee-action@v2
         with:
           args: >-
             --no-progress
             --accept 200,206,429
             --exclude-path ./_github-profile-readme
+            --exclude-path ./partials
             --exclude '^https://(www\.)?linkedin\.com'
+            --exclude '^https://adverse-insight\.streamlit\.app'
             './**/*.html'
           fail: true
 
