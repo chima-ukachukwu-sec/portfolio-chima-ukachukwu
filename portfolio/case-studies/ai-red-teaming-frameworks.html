@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AI Red Teaming Frameworks — Case Study · Chima Ukachukwu</title>
-    <meta name="description" content="The structured methodology I use for adversarial testing of frontier large language models — taxonomy, evaluation phases, automated test infrastructure, and the multimodal surface. Sanitized to remove all working exploits and client-identifying details.">
+    <title>AI Red Teaming Frameworks: Case Study · Chima Ukachukwu</title>
+    <meta name="description" content="The structured methodology I use for adversarial testing of frontier large language models: taxonomy, evaluation phases, automated test infrastructure, and the multimodal surface. Sanitized to remove all working exploits and client-identifying details.">
     <meta name="author" content="Chima Anthony Ukachukwu">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="AI Red Teaming Frameworks — Case Study">
+    <meta property="og:title" content="AI Red Teaming Frameworks: Case Study">
     <meta property="og:description" content="The structured methodology I use for adversarial testing of frontier large language models. Taxonomy, evaluation phases, automated infrastructure.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://chimaukachukwu.com/portfolio/case-studies/ai-red-teaming-frameworks.html">
     <meta property="og:image" content="https://chimaukachukwu.com/assets/images/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Chima Anthony Ukachukwu — AI Security Analyst & Red Teamer">
+    <meta property="og:image:alt" content="Chima Anthony Ukachukwu, AI Security Analyst and Red Teamer">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://chimaukachukwu.com/assets/images/og-image.png">
 
@@ -44,7 +44,7 @@
     {
       "@context": "https://schema.org",
       "@type": "TechArticle",
-      "headline": "AI Red Teaming Frameworks — Case Study",
+      "headline": "AI Red Teaming Frameworks: Case Study",
       "description": "The structured methodology I use for adversarial testing of frontier LLMs.",
       "author": { "@type": "Person", "name": "Chima Anthony Ukachukwu", "url": "https://chimaukachukwu.com" },
       "datePublished": "2026-04-29",
@@ -113,7 +113,7 @@
         <header class="post-header">
             <p class="post-eyebrow"><a href="../../index.html#work">← Work</a></p>
             <h1 class="post-title">AI Red Teaming Frameworks</h1>
-            <p class="post-dek">The structured methodology I use for adversarial testing of frontier large language models — taxonomy, evaluation phases, automated test infrastructure, and the multimodal surface. Sanitized to remove all working exploits and client-identifying details.</p>
+            <p class="post-dek">The structured methodology I use for adversarial testing of frontier large language models: taxonomy, evaluation phases, automated test infrastructure, and the multimodal surface. Sanitized to remove all working exploits and client-identifying details.</p>
             <p class="post-meta">
                 <span class="post-meta-item">Case study</span>
                 <span class="post-meta-divider">·</span>
@@ -149,15 +149,15 @@
 
             <p>What's missing is the scaffolding. Taxonomies that classify attack patterns by mechanism, not by the words they happen to use. Evaluation phases that map to deployment stages. Test infrastructure that scales beyond one researcher's notebook. Documentation discipline that lets the next person on the team pick up where you left off without re-reading every prompt.</p>
 
-            <p>I work on that scaffolding. The frameworks below are what I use across active engagements on multiple frontier-LLM evaluation platforms — <strong>Snorkel AI, Alignerr, Mercor, Meridian (Invisible), RemoteXperts, and LinkedIn's expert verification program</strong> — sanitized to remove client-identifying material, working exploits, and indicators specific to currently-deployed model versions. The structure is public so other practitioners can adapt it; the specifics are not.</p>
+            <p>I work on that scaffolding. The frameworks below are what I use across active engagements on multiple frontier-LLM evaluation platforms: <strong>Snorkel AI, Alignerr, Mercor, Meridian (Invisible), RemoteXperts, and LinkedIn's expert verification program</strong>. They are sanitized to remove client-identifying material, working exploits, and indicators specific to currently-deployed model versions. The structure is public so other practitioners can adapt it; the specifics are not.</p>
 
             <h2>Why this work matters to me</h2>
 
             <p>I'm in this lane for two reasons.</p>
 
-            <p>First — I think the next decade of security work happens at this intersection, and I want to be one of the people doing it well. Traditional security has decades of accumulated discipline (detection engineering, incident response, threat modeling, governance). AI safety has a short history of mostly research-grade evaluation. The transfer hasn't really happened yet, and there's room for people who can speak both languages. <a href="../../blog/posts/the-bridge.html">I wrote about why that matters</a>.</p>
+            <p>First, I think the next decade of security work happens where these two disciplines meet, and I want to be one of the people doing it well. Traditional security has decades of accumulated discipline (detection engineering, incident response, threat modeling, governance). AI safety has a short history of mostly research-grade evaluation. The transfer hasn't really happened yet, and there's room for people who can speak both languages. <a href="../../blog/posts/the-bridge.html">I wrote about why that matters</a>.</p>
 
-            <p>Second — adversarial work is a particular cast of mind, and it's the one I think with most naturally. SOC work taught me to ask "where could this go wrong, and what would I see if it did?" That question, pointed at an LLM or an agent system, is what AI red teaming is. Same muscle, different surface.</p>
+            <p>Second, adversarial work is a particular cast of mind, and it's the one I think with most naturally. SOC work taught me to ask "where could this go wrong, and what would I see if it did?" That question, pointed at an LLM or an agent system, is what AI red teaming is. Same muscle, different surface.</p>
 
             <h2>The four frameworks</h2>
 
@@ -167,7 +167,7 @@
 
             <p>A working classification I maintain for jailbreak patterns, organized by mechanism rather than surface form. Categories include role-play coercion, hypothetical framing, context dilution, token smuggling, multi-turn ramping, indirect injection, system-prompt extraction, prefix/suffix leakage, authority impersonation, and capability negotiation.</p>
 
-            <p>Each category has three things attached: the underlying mechanism (why does this work, structurally?), the observed behavioral signals (what does it look like when it fires?), and the defensive controls a model provider can layer in. The categories survive model upgrades because they're about <em>structure</em>, not specific phrasings — when a new family of jailbreaks appears, it's almost always a variant of an existing category, not a genuinely new mechanism.</p>
+            <p>Each category has three things attached: the underlying mechanism (why does this work, structurally?), the observed behavioral signals (what does it look like when it fires?), and the defensive controls a model provider can layer in. The categories survive model upgrades because they're about <em>structure</em>, not specific phrasings. When a new family of jailbreaks appears, it's almost always a variant of an existing category, not a genuinely new mechanism.</p>
 
             <p>I treat this taxonomy the way a SOC team treats its detection categories: a living document, revised as new patterns emerge, with explicit versioning so I can talk about "these were the categories I tested against in March 2026" rather than waving at a vague "current standards" claim.</p>
 
@@ -175,15 +175,15 @@
 
             <p>A five-phase methodology for evaluating any LLM-integrated application (RAG system, agent, plugin host, browser tool) for prompt injection vulnerabilities.</p>
 
-            <p><strong>Phase 1 — Surface mapping.</strong> Enumerate every untrusted input the model can ingest: user input, retrieved documents, web pages, tool outputs, image alt text, OCR'd content, function-call return values, system message segments under user control. The output is a labeled diagram of all attack surfaces with trust boundaries marked.</p>
+            <p><strong>Phase 1, surface mapping.</strong> Enumerate every untrusted input the model can ingest: user input, retrieved documents, web pages, tool outputs, image alt text, OCR'd content, function-call return values, system message segments under user control. The output is a labeled diagram of all attack surfaces with trust boundaries marked.</p>
 
-            <p><strong>Phase 2 — Direct injection.</strong> Probe each surface with payloads that attempt to override the model's instructions. Categorized by intent: data exfiltration, action triggering, persona override, context poisoning. Each probe is recorded with payload class, target surface, observed model behavior, and severity.</p>
+            <p><strong>Phase 2, direct injection.</strong> Probe each surface with payloads that attempt to override the model's instructions. Categorized by intent: data exfiltration, action triggering, persona override, context poisoning. Each probe is recorded with payload class, target surface, observed model behavior, and severity.</p>
 
-            <p><strong>Phase 3 — Indirect injection.</strong> The higher-impact phase. Plant instructions in documents, pages, and data the model will retrieve through its tool stack, then observe whether those instructions take effect when the model processes them as "data." This is where most production systems fail.</p>
+            <p><strong>Phase 3, indirect injection.</strong> The higher-impact phase. Plant instructions in documents, pages, and data the model will retrieve through its tool stack, then observe whether those instructions take effect when the model processes them as "data." This is where most production systems fail.</p>
 
-            <p><strong>Phase 4 — Chained / agentic injection.</strong> For agent systems, test whether an injection in one tool call cascades through the agent's reasoning chain to trigger downstream actions. This is the territory the OWASP Agentic AI Top 10 (2026) is starting to address — most teams haven't built defenses for it yet.</p>
+            <p><strong>Phase 4, chained and agentic injection.</strong> For agent systems, test whether an injection in one tool call cascades through the agent's reasoning chain to trigger downstream actions. This is the territory the OWASP Agentic AI Top 10 (2026) is starting to address, and most teams have not built defenses for it yet.</p>
 
-            <p><strong>Phase 5 — Output exfiltration channels.</strong> Test whether the model can be coerced to encode sensitive information into URLs, image alt text, function-call arguments, or other channels that bypass output filters.</p>
+            <p><strong>Phase 5, output exfiltration channels.</strong> Test whether the model can be coerced to encode sensitive information into URLs, image alt text, function-call arguments, or other channels that bypass output filters.</p>
 
             <p>Each phase produces structured findings with severity ratings (Critical / High / Medium / Low / Informational) and recommended mitigations mapped to OWASP Top 10 for LLM Applications.</p>
 
@@ -193,7 +193,7 @@
 
             <p>The point isn't speed for its own sake. The point is <em>diff-ability</em>. When a provider releases a new model version, the team or the customer wants to know which adversarial categories it now resists versus still falls for, compared to the previous version. With this harness, that diff is a few minutes of compute. Without it, it's weeks of manual prompting and someone's vague memory of last quarter's results.</p>
 
-            <p>Stack: Python 3.11+, <code>httpx</code> for async model calls, <code>pydantic</code> for schema validation, SQLite for run history, pytest-style rubric assertions. The implementation specifics are private (client work). The architecture is public — reproducible by any competent Python engineer who reads the documentation.</p>
+            <p>Stack: Python 3.11+, <code>httpx</code> for async model calls, <code>pydantic</code> for schema validation, SQLite for run history, pytest-style rubric assertions. The implementation specifics are private (client work). The architecture is public, and reproducible by any competent Python engineer who reads the documentation.</p>
 
             <h3>4. Multimodal Attack Surface Analysis</h3>
 
@@ -207,7 +207,7 @@
 
             <h2>What surprised me</h2>
 
-            <p><strong>The taxonomy is more durable than the exploits.</strong> Specific working jailbreaks for a given model version often stop working within a release cycle or two. The category they belonged to almost always still works — somewhere, with some new variant. Categorizing by mechanism rather than phrasing means the taxonomy survives the patches that make individual examples obsolete.</p>
+            <p><strong>The taxonomy is more durable than the exploits.</strong> Specific working jailbreaks for a given model version often stop working within a release cycle or two. The category they belonged to almost always still works somewhere, with some new variant. Categorizing by mechanism rather than phrasing means the taxonomy survives the patches that make individual examples obsolete.</p>
 
             <p><strong>Indirect injection is more important than direct.</strong> It's also harder to test, because it requires building the surrounding tool/RAG infrastructure as part of the evaluation. Most public AI red team work focuses on direct injection because it's easier to reproduce. The work that actually moves production safety lives in the indirect-injection phase, and it's underrepresented for that reason.</p>
 
@@ -215,7 +215,7 @@
 
             <h2>Where this is going</h2>
 
-            <p>The next phase of this work is the agentic surface. Single-model adversarial testing is a reasonably mature category at this point — there are public frameworks (Anthropic's, OpenAI's, the OWASP project's) that codify the basics. Agentic systems are not. An agent that can write code, send emails, query databases, and trigger workflows multiplies the attack surface non-linearly, and the evaluation methodology is still being invented.</p>
+            <p>The next phase of this work is the agentic surface. Single-model adversarial testing is a reasonably mature category at this point. There are public frameworks (Anthropic's, OpenAI's, the OWASP project's) that codify the basics. Agentic systems are not. An agent that can write code, send emails, query databases, and trigger workflows multiplies the attack surface non-linearly, and the evaluation methodology is still being invented.</p>
 
             <p>Specifically, the gaps I'm working on:</p>
 
@@ -227,7 +227,7 @@
 
             <h2>Where this fits</h2>
 
-            <p>The frameworks themselves are documented in <a href="https://github.com/chima-ukachukwu-sec/ai-red-teaming-frameworks" target="_blank" rel="noopener">github.com/chima-ukachukwu-sec/ai-red-teaming-frameworks</a>. The applied evaluation work — selected sanitized case studies and rubrics from active engagements — is in the <a href="https://github.com/chima-ukachukwu-sec/ai-evaluation-safety-portfolio" target="_blank" rel="noopener">AI Evaluation &amp; Safety Portfolio</a>.</p>
+            <p>The frameworks themselves are documented in <a href="https://github.com/chima-ukachukwu-sec/ai-red-teaming-frameworks" target="_blank" rel="noopener">github.com/chima-ukachukwu-sec/ai-red-teaming-frameworks</a>. The applied evaluation work, meaning selected sanitized case studies and rubrics from active engagements, is in the <a href="https://github.com/chima-ukachukwu-sec/ai-evaluation-safety-portfolio" target="_blank" rel="noopener">AI Evaluation &amp; Safety Portfolio</a>.</p>
 
             <p>Working exploits, model-version-specific findings, and any client-confidential material are not published anywhere public. References I work against include the <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" rel="noopener">OWASP Top 10 for LLM Applications</a>, the OWASP Agentic AI Top 10 (2026), <a href="https://atlas.mitre.org/" target="_blank" rel="noopener">MITRE ATLAS</a>, and the NIST AI Risk Management Framework.</p>
 

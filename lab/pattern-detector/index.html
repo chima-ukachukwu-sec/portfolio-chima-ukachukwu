@@ -16,7 +16,7 @@
     <meta property="og:image" content="https://chimaukachukwu.com/assets/images/og/lab-pattern-detector.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Chima Ukachukwu — pattern detector">
+    <meta property="og:image:alt" content="Chima Ukachukwu, pattern detector">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://chimaukachukwu.com/assets/images/og/lab-pattern-detector.png">
 
@@ -293,7 +293,7 @@
         <header class="post-header">
             <p class="post-eyebrow"><a href="../../index.html#work">← Work</a></p>
             <h1 class="post-title">AI Red Team Pattern Detector</h1>
-            <p class="post-dek">A live demo of my LLM jailbreak taxonomy from active red-teaming work. Paste any prompt and see which adversarial categories my framework would flag it under. Runs entirely in your browser — nothing is sent to any server.</p>
+            <p class="post-dek">A live demo of my LLM jailbreak taxonomy from active red-teaming work. Paste any prompt and see which adversarial categories my framework would flag it under. Runs entirely in your browser. Nothing is sent to any server.</p>
             <p class="post-meta">
                 <span class="post-meta-item">Live demo</span>
                 <span class="post-meta-divider">·</span>
@@ -307,10 +307,10 @@
 
             <h2>Try it</h2>
 
-            <p>Paste a prompt below — your own, an example you've seen, or one of the templates I've included. The detector will categorize it against the 10 jailbreak patterns from my <a href="../../portfolio/case-studies/ai-red-teaming-frameworks.html">AI Red Teaming Frameworks case study</a>.</p>
+            <p>Paste a prompt below: your own, an example you've seen, or one of the templates I've included. The detector will categorize it against the 10 jailbreak patterns from my <a href="../../portfolio/case-studies/ai-red-teaming-frameworks.html">AI Red Teaming Frameworks case study</a>.</p>
 
             <noscript>
-                <p class="demo-noscript"><strong>This demo needs JavaScript.</strong> The detector runs entirely client-side — there's no backend to call — but that means the page is inert without JS enabled. Enable JavaScript for this origin to use it, or read the case study linked below for the full methodology.</p>
+                <p class="demo-noscript"><strong>This demo needs JavaScript.</strong> The detector runs entirely client-side and there is no backend to call, but that means the page is inert without JS enabled. Enable JavaScript for this origin to use it, or read the case study linked below for the full methodology.</p>
             </noscript>
 
             <p class="demo-score-label" id="demo-examples-label" style="margin-top: 16px; margin-bottom: 8px;">Try a template:</p>
@@ -341,32 +341,32 @@
                 <div id="demo-categories"></div>
             </div>
 
-            <h2>What this is — and what it isn't</h2>
+            <h2>What this is, and what it isn't</h2>
 
             <p><strong>What it is:</strong> a client-side pattern detector that maps prompts to the 10-category jailbreak taxonomy I maintain for active LLM red-teaming work. It runs entirely in your browser. Nothing is sent to any server. There is no AI call, no telemetry, no data collection.</p>
 
-            <p><strong>What it isn't:</strong> a production AI safety evaluation. Real red teaming uses model-side response analysis, multi-turn probing, structural reasoning about model behavior, and human judgment — not surface-level keyword matching. This demo deliberately uses simple regex-based detection to make the taxonomy <em>visible</em>, not to replace it.</p>
+            <p><strong>What it isn't:</strong> a production AI safety evaluation. Real red teaming uses model-side response analysis, multi-turn probing, structural reasoning about model behavior, and human judgment, not surface-level keyword matching. This demo deliberately uses simple regex-based detection to make the taxonomy <em>visible</em>, not to replace it.</p>
 
-            <p><strong>Why it still matters:</strong> the 10 categories are the structural backbone of how I think about jailbreaks. Specific working exploits change with every model upgrade. The categories don't. When a new family of jailbreaks emerges, it almost always slots into an existing category — that's the whole point of taxonomizing by mechanism rather than by phrasing.</p>
+            <p><strong>Why it still matters:</strong> the 10 categories are the structural backbone of how I think about jailbreaks. Specific working exploits change with every model upgrade. The categories don't. When a new family of jailbreaks emerges, it almost always slots into an existing category. That is the whole point of taxonomizing by mechanism rather than by phrasing.</p>
 
             <h2>The 10 categories</h2>
 
             <p>For reference, here's what each category covers (also documented in the <a href="../../portfolio/case-studies/ai-red-teaming-frameworks.html">case study</a>):</p>
 
             <ul>
-                <li><strong>Role-play coercion</strong> — persona that supersedes safety training</li>
-                <li><strong>Hypothetical framing</strong> — wrapping a request as fiction or thought experiment</li>
-                <li><strong>Context dilution</strong> — burying a malicious request in long benign context</li>
-                <li><strong>Token smuggling</strong> — encoded payloads (Base64, hex, ROT13)</li>
-                <li><strong>Multi-turn ramping</strong> — building rapport over several turns then escalating</li>
-                <li><strong>Indirect injection</strong> — hiding instructions in retrieved data</li>
-                <li><strong>System-prompt extraction</strong> — coercing the model to reveal its hidden instructions</li>
-                <li><strong>Prefix / suffix leakage</strong> — using safe completions to set up unsafe ones</li>
-                <li><strong>Authority impersonation</strong> — claiming developer / staff / researcher trust</li>
-                <li><strong>Capability negotiation</strong> — arguing safety policies don't apply</li>
+                <li><strong>Role-play coercion</strong>: persona that supersedes safety training</li>
+                <li><strong>Hypothetical framing</strong>: wrapping a request as fiction or thought experiment</li>
+                <li><strong>Context dilution</strong>: burying a malicious request in long benign context</li>
+                <li><strong>Token smuggling</strong>: encoded payloads (Base64, hex, ROT13)</li>
+                <li><strong>Multi-turn ramping</strong>: building rapport over several turns then escalating</li>
+                <li><strong>Indirect injection</strong>: hiding instructions in retrieved data</li>
+                <li><strong>System-prompt extraction</strong>: coercing the model to reveal its hidden instructions</li>
+                <li><strong>Prefix / suffix leakage</strong>: using safe completions to set up unsafe ones</li>
+                <li><strong>Authority impersonation</strong>: claiming developer / staff / researcher trust</li>
+                <li><strong>Capability negotiation</strong>: arguing safety policies don't apply</li>
             </ul>
 
-            <p>For the full methodology — including how I evaluate these in real engagements, what the prompt injection testing framework looks like end-to-end, and how the automated test suite is architected — read the <a href="../../portfolio/case-studies/ai-red-teaming-frameworks.html">AI Red Teaming Frameworks case study</a>.</p>
+            <p>For the full methodology, including how I evaluate these in real engagements, what the prompt injection testing framework looks like end-to-end, and how the automated test suite is architected, read the <a href="../../portfolio/case-studies/ai-red-teaming-frameworks.html">AI Red Teaming Frameworks case study</a>.</p>
 
             <div class="demo-disclaimer">
                 <strong>Privacy note:</strong> this page makes zero network requests for analysis. The pattern matcher runs in your browser. The only network activity from this page is the analytics script (which records that you visited but nothing about your inputs) and the Google Fonts request. You can verify by opening DevTools → Network and watching what happens when you click "Analyze prompt." Nothing.
@@ -375,7 +375,7 @@
 
         <footer class="post-footer">
             <p class="post-author-card">
-                <strong>Built by Chima Anthony Ukachukwu.</strong> AI Security Analyst &amp; Red Teamer based in Oklahoma City. This demo is part of an ongoing portfolio of AI safety and red-teaming work — see the case studies, blog, and GitHub for more.
+                <strong>Built by Chima Anthony Ukachukwu.</strong> AI Security Analyst &amp; Red Teamer based in Oklahoma City. This demo is part of an ongoing portfolio of AI safety and red-teaming work. See the case studies, blog, and GitHub for more.
                 <br><br>
                 <a href="../../index.html#contact">Get in touch →</a> · <a href="https://linkedin.com/in/chima-anthony-u" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/chima-ukachukwu-sec" target="_blank" rel="noopener">GitHub</a>
             </p>
@@ -518,7 +518,7 @@
             const text = EXAMPLES[key];
             if (text) {
                 inputEl.value = text;
-                // Stale results from a previous prompt are confusing — clear them
+                // Stale results from a previous prompt are confusing, so clear them
                 // so the user has to re-click Analyze to see this example's verdict.
                 hideResults();
                 syncAnalyzeState();
@@ -544,9 +544,9 @@
     // Initialize button state in case the textarea has stale text on reload
     syncAnalyzeState();
 
-    // Console banner — easter egg for fellow devs / red teamers
+    // Console banner: easter egg for fellow devs / red teamers
     console.log('%c AI Red Team Pattern Detector ', 'background:#00d4aa;color:#0a0e14;padding:6px 12px;font-weight:700;border-radius:4px');
-    console.log('Pattern library is open — inspect window.__taxonomy if you want to see the regex definitions.');
+    console.log('Pattern library is open. Inspect window.__taxonomy if you want to see the regex definitions.');
     window.__taxonomy = TAXONOMY;
 })();
 </script>

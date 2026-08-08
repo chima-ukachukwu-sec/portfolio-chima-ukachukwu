@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MISP Threat Intelligence Automation — Hobby Lobby · Case Study · Chima Ukachukwu</title>
+    <title>MISP Threat Intelligence Automation at Hobby Lobby · Case Study · Chima Ukachukwu</title>
     <meta name="description" content="How I deployed and automated a community-feed threat intelligence platform for an enterprise SOC during a 4-month corporate internship. Architecture, what worked, what I'd do differently.">
     <meta name="author" content="Chima Anthony Ukachukwu">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="MISP Threat Intelligence Automation — Hobby Lobby · Case Study">
+    <meta property="og:title" content="MISP Threat Intelligence Automation at Hobby Lobby · Case Study">
     <meta property="og:description" content="How I deployed and automated a community-feed threat intelligence platform for an enterprise SOC during a 4-month corporate internship.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://chimaukachukwu.com/portfolio/case-studies/hobby-lobby-misp.html">
     <meta property="og:image" content="https://chimaukachukwu.com/assets/images/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Chima Anthony Ukachukwu — AI Security Analyst & Red Teamer">
+    <meta property="og:image:alt" content="Chima Anthony Ukachukwu, AI Security Analyst and Red Teamer">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://chimaukachukwu.com/assets/images/og-image.png">
 
@@ -44,7 +44,7 @@
     {
       "@context": "https://schema.org",
       "@type": "TechArticle",
-      "headline": "MISP Threat Intelligence Automation — Hobby Lobby",
+      "headline": "MISP Threat Intelligence Automation at Hobby Lobby",
       "description": "Containerizing MISP and automating community-feed ingestion for an enterprise SOC during a 4-month corporate internship.",
       "author": { "@type": "Person", "name": "Chima Anthony Ukachukwu", "url": "https://chimaukachukwu.com" },
       "datePublished": "2026-04-29",
@@ -112,7 +112,7 @@
     <article class="post-article">
         <header class="post-header">
             <p class="post-eyebrow"><a href="../../index.html#work">← Work</a></p>
-            <h1 class="post-title">MISP Threat Intelligence Automation — Hobby Lobby</h1>
+            <h1 class="post-title">MISP Threat Intelligence Automation at Hobby Lobby</h1>
             <p class="post-dek">How I deployed and automated a community-feed threat intelligence platform for an enterprise SOC during a 4-month corporate internship. Architecture, what worked, and what I'd do differently.</p>
             <p class="post-meta">
                 <span class="post-meta-item">Case study</span>
@@ -135,21 +135,21 @@
 
             <h2>The problem</h2>
 
-            <p>Hobby Lobby's Corporate Information Systems Network Security team had <a href="https://www.misp-project.org/" target="_blank" rel="noopener">MISP</a> (Malware Information Sharing Platform) available but no standardized deployment pattern, no automated community-feed ingestion, and no documented onboarding for new contributors. Threat intelligence is a force-multiplier that's only as good as how reliably it gets operationalized — when analysts are pulling indicators manually when they remember to, the value is barely above zero.</p>
+            <p>Hobby Lobby's Corporate Information Systems Network Security team had <a href="https://www.misp-project.org/" target="_blank" rel="noopener">MISP</a> (Malware Information Sharing Platform) available but no standardized deployment pattern, no automated community-feed ingestion, and no documented onboarding for new contributors. Threat intelligence is a force-multiplier that's only as good as how reliably it gets operationalized. When analysts pull indicators manually and only when they remember to, the value is barely above zero.</p>
 
             <p>The team needed three things:</p>
 
             <ul>
                 <li>A reproducible MISP deployment that didn't require tribal knowledge to spin up</li>
                 <li>Automated ingestion from a curated set of community threat feeds</li>
-                <li>Clear documentation so the next contributor — intern, analyst, or new hire — could be productive without starting from scratch</li>
+                <li>Clear documentation so the next contributor (intern, analyst, or new hire) could be productive without starting from scratch</li>
             </ul>
 
             <p>That was my project for the summer.</p>
 
             <h2>Why this internship mattered to me</h2>
 
-            <p>This was my first time doing security work in a Fortune 500 environment. My background up to that point was Microsoft 365 administration, IT support, and lab-based offensive practice (TryHackMe, Hack The Box, the usual). What I needed — what every entry-level cybersecurity candidate needs but rarely gets — was time inside a working SOC, on real infrastructure, with real signals.</p>
+            <p>This was my first time doing security work in a Fortune 500 environment. My background up to that point was Microsoft 365 administration, IT support, and lab-based offensive practice (TryHackMe, Hack The Box, the usual). What I needed, and what every entry-level cybersecurity candidate needs but rarely gets, was time inside a working SOC, on real infrastructure, with real signals.</p>
 
             <p>Working embedded with the Network Security team, I got to see things you can't learn from a course: how alerts actually get prioritized when a dozen fire at once, what "tuning" a detection looks like in production, how analysts decide when something is a real threat versus benign noise that happens to look suspicious. The MISP project was important; the daily proximity to working analysts was where most of the learning happened.</p>
 
@@ -159,13 +159,13 @@
 
             <h3>1. Containerized deployment</h3>
 
-            <p>Rebuilt the MISP environment as a Docker-Compose-based deployment — MISP server, database, cache, all wired together with a single command. Configuration that had previously lived in someone's head moved into a checked-in template file and a documented setup process.</p>
+            <p>Rebuilt the MISP environment as a Docker-Compose-based deployment: MISP server, database, cache, all wired together with a single command. Configuration that had previously lived in someone's head moved into a checked-in template file and a documented setup process.</p>
 
             <p>The win wasn't speed. The win was <em>repeatability</em>. The team could spin up a clean instance for testing in minutes, and rolling back a broken change was trivial. Before, both of those operations were "ask the person who set it up."</p>
 
             <h3>2. Feed ingestion automation</h3>
 
-            <p>MISP is most valuable when it's continuously pulling and enriching indicators from external sources. I wrote Python scripts to pull from a curated list of community threat feeds — CIRCL OSINT, abuse.ch (URLhaus, ThreatFox), AlienVault OTX, and a few others — normalize their formats, and push the indicators into MISP on a scheduled cadence.</p>
+            <p>MISP is most valuable when it's continuously pulling and enriching indicators from external sources. I wrote Python scripts to pull from a curated list of community threat feeds: CIRCL OSINT, abuse.ch (URLhaus, ThreatFox), AlienVault OTX, and a few others, normalize their formats, and push the indicators into MISP on a scheduled cadence.</p>
 
             <p>Each feed had its own quirks: different rate limits, different schemas, different reliability profiles. The scripts handled them per-source with proper error handling and logging, so a partial feed failure didn't take down the whole ingestion run.</p>
 
@@ -186,11 +186,11 @@
 
             <h2>What surprised me</h2>
 
-            <p><strong>The hardest part wasn't the technology — it was the threat-feed governance.</strong> I'd assumed "pull from open-source threat feeds" was a solved problem and I'd just be writing glue code. What actually took the most thought was deciding which feeds to trust, which indicators to auto-ingest versus flag for analyst review, and how to prevent low-quality feeds from creating alert fatigue downstream in the SIEM. That's a judgment call problem, not an engineering problem.</p>
+            <p><strong>The hardest part was not the technology. It was the threat-feed governance.</strong> I'd assumed "pull from open-source threat feeds" was a solved problem and I'd just be writing glue code. What actually took the most thought was deciding which feeds to trust, which indicators to auto-ingest versus flag for analyst review, and how to prevent low-quality feeds from creating alert fatigue downstream in the SIEM. That's a judgment call problem, not an engineering problem.</p>
 
-            <p><strong>Documentation wasn't a separate task — it was the work.</strong> I'd thought of docs as "the writeup at the end." In practice, every time I documented something, I found a design decision that didn't survive being written down. Good docs forced me to make better choices in the implementation. The docs were the spec, not the postmortem.</p>
+            <p><strong>Documentation was not a separate task. It was the work.</strong> I'd thought of docs as "the writeup at the end." In practice, every time I documented something, I found a design decision that didn't survive being written down. Good docs forced me to make better choices in the implementation. The docs were the spec, not the postmortem.</p>
 
-            <p><strong>SOC analysts care about different things than security researchers do.</strong> I came in with a researcher's mindset: novel techniques, sophisticated attack chains, interesting findings. The SOC team cared about: was the alert reproducible, what's the false-positive rate, what's the runbook, can the next-shift analyst pick it up at 3am. That's a different value system, and learning it changed how I think about security work — and is a big part of why I now write about <a href="../../blog/posts/the-bridge.html">the bridge between SOC and AI red teaming</a>.</p>
+            <p><strong>SOC analysts care about different things than security researchers do.</strong> I came in with a researcher's mindset: novel techniques, sophisticated attack chains, interesting findings. The SOC team cared about: was the alert reproducible, what's the false-positive rate, what's the runbook, can the next-shift analyst pick it up at 3am. That's a different value system, and learning it changed how I think about security work, and is a big part of why I now write about <a href="../../blog/posts/the-bridge.html">the bridge between SOC and AI red teaming</a>.</p>
 
             <h2>What I'd do differently</h2>
 
@@ -198,17 +198,17 @@
 
             <p><strong>Per-feed reliability scoring.</strong> Some community feeds are higher signal-to-noise than others. The current ingestion treats them all equally. A scoring system that tracked per-feed signal quality over time and adjusted ingestion priority accordingly would be a real upgrade.</p>
 
-            <p><strong>Tighter integration with Splunk.</strong> I designed for MISP-as-source-of-truth, but in practice analysts spent most of their time in Splunk. A closer integration — surfacing MISP context inline on Splunk alerts via lookups — would have meant the threat intel I was ingesting actually got used in real triage, not just sat there waiting to be queried.</p>
+            <p><strong>Tighter integration with Splunk.</strong> I designed for MISP-as-source-of-truth, but in practice analysts spent most of their time in Splunk. A closer integration, surfacing MISP context inline on Splunk alerts via lookups, would have meant the threat intel I was ingesting actually got used in real triage, not just sat there waiting to be queried.</p>
 
             <h2>Outcome</h2>
 
             <p>By the end of the internship: a reproducible MISP environment with daily auto-updated indicators from a curated set of community feeds, plus documentation that the next contributor could actually use. I presented the work to senior IT staff at the end-of-internship review.</p>
 
-            <p>The bigger outcome was personal. Four months embedded with a working SOC taught me what I'd been trying to learn from books and labs for two years — what security operations actually look like when production is on the line. The technical skills (Splunk, MISP, Docker, Python automation) transferred cleanly into my next chapter of work in AI security and adversarial evaluation. The <em>operational</em> skills — triage discipline, runbook thinking, how to write a detection that survives a real shift — are the ones I rely on most.</p>
+            <p>The bigger outcome was personal. Four months embedded with a working SOC taught me what I had been trying to learn from books and labs for two years: what security operations actually look like when production is on the line. The technical skills (Splunk, MISP, Docker, Python automation) transferred cleanly into my next chapter of work in AI security and adversarial evaluation. The <em>operational</em> skills are the ones I rely on most: triage discipline, runbook thinking, and how to write a detection that survives a real shift.</p>
 
             <h2>Where this fits</h2>
 
-            <p>This work lives in my <a href="https://github.com/chima-ukachukwu-sec/soc-defensive-portfolio" target="_blank" rel="noopener">SOC &amp; Defensive Security Portfolio</a> on GitHub, alongside other defensive security case studies and methodology notes. Specific findings, indicators, internal architecture details, and any client-confidential material are not published — that's all under standard internship NDA. The methodology and lessons are public; the proprietary details remain with the team.</p>
+            <p>This work lives in my <a href="https://github.com/chima-ukachukwu-sec/soc-defensive-portfolio" target="_blank" rel="noopener">SOC &amp; Defensive Security Portfolio</a> on GitHub, alongside other defensive security case studies and methodology notes. Specific findings, indicators, internal architecture details, and any client-confidential material are not published. That is all under standard internship NDA. The methodology and lessons are public; the proprietary details remain with the team.</p>
 
             <p>If you're a hiring manager evaluating candidates for an entry-level SOC role and want to talk about what this work taught me, the fastest way is the <a href="../../index.html#contact">contact form</a> or <a href="mailto:chima.ukachukwu.sec@gmail.com">email</a>.</p>
 

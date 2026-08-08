@@ -9,14 +9,14 @@
     <meta name="author" content="Chima Anthony Ukachukwu">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Red Team Atlas — ten LLM jailbreak categories by mechanism">
+    <meta property="og:title" content="Red Team Atlas: ten LLM jailbreak categories by mechanism">
     <meta property="og:description" content="Mechanism, detection signal, mitigation and OWASP mapping for each category in my jailbreak taxonomy. Organised by mechanism, so the categories outlive the exploits.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://chimaukachukwu.com/lab/red-team-atlas/">
     <meta property="og:image" content="https://chimaukachukwu.com/assets/images/og/lab-red-team-atlas.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Chima Ukachukwu — red team atlas">
+    <meta property="og:image:alt" content="Chima Ukachukwu, red team atlas">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://chimaukachukwu.com/assets/images/og/lab-red-team-atlas.png">
 
@@ -105,7 +105,7 @@
             <p class="post-dek">
                 Ten jailbreak categories from active red teaming, organised by <em>mechanism</em>
                 rather than by phrasing. Specific working exploits change with every model release.
-                The mechanisms don't — when a new family of jailbreaks appears it almost always slots
+                The mechanisms do not. When a new family of jailbreaks appears it almost always slots
                 into an existing category, which is the entire point of taxonomising this way.
             </p>
             <p class="post-meta">Maps to the OWASP Top 10 for LLM Applications (2025) · Sanitized, NDA-compliant</p>
@@ -116,8 +116,8 @@
                 Each entry below carries four things: the <strong>mechanism</strong> that makes it
                 work, the <strong>detection signal</strong> a rule would key on, a
                 <strong>mitigation</strong> that addresses the mechanism rather than the wording, and
-                the <strong>OWASP</strong> entry it maps to. The detection patterns are the live ones
-                — the <a href="../pattern-detector/index.html">Pattern Detector</a> runs on exactly
+                the <strong>OWASP</strong> entry it maps to. The detection patterns are the live ones:
+                the <a href="../pattern-detector/index.html">Pattern Detector</a> runs on exactly
                 this data.
             </p>
 
@@ -144,13 +144,13 @@
                 A taxonomy built on wording is obsolete the moment a model ships. "Pretend you are
                 DAN" stops working; the <em>persona override</em> it relies on does not. Sorting by
                 mechanism means a new jailbreak is usually a new instance of a known category rather
-                than a new category — which is what makes the framework useful for planning coverage
+                than a new category, which is what makes the framework useful for planning coverage
                 instead of just cataloguing what already happened.
             </p>
             <p>
                 It also translates. Each mechanism implies a defence, and those defences are what a
-                blue team can actually build against. That translation — offensive finding to
-                defensive control — is the part of this work that transfers directly from SOC
+                blue team can actually build against. That translation, from offensive finding to
+                defensive control, is the part of this work that transfers directly from SOC
                 practice, and it's covered further in
                 <a href="../../blog/posts/detecting-prompt-injection.html">Detecting Prompt Injection</a>.
             </p>

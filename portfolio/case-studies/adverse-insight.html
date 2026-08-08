@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Adverse Insight — Case Study · Chima Ukachukwu</title>
-    <meta name="description" content="How I built Adverse Insight — a 3-agent contract risk analyzer (Streamlit + OpenAI) — in 48 hours for the Codex Creator Challenge. Architecture, design decisions, and what I'd do differently.">
+    <title>Adverse Insight · Case Study · Chima Ukachukwu</title>
+    <meta name="description" content="How I built Adverse Insight, a 3-agent contract risk analyzer (Streamlit and OpenAI), in 48 hours for the Codex Creator Challenge. Architecture, design decisions, and what I'd do differently.">
     <meta name="author" content="Chima Anthony Ukachukwu">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Adverse Insight — Case Study">
+    <meta property="og:title" content="Adverse Insight: Case Study">
     <meta property="og:description" content="How I built a 3-agent contract risk analyzer in 48 hours. Architecture, design decisions, and what I'd do differently.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://chimaukachukwu.com/portfolio/case-studies/adverse-insight.html">
     <meta property="og:image" content="https://chimaukachukwu.com/assets/images/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Chima Anthony Ukachukwu — AI Security Analyst & Red Teamer">
+    <meta property="og:image:alt" content="Chima Anthony Ukachukwu, AI Security Analyst and Red Teamer">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://chimaukachukwu.com/assets/images/og-image.png">
 
@@ -44,7 +44,7 @@
     {
       "@context": "https://schema.org",
       "@type": "TechArticle",
-      "headline": "Adverse Insight — Case Study",
+      "headline": "Adverse Insight: Case Study",
       "description": "How I built a 3-agent contract risk analyzer in 48 hours for the Codex Creator Challenge.",
       "author": { "@type": "Person", "name": "Chima Anthony Ukachukwu", "url": "https://chimaukachukwu.com" },
       "datePublished": "2026-04-29",
@@ -134,7 +134,7 @@
             </p>
             <p class="post-note">The demo runs on Streamlit's free tier, which puts an app to sleep
                 after a stretch with no traffic. If you land on a “Zzzz” page, the button on it wakes
-                the app in about 30 seconds — nothing is broken. The walkthrough below stands on its
+                the app in about 30 seconds. Nothing is broken. The walkthrough below stands on its
                 own either way.</p>
         </header>
 
@@ -142,7 +142,7 @@
 
             <h2>The problem</h2>
 
-            <p>Contracts are dense, clause-heavy artifacts written by lawyers for lawyers. Most of the people who actually <em>sign</em> contracts — founders, freelancers, engineers, small-business owners — read them once, decide they're "probably fine," and move on. The clauses that hurt most aren't the obviously hostile ones. They're the buried ones: an unbounded indemnification, a quietly perpetual non-compete, a unilateral termination right with no equivalent on your side, a "MAY at our discretion" verb that should have been "WILL."</p>
+            <p>Contracts are dense, clause-heavy artifacts written by lawyers for lawyers. Most of the people who actually <em>sign</em> contracts (founders, freelancers, engineers, small-business owners) read them once, decide they're "probably fine," and move on. The clauses that hurt most aren't the obviously hostile ones. They're the buried ones: an unbounded indemnification, a quietly perpetual non-compete, a unilateral termination right with no equivalent on your side, a "MAY at our discretion" verb that should have been "WILL."</p>
 
             <p>Generic LLM summaries don't help. Ask ChatGPT to "summarize this contract" and you'll get a polite paragraph about scope and term. The clauses that matter are the ones a summary smooths over.</p>
 
@@ -150,41 +150,41 @@
 
             <h2>Why this build matters to me</h2>
 
-            <p>This sits at the exact intersection I work at — security thinking applied to AI systems. "Adversarial scoring" isn't summarization. It's the same red-team mindset I apply to LLM evaluation, pointed at a different artifact. A contract clause is just a payload that the signer has to evaluate for hidden harm. The same skills transfer.</p>
+            <p>This is security thinking pointed at an AI system, which is the work I do anyway. "Adversarial scoring" isn't summarization. It's the same red-team mindset I apply to LLM evaluation, pointed at a different artifact. A contract clause is just a payload that the signer has to evaluate for hidden harm. The same skills transfer.</p>
 
-            <p>I also wanted to ship something <em>working</em>, not just framework documentation. The Codex Creator Challenge gave me a 48-hour window. That's a useful constraint — it forces design decisions you'd otherwise defer.</p>
+            <p>I also wanted to ship something <em>working</em>, not just framework documentation. The Codex Creator Challenge gave me a 48-hour window. That is a useful constraint. It forces design decisions you would otherwise defer.</p>
 
             <h2>The 3-agent architecture</h2>
 
             <p>The pipeline is three specialized agents passing structured data to each other, not one mega-prompt trying to do everything:</p>
 
-            <h3>Agent 1 — Extractor</h3>
+            <h3>Agent 1: Extractor</h3>
 
             <p>Reads the raw contract text and emits a structured list of clauses. Each clause is tagged with its position, its category (indemnification, term, payment, IP, termination, etc.), and a verbatim quote of the source language.</p>
 
             <p>Why a separate agent: clause extraction is a different competence from risk analysis. Mixing them in one prompt produces clauses scored on shallow analysis, or analyses written about clauses that the model paraphrased and slightly changed. Separating them keeps the source clause text honest.</p>
 
-            <h3>Agent 2 — Adversarial Scorer</h3>
+            <h3>Agent 2: Adversarial Scorer</h3>
 
             <p>Takes one clause at a time and treats it the way a red teamer treats a model output: <em>what's the worst-case interpretation here, and what's the path to that outcome?</em> Outputs a structured risk score (low / medium / high / critical) plus a 1–2 sentence "if this goes wrong" scenario specific to that clause.</p>
 
-            <p>Why this design: scoring per clause rather than holistically forces the model to actually engage with each piece of language rather than defaulting to a vibe-summary. It's also debuggable — if a particular score looks wrong, you can read the exact prompt + the exact clause and figure out why.</p>
+            <p>Why this design: scoring per clause rather than holistically forces the model to actually engage with each piece of language rather than defaulting to a vibe-summary. It is also debuggable. If a particular score looks wrong, you can read the exact prompt + the exact clause and figure out why.</p>
 
-            <h3>Agent 3 — Negotiator</h3>
+            <h3>Agent 3: Negotiator</h3>
 
             <p>For each medium/high/critical clause, drafts a counter-proposal: alternative language plus a 1-line script for what to say in the negotiation conversation. Designed to be copy-pasteable into an email or a redline.</p>
 
-            <p>Why this matters: most contract-review tools stop at "here's what's risky." That's the easy half. The hard half is "here's what to ask for instead." The Negotiator agent closes the loop — you don't just learn there's a problem, you walk away with the language to fix it.</p>
+            <p>Why this matters: most contract-review tools stop at "here's what's risky." That's the easy half. The hard half is "here's what to ask for instead." The Negotiator agent closes the loop. You do not just learn there is a problem, you walk away with the language to fix it.</p>
 
             <h2>The stack and the build</h2>
 
             <ul>
-                <li><strong>Streamlit</strong> for the UI — paste-text-in, get-cards-out. No file upload, no auth, no persistence. Get out of the user's way.</li>
-                <li><strong>OpenAI API</strong> for the three agents — different system prompts, structured JSON output schema, parallel calls per clause for the scorer/negotiator pair.</li>
+                <li><strong>Streamlit</strong> for the UI: paste text in, get cards out. No file upload, no auth, no persistence. Get out of the user's way.</li>
+                <li><strong>OpenAI API</strong> for the three agents, with different system prompts, structured JSON output schema, parallel calls per clause for the scorer/negotiator pair.</li>
                 <li><strong>Python orchestration</strong> tying it together. ~600 lines. The agents themselves are mostly prompt design plus schema validation; the interesting code is the orchestration that handles partial failures and clause batching.</li>
             </ul>
 
-            <p>Total build time: ~36 hours of actual coding spread across the 48-hour window. The remaining 12 hours were prompt iteration — getting the Adversarial Scorer to be specific rather than generic was 80% of the design work.</p>
+            <p>Total build time: ~36 hours of actual coding spread across the 48-hour window. The remaining 12 hours were prompt iteration, mostly getting the Adversarial Scorer to be specific rather than generic was 80% of the design work.</p>
 
             <h2>What surprised me</h2>
 
@@ -192,7 +192,7 @@
 
             <p><strong>The Extractor was harder than expected.</strong> Contract structure is inconsistent. Some are well-formatted with numbered clauses, others are wall-of-text. Some use defined terms; others reference "the Party of the First Part." Getting the extractor to produce a clean, structured list across that variance took more iteration than the scoring or drafting steps.</p>
 
-            <p><strong>Per-clause scoring beat holistic scoring.</strong> An early prototype let one agent see the whole contract and rate each clause in context. The output looked sophisticated but degraded quickly on long contracts — clauses near the end got shallow analysis. Splitting into per-clause calls (slower, more API spend) produced consistently better outputs.</p>
+            <p><strong>Per-clause scoring beat holistic scoring.</strong> An early prototype let one agent see the whole contract and rate each clause in context. The output looked sophisticated but degraded quickly on long contracts, because clauses near the end got shallow analysis. Splitting into per-clause calls (slower, more API spend) produced consistently better outputs.</p>
 
             <h2>What I'd do differently</h2>
 
@@ -202,19 +202,19 @@
 
             <p><strong>Domain specialization.</strong> A SaaS contract has different risk patterns than a freelance work-for-hire agreement than a residential lease. Letting the user pick a contract type up front, and routing to a domain-specific Scorer prompt, would tighten outputs significantly.</p>
 
-            <p><strong>Persistence.</strong> The current build is stateless — close the tab and your analysis is gone. For real use this needs at least optional save-to-account.</p>
+            <p><strong>Persistence.</strong> The current build is stateless. Close the tab and your analysis is gone. For real use this needs at least optional save-to-account.</p>
 
             <h2>Why I built this and not something else</h2>
 
             <p>Two reasons. First, contracts are a domain where adversarial thinking actually maps cleanly: every clause has a counter-party who wrote it for their benefit, not yours. That's the same mental model I use in security work, just applied to a different surface.</p>
 
-            <p>Second, I wanted something <em>useful to non-security people</em>. Most of my work is illegible to the people I love and respect — my mother, my pastor, my friends from before this career. <em>"I evaluate adversarial robustness in frontier model deployments"</em> means nothing to them. <em>"It reads contracts and tells you what to push back on"</em> they understood immediately. Some of them have used it.</p>
+            <p>Second, I wanted something <em>useful to non-security people</em>. Most of my work is illegible to the people I love and respect: my mother, my pastor, my friends from before this career. <em>"I evaluate adversarial robustness in frontier model deployments"</em> means nothing to them. <em>"It reads contracts and tells you what to push back on"</em> they understood immediately. Some of them have used it.</p>
 
             <p>That's a small thing, but it's the thing.</p>
 
             <h2>Try it</h2>
 
-            <p>Live demo at <a href="https://adverse-insight.streamlit.app/" target="_blank" rel="noopener">adverse-insight.streamlit.app</a> — paste any contract you're allowed to share, see what comes back. It's on the free tier, so give it about 30 seconds to wake if it has been idle. Code at <a href="https://github.com/chima-ukachukwu-sec/adverse-insight" target="_blank" rel="noopener">github.com/chima-ukachukwu-sec/adverse-insight</a>.</p>
+            <p>Live demo at <a href="https://adverse-insight.streamlit.app/" target="_blank" rel="noopener">adverse-insight.streamlit.app</a>. Paste any contract you're allowed to share, see what comes back. It's on the free tier, so give it about 30 seconds to wake if it has been idle. Code at <a href="https://github.com/chima-ukachukwu-sec/adverse-insight" target="_blank" rel="noopener">github.com/chima-ukachukwu-sec/adverse-insight</a>.</p>
 
             <p>Feedback welcome at <a href="mailto:chima.ukachukwu.sec@gmail.com">chima.ukachukwu.sec@gmail.com</a>.</p>
 

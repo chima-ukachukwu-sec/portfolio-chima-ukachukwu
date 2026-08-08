@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Prompt Injection Simulator · Chima Ukachukwu</title>
-    <meta name="description" content="Play attacker against a simulated support agent. Toggle four defences on and off and watch the same attack succeed or fail — a deterministic sandbox that shows which control actually stops which technique.">
+    <meta name="description" content="Play attacker against a simulated support agent. Toggle four defences on and off and watch the same attack succeed or fail. A deterministic sandbox that shows which control actually stops which technique.">
     <meta name="author" content="Chima Anthony Ukachukwu">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Prompt Injection Simulator — attack a support agent, then defend it">
+    <meta property="og:title" content="Prompt Injection Simulator: attack a support agent, then defend it">
     <meta property="og:description" content="Three attack paths, four defences, one deterministic agent. Toggle a control and watch the same attack flip from succeeding to failing.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://chimaukachukwu.com/lab/injection-sim/">
     <meta property="og:image" content="https://chimaukachukwu.com/assets/images/og/lab-injection-sim.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Chima Ukachukwu — injection sim">
+    <meta property="og:image:alt" content="Chima Ukachukwu, injection sim">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://chimaukachukwu.com/assets/images/og/lab-injection-sim.png">
 
@@ -104,7 +104,7 @@
         <p class="sim-dek">
             You are the attacker. Below is <strong>Nora</strong>, a support agent for a fictional outdoor
             retailer, with a system prompt, one tool, and a secret she is told never to reveal. Get the
-            secret out of her — then turn the defences on and try the same attack again.
+            secret out of her, then turn the defences on and try the same attack again.
         </p>
         <p class="sim-sub">
             The agent is a rule engine, not a model. That is deliberate: because the same input always
@@ -136,7 +136,7 @@
             <form id="sim-form" class="sim-form">
                 <label for="sim-input" class="sr-only">Your message to the agent</label>
                 <textarea id="sim-input" class="sim-input" rows="2" spellcheck="false"
-                          placeholder="Type an attack — or load one below."></textarea>
+                          placeholder="Type an attack, or load one below."></textarea>
                 <button type="submit" id="sim-send" class="sim-send" disabled>Send</button>
             </form>
 
@@ -166,7 +166,7 @@
         <h2>What this is actually showing</h2>
         <p>
             Turn on <strong>only the input classifier</strong> and run the indirect injection. It goes
-            straight through. The classifier is not broken — the hostile instruction never appears in
+            straight through. The classifier is not broken. The hostile instruction never appears in
             anything you typed, so there was nothing in the input for it to catch. It arrived in a tool
             return. That is the entire problem with indirect injection, and it is why input-side
             filtering alone is not a control for it.
@@ -174,8 +174,8 @@
         <p>
             Turn on <strong>only the output filter</strong> and every attack reports a near miss. The
             agent was fully compromised and complied; the secret was simply caught on the way out. That
-            is a real control and worth having, but a system relying on it has already lost the turn —
-            it just got lucky about what the payload happened to be.
+            is a real control and worth having, but a system relying on it has already lost the turn.
+            It just got lucky about what the payload happened to be.
         </p>
         <p>
             None of the four defences covers all three paths alone. That is the point, and it's the

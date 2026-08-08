@@ -130,7 +130,7 @@ function main() {
     written++;
     console.log(`  wrote   assets/images/og/${card.slug}.png  ${(fs.statSync(pngOut).size / 1024).toFixed(0)} KB`);
   }
-  console.log(`Done — ${written} of ${CARDS.length} cards.`);
+  console.log(`Done. ${written} of ${CARDS.length} cards.`);
 }
 
 main();

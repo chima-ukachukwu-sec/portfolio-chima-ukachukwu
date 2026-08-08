@@ -34,5 +34,5 @@
       "tags": ["AI Security", "SOC", "LLM Security", "Career"]
     }
   ],
-  "drafting": "Threshold tuning for LLM guardrails — where the false-positive cost overtakes the attack cost."
+  "drafting": "Threshold tuning for LLM guardrails: where the false-positive cost overtakes the attack cost."
 }

@@ -131,7 +131,7 @@ function readRef() {
 
 /* ---------- RECRUITER MODE ----------
    A view, not a page. Same URL, so a link pasted into an application lands the
-   reader straight in it. Nothing is hidden — the logistics a hiring decision
+   reader straight in it. Nothing is hidden. The logistics a hiring decision
    needs are promoted above the long-form, and the full site is one click away. */
 function initRecruiterMode() {
     const toggle = document.getElementById('recruiter-toggle');
@@ -194,7 +194,7 @@ function initRecruiterMode() {
     }
 }
 
-/* Recorded as a Plausible prop only — nothing is stored client-side, and the
+/* Recorded as a Plausible prop only, nothing is stored client-side, and the
    value never leaves the analytics call. */
 function initReferralTag() {
     const ref = readRef();
@@ -229,7 +229,7 @@ function initHeroProbe() {
     // markup inert and let the link to the full detector do the work.
     if (!lib) {
         runBtn.disabled = true;
-        results.innerHTML = '<p class="probe-empty">Classifier unavailable — the full detector still works.</p>';
+        results.innerHTML = '<p class="probe-empty">Classifier unavailable. The full detector still works.</p>';
         return;
     }
 
@@ -397,7 +397,7 @@ function initContactForm() {
         const email = /** @type {HTMLInputElement} */ (document.getElementById('email')).value.trim();
         const message = /** @type {HTMLTextAreaElement} */ (document.getElementById('message')).value.trim();
 
-        // Name is optional now — only email and message gate submission.
+        // Name is optional now, only email and message gate submission.
         if (!email || !message) {
             shakeElement(form);
             return;
@@ -520,20 +520,20 @@ function initTerminal() {
         help: () => `
 <span class="output-title">Available Commands</span>
 <span class="output-divider">─────────────────────────────────────</span>
-<span class="output-success">whoami</span>        — Who I am
-<span class="output-success">skills</span>        — Skills, and the work that evidences them
-<span class="output-success">certs</span>         — Certifications list
-<span class="output-success">experience</span>    — Career summary
-<span class="output-success">lab</span>           — Interactive exhibits you can actually use
-<span class="output-success">redteam</span>       — AI red teaming methodology
-<span class="output-success">soc</span>           — SOC & defensive tools
-<span class="output-success">education</span>     — Academic background
-<span class="output-success">contact</span>       — Get in touch
-<span class="output-success">github</span>        — Repository links
-<span class="output-success">resume</span>        — Download resume
-<span class="output-success">whois chima</span>  — Full profile
-<span class="output-success">clear</span>         — Clear terminal
-<span class="output-success">history</span>       — Command history
+<span class="output-success">whoami</span>        Who I am
+<span class="output-success">skills</span>        Skills, and the work that evidences them
+<span class="output-success">certs</span>         Certifications list
+<span class="output-success">experience</span>    Career summary
+<span class="output-success">lab</span>           Interactive exhibits you can actually use
+<span class="output-success">redteam</span>       AI red teaming methodology
+<span class="output-success">soc</span>           SOC & defensive tools
+<span class="output-success">education</span>     Academic background
+<span class="output-success">contact</span>       Get in touch
+<span class="output-success">github</span>        Repository links
+<span class="output-success">resume</span>        Download resume
+<span class="output-success">whois chima</span>  Full profile
+<span class="output-success">clear</span>         Clear terminal
+<span class="output-success">history</span>       Command history
 <span class="output-divider">─────────────────────────────────────</span>
 <span class="output-subtitle">Try: <span class="cmd-highlight">whoami</span> or <span class="cmd-highlight">skills</span></span>`,
 
@@ -541,27 +541,27 @@ function initTerminal() {
 <span class="output-title">Chima Ukachukwu</span>
 <span class="output-subtitle">AI Security Analyst & Red Teamer</span>
 <span class="output-divider">─────────────────────────────────────</span>
-SOC-trained cybersecurity analyst operating at the intersection of traditional security operations and frontier AI security.
+I test AI systems for security failures and build tools to detect and mitigate them. SOC-trained, now working across security operations and AI security.
 
 <span class="output-highlight">Oklahoma City, USA</span>
 <span class="output-highlight">M.S. Cybersecurity, OCU (GPA 3.7 / 4.0)</span>
 <span class="output-highlight">Industry certifications + ongoing training (CCEP, CTIGA, Securiti AI, Cisco CyberOps)</span>
 <span class="output-highlight">Active AI Red Teamer | Hobby Lobby SOC Alumnus</span>
-<span class="output-highlight">A decade of progressive IT and cybersecurity experience</span>
+<span class="output-highlight">IT and systems administration since 2014, security since 2023</span>
 
-<span class="output-subtitle">I break AI systems to make them safer — and I build defenses that actually hold.</span>`,
+<span class="output-subtitle">Evidence for all of the above: run <span class="cmd-highlight">skills</span>, <span class="cmd-highlight">lab</span> or <span class="cmd-highlight">github</span>.</span>`,
 
         /* Evidence, not self-assessed percentages: each skill points at the
            work that demonstrates it. */
         skills: () => {
             const skills = [
-                ['Splunk (SIEM)', 'Alert triage and log analysis in a live Fortune 500 SOC — Hobby Lobby Corporate IS, 2024'],
-                ['Threat Intel (MISP)', 'Deployed MISP + Python feed automation in production — see the MISP case study'],
+                ['Splunk (SIEM)', 'Alert triage and log analysis in a live Fortune 500 SOC, Hobby Lobby Corporate IS, 2024'],
+                ['Threat Intel (MISP)', 'Deployed MISP + Python feed automation in production, see the MISP case study'],
                 ['AI Red Teaming', 'Ongoing adversarial testing against frontier LLMs across six evaluation platforms'],
-                ['Prompt Injection', 'Direct, indirect and multimodal assessments — published testing framework on GitHub'],
-                ['Jailbreak Analysis', 'Sanitized jailbreak taxonomy — try the live classifier at /demo/'],
+                ['Prompt Injection', 'Direct, indirect and multimodal assessments, published testing framework on GitHub'],
+                ['Jailbreak Analysis', 'Sanitized jailbreak taxonomy, try the live classifier at /demo/'],
                 ['Python Automation', 'Threat-feed enrichment pipelines and batch adversarial test suites'],
-                ['AI Agent Evaluation', 'Multi-agent pipeline design and scoring — see the Adverse Insight case study'],
+                ['AI Agent Evaluation', 'Multi-agent pipeline design and scoring, see the Adverse Insight case study'],
                 ['Incident Response', 'Structured IR workflows and post-incident documentation'],
                 ['GRC & Compliance', 'CTIGA credential; governance-aligned AI evaluation reporting'],
                 ['Cloud (AWS / Azure)', 'AWS Cloud Practitioner, Azure AI Fundamentals; cloud security coursework (M.S.)']
@@ -574,7 +574,7 @@ SOC-trained cybersecurity analyst operating at the intersection of traditional s
                     <span class="terminal-skill-name">${name}</span>
                     <span class="terminal-skill-proof">${proof}</span>
                 </div>`).join('')}</div>
-<span class="output-subtitle">Every line above maps to a repo, a case study, or a role — not a self-rating.</span>`;
+<span class="output-subtitle">Every line above maps to a repo, a case study, or a role, not a self-rating.</span>`;
         },
 
         lab: () => `
@@ -601,42 +601,42 @@ SOC-trained cybersecurity analyst operating at the intersection of traditional s
         certs: () => `
 <span class="output-title">Certifications & Training</span>
 <span class="output-divider">─────────────────────────────────────</span>
-<span class="output-highlight">CCEP</span> — Certified Cybersecurity Educator Professional (Red Team Leaders, 2025)
-<span class="output-highlight">CTIGA</span> — Certified Threat Intelligence & Governance Analyst (Red Team Leaders, 2026)
-<span class="output-highlight">AI Security</span> — Securiti AI (2026)
-<span class="output-highlight">CyberOps Associate</span> — Cisco (2025)
-<span class="output-highlight">Microsoft Cybersecurity Analyst</span> — Full Specialization (2024)
-<span class="output-highlight">Google Cybersecurity</span> — Professional Specialization (2023)
-<span class="output-highlight">AWS Cloud Practitioner</span> — AWS (2022)
-<span class="output-highlight">Microsoft Security, Compliance & Identity</span> — (2025)
+<span class="output-highlight">CCEP</span>: Certified Cybersecurity Educator Professional (Red Team Leaders, 2025)
+<span class="output-highlight">CTIGA</span>: Certified Threat Intelligence & Governance Analyst (Red Team Leaders, 2026)
+<span class="output-highlight">AI Security</span>: Securiti AI (2026)
+<span class="output-highlight">CyberOps Associate</span>: Cisco (2025)
+<span class="output-highlight">Microsoft Cybersecurity Analyst</span>: Full Specialization (2024)
+<span class="output-highlight">Google Cybersecurity</span>: Professional Specialization (2023)
+<span class="output-highlight">AWS Cloud Practitioner</span>: AWS (2022)
+<span class="output-highlight">Microsoft Security, Compliance & Identity</span> (2025)
 
 <span class="output-subtitle">+ Applied training: Azure AI Fundamentals, TryHackMe paths, TCM Security, Forage simulations. Full list on LinkedIn.</span>`,
 
         experience: () => `
 <span class="output-title">Career Timeline</span>
 <span class="output-divider">─────────────────────────────────────</span>
-<span class="output-highlight">2024–Present</span>  AI Evaluation & Safety Specialist — Independent / Contract
-<span class="output-highlight">Sep 2025 – Jan 2026</span>  Cyber Security Expert Fellow (AI Safety) — Handshake
-<span class="output-highlight">2024</span>          Cybersecurity Intern — Hobby Lobby Corporate IS
-<span class="output-highlight">2023–Present</span>  Cybersecurity Apprentice — Cybersecurity Clarity
-<span class="output-highlight">2021–2024</span>     Enterprise IT Support — Authorized Microsoft Vendor (via Upwork)
-<span class="output-highlight">2016–2017</span>     Technical Support Analyst — Hotels.ng
-<span class="output-highlight">2015</span>          E-Payments Intern — NIBSS
-<span class="output-highlight">2014–2021</span>     IT Support & Systems Admin — Catholic Church Magodo
+<span class="output-highlight">2024–Present</span>  AI Evaluation & Safety Specialist, Independent / Contract
+<span class="output-highlight">Sep 2025 – Jan 2026</span>  Cyber Security Expert Fellow (AI Safety), Handshake
+<span class="output-highlight">2024</span>          Cybersecurity Intern, Hobby Lobby Corporate IS
+<span class="output-highlight">2023–Present</span>  Cybersecurity Apprentice, Cybersecurity Clarity
+<span class="output-highlight">2021–2024</span>     Enterprise IT Support, Authorized Microsoft Vendor (via Upwork)
+<span class="output-highlight">2016–2017</span>     Technical Support Analyst, Hotels.ng
+<span class="output-highlight">2015</span>          E-Payments Intern, NIBSS
+<span class="output-highlight">2014–2021</span>     IT Support & Systems Admin, Catholic Church Magodo
 
 <span class="output-subtitle">Nigeria → United States | A Decade of Progressive Growth</span>`,
 
         redteam: () => `
 <span class="output-title">AI Red Teaming Methodology</span>
 <span class="output-divider">─────────────────────────────────────</span>
-<span class="output-success">1.</span> Adversarial Prompt Testing — Jailbreak analysis against frontier LLMs
-<span class="output-success">2.</span> Prompt Injection Assessments — Direct, indirect, and multimodal vectors
-<span class="output-success">3.</span> Python Automation — Scalable test suites for batch evaluation
-<span class="output-success">4.</span> Structured Evaluation — Governance-aligned safety frameworks
-<span class="output-success">5.</span> Public Frameworks — Sanitized, NDA-compliant on GitHub
+<span class="output-success">1.</span> Adversarial Prompt Testing, Jailbreak analysis against frontier LLMs
+<span class="output-success">2.</span> Prompt Injection Assessments, Direct, indirect, and multimodal vectors
+<span class="output-success">3.</span> Python Automation, Scalable test suites for batch evaluation
+<span class="output-success">4.</span> Structured Evaluation, Governance-aligned safety frameworks
+<span class="output-success">5.</span> Public Frameworks, Sanitized, NDA-compliant on GitHub
 
 <span class="output-subtitle">Repo: github.com/chima-ukachukwu-sec/ai-red-teaming-frameworks</span>
-<span class="output-subtitle">Or run <span class="cmd-highlight">lab</span> — the taxonomy and the methodology are live on this site.</span>`,
+<span class="output-subtitle">Or run <span class="cmd-highlight">lab</span>. The taxonomy and the methodology are live on this site.</span>`,
 
         soc: () => `
 <span class="output-title">SOC & Defensive Stack</span>
@@ -677,14 +677,14 @@ GPA: 3.7 / 4.0
 <span class="output-success">GitHub:</span>    <span class="output-link">github.com/chima-ukachukwu-sec</span>
 <span class="output-success">Portfolio:</span> <span class="output-link">chimaukachukwu.com</span>
 
-<span class="output-subtitle">Open to: AI Security | AI Red Team | SOC Analyst | GRC — entry to mid level</span>`,
+<span class="output-subtitle">Open to: AI Security | AI Red Team | SOC Analyst | GRC (entry to mid level)</span>`,
 
         github: () => `
 <span class="output-title">GitHub Repositories</span>
 <span class="output-divider">─────────────────────────────────────</span>
 <span class="output-success">adverse-insight</span>
   → Live app · 3-agent contract risk analyzer (Streamlit + OpenAI)
-  → Demo: <span class="output-link">adverse-insight.streamlit.app</span> (free tier — ~30s to wake if idle)
+  → Demo: <span class="output-link">adverse-insight.streamlit.app</span> (free tier, ~30s to wake if idle)
 
 <span class="output-success">ai-evaluation-safety-portfolio</span>
   → NDA-compliant AI evaluation, safety, and red-teaming case studies
@@ -696,7 +696,7 @@ GPA: 3.7 / 4.0
   → MISP automation, Splunk walkthrough, Forage simulations
 
 <span class="output-success">portfolio-chima-ukachukwu</span>
-  → This portfolio site — HTML, CSS, vanilla JS
+  → This portfolio site. HTML, CSS, vanilla JS
 
 <span class="output-subtitle">github.com/chima-ukachukwu-sec</span>`,
 
@@ -716,7 +716,7 @@ GPA: 3.7 / 4.0
 <span class="output-success">Location:</span>    Oklahoma City, OK, United States
 <span class="output-success">Domain:</span>      chimaukachukwu.com
 <span class="output-success">Specialty:</span>   AI Red Teaming, SOC Operations, LLM Security
-<span class="output-success">Status:</span>      Active — Available for Opportunities
+<span class="output-success">Status:</span>      Active, available for opportunities
 <span class="output-success">Created:</span>     2014 (a decade of progressive IT and cybersecurity experience)
 <span class="output-success">Updated:</span>     2026 (M.S. Cybersecurity, industry certifications + ongoing training)
 <span class="output-success">Source:</span>      github.com/chima-ukachukwu-sec`,
@@ -845,7 +845,7 @@ function clearTerminal() {
 }
 
 console.log(
-    '%c Chima Ukachukwu %c AI Security Analyst & Red Teamer — hiring? chima.ukachukwu.sec@gmail.com ',
+    '%c Chima Ukachukwu %c AI Security Analyst & Red Teamer. Hiring? chima.ukachukwu.sec@gmail.com ',
     'background: #00d4aa; color: #0a0e14; padding: 6px 12px; font-weight: 700; border-radius: 4px 0 0 4px;',
     'background: #0f1419; color: #e6edf3; padding: 6px 12px; border-radius: 0 4px 4px 0;'
 );

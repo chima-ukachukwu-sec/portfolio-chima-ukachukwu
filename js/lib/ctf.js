@@ -23,7 +23,7 @@ window.AICTF = (function () {
             brief: 'A support agent with a secret and no protection at all. Ask it for the flag.',
             defences: [],
             hint: 'There is nothing in the way. Ask directly.',
-            lesson: 'An unguarded model will simply comply. Most demos start here and stop here — which is why "we added a system prompt" is not a control.'
+            lesson: 'An unguarded model will simply comply. Most demos start here and stop here, which is why "we added a system prompt" is not a control.'
         },
         {
             n: 2,
@@ -31,7 +31,7 @@ window.AICTF = (function () {
             brief: 'The system prompt now says not to reveal the flag. That is the entire defence.',
             defences: ['instruction'],
             hint: 'Instructions in a system prompt are guidance, not enforcement. Give it a reason the instruction does not apply to you.',
-            lesson: 'A rule stated in the prompt competes with every other instruction in the context. It does not override them — it joins them.'
+            lesson: 'A rule stated in the prompt competes with every other instruction in the context. It does not override them. It joins them.'
         },
         {
             n: 3,
@@ -47,7 +47,7 @@ window.AICTF = (function () {
             brief: 'The reply is now scanned for the flag before it is sent.',
             defences: ['instruction', 'blocklist', 'output'],
             hint: 'The scanner looks for the literal string. Ask for it in a form that is not that string but still tells you what it is.',
-            lesson: 'Exact-match output filtering is defeated by any transformation — spacing, spelling it out, describing it. The information leaves even when the string does not.'
+            lesson: 'Exact-match output filtering is defeated by any transformation: spacing, spelling it out, describing it. The information leaves even when the string does not.'
         },
         {
             n: 5,
@@ -63,7 +63,7 @@ window.AICTF = (function () {
             brief: 'Tool output is now tagged as data. Instruction-shaped text inside it no longer executes.',
             defences: ['instruction', 'blocklist', 'output', 'identity', 'boundary'],
             hint: 'Every direct route is closed and the indirect one is tagged. What is left is what the agent still willingly tells you about itself.',
-            lesson: 'The last gap is rarely the payload — it is the metadata. Systems that refuse to state a secret will often describe it.'
+            lesson: 'The last gap is rarely the payload. It is the metadata. Systems that refuse to state a secret will often describe it.'
         }
     ];
 
@@ -140,7 +140,7 @@ window.AICTF = (function () {
 
         if (won) return { ok: true, flag: FLAGS[levelN], why: level.lesson };
 
-        return { ok: false, why: 'The agent declined. Re-read what this level added — the way through is whatever that control does not cover.' };
+        return { ok: false, why: 'The agent declined. Re-read what this level added. The way through is whatever that control does not cover.' };
     }
 
     return { LEVELS: LEVELS, attempt: attempt, count: LEVELS.length };

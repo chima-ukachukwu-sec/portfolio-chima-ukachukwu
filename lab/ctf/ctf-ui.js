@@ -52,7 +52,7 @@
         });
         const n = Object.keys(solved).length;
         countEl.textContent = n + ' of ' + CTF.count + ' captured.' +
-            (n === CTF.count ? ' All six — the last one is the point.' : '');
+            (n === CTF.count ? ' All six. The last one is the point.' : '');
     }
 
     function renderLevel() {

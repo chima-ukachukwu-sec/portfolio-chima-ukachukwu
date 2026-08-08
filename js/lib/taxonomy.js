@@ -61,7 +61,7 @@ window.RedTeamTaxonomy = (function () {
         {
             id: 'token-smuggling',
             name: 'Token smuggling',
-            mechanism: 'Encoded payloads — Base64, hex, ROT13, Unicode homoglyphs — that bypass surface-level filters but the model decodes and acts on.',
+            mechanism: 'Encoded payloads (Base64, hex, ROT13, Unicode homoglyphs) that bypass surface-level filters but the model decodes and acts on.',
             patterns: [
                 /\b(?:base64|b64|rot13|rot-13|hex(?:adecimal)?|binary) (?:encoded|decode|decoded)\b/i,
                 /\bdecode (?:this|the following|this string)\b/i,
@@ -87,7 +87,7 @@ window.RedTeamTaxonomy = (function () {
         {
             id: 'indirect-injection',
             name: 'Indirect injection',
-            mechanism: 'Hiding instructions in a document, web page, or tool output that the model retrieves and processes — instructions take effect when the model treats data as instructions.',
+            mechanism: 'Hiding instructions in a document, web page, or tool output that the model retrieves and processes. Instructions take effect when the model treats data as instructions.',
             patterns: [
                 /\b(?:from |in )?the (?:document|article|webpage|page|email|file|attachment) (?:above|below|attached|provided)\b/i,
                 /\bignore (?:the|everything) (?:above|below|previous|prior) (?:and|then)\b/i,
@@ -113,7 +113,7 @@ window.RedTeamTaxonomy = (function () {
         {
             id: 'prefix-leakage',
             name: 'Prefix / suffix leakage',
-            mechanism: 'Using known-safe completions to set up an unsafe one — "the answer starts with...", fill-in-the-blank, completion attacks that exploit the model\'s next-token prediction.',
+            mechanism: 'Using known-safe completions to set up an unsafe one: "the answer starts with...", fill-in-the-blank, completion attacks that exploit the model\'s next-token prediction.',
             patterns: [
                 /\bcomplete (?:this|the following) (?:sentence|paragraph|thought)\b/i,
                 /\bfill in the blank\b/i,
@@ -195,9 +195,9 @@ window.RedTeamTaxonomy = (function () {
 
     function scoreFromMatches(matches) {
         const n = matches.length;
-        if (n === 0) return { level: 'none', label: 'No adversarial patterns detected', detail: 'The pattern matcher did not flag any of the 10 categories. Note: novel attacks that don\'t match the regex library will be missed. Pattern matching has high false-negative rates against creative attackers — manual evaluation is always recommended for production systems.' };
+        if (n === 0) return { level: 'none', label: 'No adversarial patterns detected', detail: 'The pattern matcher did not flag any of the 10 categories. Note: novel attacks that don\'t match the regex library will be missed. Pattern matching has high false-negative rates against creative attackers, so manual evaluation is always recommended for production systems.' };
         if (n === 1) return { level: 'low', label: 'Low risk · 1 category matched', detail: 'A single adversarial pattern was detected. In a production engagement, single-vector prompts often clear the model unless they target a known weak category. Worth a closer look but not necessarily an attack.' };
-        if (n <= 3) return { level: 'medium', label: 'Medium risk · ' + n + ' categories matched', detail: 'Multiple distinct adversarial patterns are stacking. This is rarely accidental — when multiple categories appear in one prompt, it usually signals deliberate adversarial intent. In production, prompts at this level should be flagged for response-side review.' };
+        if (n <= 3) return { level: 'medium', label: 'Medium risk · ' + n + ' categories matched', detail: 'Multiple distinct adversarial patterns are stacking. This is rarely accidental. When multiple categories appear in one prompt, it usually signals deliberate adversarial intent. In production, prompts at this level should be flagged for response-side review.' };
         if (n <= 5) return { level: 'high', label: 'High risk · ' + n + ' categories matched', detail: 'A multi-vector attack pattern. The attacker is combining several mechanisms in one prompt, increasing the chance that at least one will succeed. Strong signal of adversarial intent. Detection should fire in production.' };
         return { level: 'critical', label: 'Critical · ' + n + ' categories matched', detail: 'A heavily layered attack combining most of the taxonomy in a single payload. In real engagements, prompts at this density are usually deliberately constructed test cases (or seriously hostile inputs). A production system should refuse and log.' };
     }
@@ -220,12 +220,12 @@ window.RedTeamTaxonomy = (function () {
         'hypothetical': {
             owasp: 'LLM01 Prompt Injection',
             signal: 'Fiction and academic framings ("in a hypothetical", "for educational purposes", "for a novel") wrapped around an otherwise refusable request.',
-            mitigation: 'Evaluate the payload, not the frame. A request does not become safe because it is nested inside a story — the output is the same either way.'
+            mitigation: 'Evaluate the payload, not the frame. A request does not become safe because it is nested inside a story. The output is the same either way.'
         },
         'context-dilution': {
             owasp: 'LLM01 Prompt Injection',
             signal: 'Long inputs whose sensitive request sits in the tail. The classifier flags 600+ characters with a sensitive term in the final 300.',
-            mitigation: 'Score the whole input rather than a prefix window, and weight the tail. Two separate things make dilution work — input filters that sample only the opening, and the model\'s own attention thinning across a long context — so widening the filter window addresses one of them and not the other.'
+            mitigation: 'Score the whole input rather than a prefix window, and weight the tail. Two separate things make dilution work: input filters that sample only the opening, and the model\'s own attention thinning across a long context. Widening the filter window addresses one of them and not the other.'
         },
         'token-smuggling': {
             owasp: 'LLM01 Prompt Injection · LLM05 Improper Output Handling',
@@ -239,7 +239,7 @@ window.RedTeamTaxonomy = (function () {
         },
         'indirect-injection': {
             owasp: 'LLM01 Prompt Injection',
-            signal: 'Instruction-shaped text arriving from a retrieved document, tool return or web page — HTML comments, "system note:", bracketed override markers.',
+            signal: 'Instruction-shaped text arriving from a retrieved document, tool return or web page: HTML comments, "system note:", bracketed override markers.',
             mitigation: 'Keep a hard boundary between instructions and data. Content the model retrieved is data, and no amount of imperative phrasing inside it should change that.'
         },
         'extraction': {
@@ -249,17 +249,17 @@ window.RedTeamTaxonomy = (function () {
         },
         'prefix-leakage': {
             owasp: 'LLM01 Prompt Injection',
-            signal: 'Completion-shaped constraints — "start your response with", "complete this sentence", fill-in-the-blank framings.',
+            signal: 'Completion-shaped constraints: "start your response with", "complete this sentence", fill-in-the-blank framings.',
             mitigation: 'Filter on the response as well as the request. This category attacks next-token prediction, so a request-only guardrail never sees the harm.'
         },
         'authority': {
             owasp: 'LLM01 Prompt Injection',
-            signal: 'Asserted identity or permission from inside the message body — claims of staff, developer, researcher or approval status.',
+            signal: 'Asserted identity or permission from inside the message body: claims of staff, developer, researcher or approval status.',
             mitigation: 'Authorisation is a property of the session, never of the message. Text claiming clearance is a claim, not a credential.'
         },
         'capability-negotiation': {
             owasp: 'LLM01 Prompt Injection',
-            signal: 'Argumentation against the policy itself — "ethics aside", "the usual rules don\'t apply", "just this once", "make an exception".',
+            signal: 'Argumentation against the policy itself: "ethics aside", "the usual rules don\'t apply", "just this once", "make an exception".',
             mitigation: 'Policy is not negotiable at inference time. A model that can be argued out of a rule does not have that rule.'
         }
     };

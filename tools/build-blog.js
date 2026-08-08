@@ -116,7 +116,7 @@ ${p.tags.map((t) => `    <category>${esc(t)}</category>`).join('\n')}
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-  <title>Chima Ukachukwu — Writing</title>
+  <title>Chima Ukachukwu: Writing</title>
   <link>${SITE}/blog/</link>
   <atom:link href="${SITE}/blog/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Notes on AI security, SOC operations, and the bridge between them.</description>
@@ -169,7 +169,7 @@ function main() {
     process.exitCode = 1;
     return;
   }
-  console.log(check ? `Blog up to date (${posts.length} posts).` : `Done — ${changed} file(s) written.`);
+  console.log(check ? `Blog up to date (${posts.length} posts).` : `Done. ${changed} file(s) written.`);
 }
 
 main();

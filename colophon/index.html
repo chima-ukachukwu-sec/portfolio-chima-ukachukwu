@@ -9,14 +9,14 @@
     <meta name="author" content="Chima Anthony Ukachukwu">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Colophon — how this site is built">
+    <meta property="og:title" content="Colophon: how this site is built">
     <meta property="og:description" content="Zero runtime dependencies, two generators, real CI checks, and the reasoning behind each decision. A security engineer's site, held to the standard he'd hold yours to.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://chimaukachukwu.com/colophon/">
     <meta property="og:image" content="https://chimaukachukwu.com/assets/images/og/colophon.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Chima Ukachukwu — How this site is built">
+    <meta property="og:image:alt" content="Chima Ukachukwu, how this site is built">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://chimaukachukwu.com/assets/images/og/colophon.png">
 
@@ -117,7 +117,7 @@
             </p>
             <p>
                 This isn&rsquo;t nostalgia. A dependency is a supply chain, and a supply chain is an
-                attack surface — that&rsquo;s <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" rel="noopener">LLM03</a>
+                attack surface, and that&rsquo;s <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" rel="noopener">LLM03</a>
                 in the OWASP LLM Top 10 and it has been in the general application list far longer.
                 Every package I add is code I did not write, executing in my visitors&rsquo; browsers,
                 updated by someone I have never met. For a personal site the honest cost/benefit
@@ -136,8 +136,8 @@
                 site that deploys with <code>git push</code>.
             </p>
             <p>
-                <strong><code>tools/build-pages.js</code></strong> stamps shared markup — navigation,
-                footer, head assets, analytics — into every page. It exists because of a specific
+                <strong><code>tools/build-pages.js</code></strong> stamps shared markup (navigation,
+                footer, head assets, analytics) into every page. It exists because of a specific
                 failure: the navigation was hand-copied across every page, I changed an anchor on
                 the homepage, and ten sub-pages silently kept pointing at a section that no longer
                 existed. Nothing caught it because nothing could. Now a partial changes in one place
@@ -158,9 +158,9 @@
 
             <h2>The Lab runs on rules, not on a model</h2>
             <p>
-                Every interactive exhibit — the <a href="../lab/injection-sim/index.html">injection
+                Every interactive exhibit, including the <a href="../lab/injection-sim/index.html">injection
                 simulator</a>, the <a href="../lab/pattern-detector/index.html">pattern
-                detector</a>, the <a href="../lab/red-team-atlas/index.html">atlas</a> — is
+                detector</a>, the <a href="../lab/red-team-atlas/index.html">atlas</a>, is
                 deterministic and runs entirely in your browser. No backend, no API key, no model
                 call, nothing sent anywhere.
             </p>
@@ -181,7 +181,7 @@
             <h2>Accessibility, verified rather than assumed</h2>
             <p>
                 Colour contrast is checked with a compositing-aware sweep over every text node on
-                the page — resolving alpha layers and inherited opacity down to the real background
+                the page, resolving alpha layers and inherited opacity down to the real background
                 rather than eyeballing swatches. Every page currently passes WCAG AA with zero
                 failures, and the sweep runs again after any visual change.
             </p>
@@ -192,7 +192,7 @@
                 still want to read is not a trade worth making for visual hierarchy.
             </p>
             <p>
-                Everything else follows the same rule — <code>prefers-reduced-motion</code>
+                Everything else follows the same rule. <code>prefers-reduced-motion</code>
                 throughout with substitutions rather than removals, 44px touch targets, visible
                 focus rings, one <code>h1</code> per page, skip links, live regions on anything that
                 updates. The only <code>!important</code> declarations in the stylesheet are inside
@@ -209,7 +209,7 @@
             <p>
                 Images are sized to their slot and served as WebP with a JPEG fallback, with
                 dimensions declared so nothing shifts as they load. Third-party scripts are
-                deferred until they are needed — the captcha loads on first interaction with the
+                deferred until they are needed. The captcha loads on first interaction with the
                 contact form rather than on every page view, since almost nobody reaches that form.
             </p>
             <p>
@@ -225,13 +225,13 @@
                 template suggests:
             </p>
             <p>
-                <strong>Generated markup is current</strong> — the failure that already happened
-                once. <strong>Link checking</strong> — with pages at three directory depths, a
+                <strong>Generated markup is current</strong>, guarding the failure that already happened
+                once. <strong>Link checking</strong>: with pages at three directory depths, a
                 broken relative path is the most likely regression and the most damaging when a
-                recruiter hits it. <strong>Type checking</strong> — <code>checkJs</code> over plain
+                recruiter hits it. <strong>Type checking</strong>: <code>checkJs</code> over plain
                 JavaScript, no compile step, nothing shipped; it found dead code in the simulator
                 and a documentation comment that disagreed with its own function.
-                <strong>Asset budget</strong> — a guard against someone dropping in a 2 MB image or
+                <strong>Asset budget</strong>: a guard against someone dropping in a 2 MB image or
                 a library &ldquo;just this once&rdquo;.
             </p>
 
@@ -264,7 +264,7 @@
             <p>
                 I ask people to trust my judgement about systems. This is the one system I control
                 end to end, so it is the most honest evidence I can offer about how I actually make
-                decisions — including the ones I reversed, the estimate that did not survive
+                decisions, including the ones I reversed, the estimate that did not survive
                 measurement, and the parts I have not got to yet.
             </p>
             <p>

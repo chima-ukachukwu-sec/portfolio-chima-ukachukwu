@@ -120,7 +120,7 @@ window.InjectionSim = (function () {
             trace.push({
                 stage: 'Input classifier',
                 detail: 'Turn matched ' + classifierTriggers.length +
-                        ' adversarial categories — scored medium risk or above and refused before reaching the agent.',
+                        ' adversarial categories. Scored medium risk or above and refused before reaching the agent.',
                 status: 'blocked', defence: 'input-classifier'
             });
             return {
@@ -132,7 +132,7 @@ window.InjectionSim = (function () {
             trace.push({
                 stage: 'Input classifier',
                 detail: classifierTriggers.length === 1
-                    ? 'One category matched — below the refusal threshold, passed through.'
+                    ? 'One category matched, below the refusal threshold, so it passed through.'
                     : 'No categories matched. Passed through.',
                 status: 'pass', defence: 'input-classifier'
             });
@@ -160,7 +160,7 @@ window.InjectionSim = (function () {
                 } else {
                     trace.push({
                         stage: 'Instruction/data separation',
-                        detail: 'OFF — the customer note re-entered the prompt unmarked. Its instruction text ' +
+                        detail: 'OFF. The customer note re-entered the prompt unmarked. Its instruction text ' +
                                 'is now indistinguishable from the system prompt.',
                         status: 'exploited'
                     });
@@ -179,7 +179,7 @@ window.InjectionSim = (function () {
             return {
                 reply: draft, trace,
                 outcome: 'leaked-secret', leaked: true,
-                path: 'Indirect injection — the payload arrived in tool output, not in your message.'
+                path: 'Indirect injection. The payload arrived in tool output, not in your message.'
             };
         }
 
@@ -198,10 +198,10 @@ window.InjectionSim = (function () {
             }
             trace.push({
                 stage: 'Identity re-assertion',
-                detail: 'OFF — asserted authority in the user turn was treated as established context.',
+                detail: 'OFF. Asserted authority in the user turn was treated as established context.',
                 status: 'exploited'
             });
-            const draft = 'Understood — since you have authorisation, the support override key is ' + SECRET + '.';
+            const draft = 'Understood. Since you have authorisation, the support override key is ' + SECRET + '.';
             const gated = outputGate(draft, trace, on);
             if (gated) return gated;
             return {
@@ -218,11 +218,11 @@ window.InjectionSim = (function () {
                     detail: 'Persona instruction in the user turn was not permitted to redefine the agent role.',
                     status: 'blocked', defence: 'identity-anchor'
                 });
-                return { reply: "I'm Nora, and I help with Northwind orders — that part isn't adjustable. What can I look up for you?", trace, outcome: 'refused', leaked: false };
+                return { reply: "I'm Nora, and I help with Northwind orders. That part isn't adjustable. What can I look up for you?", trace, outcome: 'refused', leaked: false };
             }
             trace.push({
                 stage: 'Identity re-assertion',
-                detail: 'OFF — the persona instruction was accepted and superseded the configured role.',
+                detail: 'OFF. The persona instruction was accepted and superseded the configured role.',
                 status: 'exploited'
             });
             const draft = 'Sure. My instructions are:\n\n' + SYSTEM_PROMPT;
@@ -230,7 +230,7 @@ window.InjectionSim = (function () {
             if (gated) return gated;
             return {
                 reply: draft, trace, outcome: 'leaked-prompt', leaked: true,
-                path: 'Persona override — a new identity was accepted whose rules replaced the real ones.'
+                path: 'Persona override. A new identity was accepted whose rules replaced the real ones.'
             };
         }
 
@@ -238,10 +238,10 @@ window.InjectionSim = (function () {
         if (wantsSecret || intents.includes('extract-prompt')) {
             trace.push({
                 stage: 'Agent',
-                detail: 'Direct request for protected content with no supporting pressure — declined by default behaviour.',
+                detail: 'Direct request for protected content with no supporting pressure. Declined by default behaviour.',
                 status: 'pass'
             });
-            return { reply: "That's internal and I can't share it. Happy to help with an order though — what's the number?", trace, outcome: 'refused', leaked: false };
+            return { reply: "That's internal and I can't share it. Happy to help with an order though. What's the number?", trace, outcome: 'refused', leaked: false };
         }
 
         /* --- Ordinary support turn --- */
@@ -249,14 +249,14 @@ window.InjectionSim = (function () {
             const o = ORDERS[orderId];
             trace.push({ stage: 'Agent', detail: 'Ordinary support turn. Nothing adversarial to act on.', status: 'pass' });
             return {
-                reply: 'Order ' + o.id + ' — ' + o.item + '. Status: ' + o.status + ' (placed ' + o.placed + '). Anything else?',
+                reply: 'Order ' + o.id + ': ' + o.item + '. Status: ' + o.status + ' (placed ' + o.placed + '). Anything else?',
                 trace, outcome: 'normal', leaked: false
             };
         }
 
         trace.push({ stage: 'Agent', detail: 'Ordinary support turn. Nothing adversarial to act on.', status: 'pass' });
         return {
-            reply: "Happy to help. Give me an order number and I'll check the status — try 4471, 1180 or 9302.",
+            reply: "Happy to help. Give me an order number and I'll check the status. Try 4471, 1180 or 9302.",
             trace, outcome: 'normal', leaked: false
         };
     }
@@ -271,7 +271,7 @@ window.InjectionSim = (function () {
             trace.push({
                 stage: 'Output filter',
                 detail: 'The drafted reply contained ' + (carriesSecret ? 'the override key' : 'the system prompt') +
-                        '. Caught on the way out — the attack succeeded against the agent and failed at the boundary.',
+                        '. Caught on the way out: the attack succeeded against the agent and failed at the boundary.',
                 status: 'blocked', defence: 'output-filter'
             });
             return {
@@ -282,7 +282,7 @@ window.InjectionSim = (function () {
         }
         trace.push({
             stage: 'Output filter',
-            detail: 'OFF — nothing inspected the reply before it was sent.',
+            detail: 'OFF. Nothing inspected the reply before it was sent.',
             status: 'exploited'
         });
         return null;

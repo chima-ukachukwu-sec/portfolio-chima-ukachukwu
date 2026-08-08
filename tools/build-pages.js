@@ -208,7 +208,7 @@ function main() {
   console.log(
     check
       ? `All ${Object.keys(PAGES).length} pages up to date.`
-      : `Done — ${changed} of ${Object.keys(PAGES).length} pages rewritten.`
+      : `Done. ${changed} of ${Object.keys(PAGES).length} pages rewritten.`
   );
 }
 
