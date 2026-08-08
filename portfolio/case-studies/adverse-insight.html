@@ -176,6 +176,24 @@
 
             <p>Why this matters: most contract-review tools stop at "here's what's risky." That's the easy half. The hard half is "here's what to ask for instead." The Negotiator agent closes the loop. You do not just learn there is a problem, you walk away with the language to fix it.</p>
 
+            <figure class="post-figure">
+                <img src="../../assets/images/shots/adverse-insight-dashboard.webp"
+                     width="1200" height="1098" loading="lazy" decoding="async"
+                     alt="The Adverse Insight interface after a run. The three-agent chain is
+                          drawn as a row of completed stages: Extractor, Adversarial scorer,
+                          Negotiator. Summary tiles read 8 clauses, 6 red flagged at 75% of the
+                          contract, peak risk 100 out of 100, and 6 negotiation scripts ready.
+                          A radar chart compares the contract against a market-standard baseline
+                          across financial liability, termination asymmetry and data rights.">
+                <figcaption>The chain after a run against a deliberately one-sided contractor
+                    agreement. The pipeline across the top is the architecture described above,
+                    filling in as each agent finishes. Peak risk reads the worst of all three
+                    axes, not just the financial one.
+                    <a href="https://adverse-insight.streamlit.app/" target="_blank" rel="noopener">Run
+                    it yourself</a>, or load the saved sample if you would rather not wait for a
+                    model call.</figcaption>
+            </figure>
+
             <h2>The stack and the build</h2>
 
             <ul>
