@@ -3916,6 +3916,10 @@ section {
     .recruiter-toggle,
     .footer,
     .skip-link,
+    /* The back link at the top of every long-form page. It printed as
+       "← HOME" above the name on the resume, which is the first thing a
+       reader saw on the page. */
+    .post-eyebrow,
     .hero-bg-grid,
     .hero-probe,
     .post-share,
@@ -3931,6 +3935,13 @@ section {
     .recruiter-brief,
     .contact-form-wrapper,
     .repo-live {
+        display: none !important;
+    }
+
+    /* Scoped, not global: the case studies reuse .resume-download for their
+       demo and repo buttons, and those print usefully because the rule below
+       appends the URL. A "Download PDF" button on a printed resume does not. */
+    .resume-article .resume-download {
         display: none !important;
     }
 
