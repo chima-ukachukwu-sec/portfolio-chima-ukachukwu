@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>The Bridge — Why AI Security Needs SOC People, and SOC Needs AI Red Teamers · Chima Ukachukwu</title>
-    <meta name="description" content="Two communities that should be talking to each other are mostly not. Here's what each side is missing — and what bridging them looks like in practice.">
+    <title>The Bridge: Why AI Security Needs SOC People, and SOC Needs AI Red Teamers · Chima Ukachukwu</title>
+    <meta name="description" content="Two communities that should be talking to each other are mostly not. Here's what each side is missing, and what bridging them looks like in practice.">
     <meta name="author" content="Chima Anthony Ukachukwu">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="The Bridge — Why AI Security Needs SOC People, and SOC Needs AI Red Teamers">
-    <meta property="og:description" content="Two communities that should be talking to each other are mostly not. Here's what each side is missing — and what bridging them looks like in practice.">
+    <meta property="og:title" content="The Bridge: Why AI Security Needs SOC People, and SOC Needs AI Red Teamers">
+    <meta property="og:description" content="Two communities that should be talking to each other are mostly not. Here's what each side is missing, and what bridging them looks like in practice.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://chimaukachukwu.com/blog/posts/the-bridge.html">
     <meta property="og:image" content="https://chimaukachukwu.com/assets/images/og/the-bridge.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Chima Ukachukwu — the bridge">
+    <meta property="og:image:alt" content="Chima Ukachukwu, the bridge">
     <meta property="article:published_time" content="2026-04-28">
     <meta property="article:author" content="Chima Anthony Ukachukwu">
     <meta property="article:section" content="AI Security">
@@ -27,7 +27,7 @@
     <meta name="twitter:image" content="https://chimaukachukwu.com/assets/images/og/the-bridge.png">
 
     <link rel="canonical" href="https://chimaukachukwu.com/blog/posts/the-bridge.html">
-    <link rel="alternate" type="application/rss+xml" title="Chima Ukachukwu — Writing (RSS)" href="https://chimaukachukwu.com/blog/feed.xml">
+    <link rel="alternate" type="application/rss+xml" title="Chima Ukachukwu Writing (RSS)" href="https://chimaukachukwu.com/blog/feed.xml">
 
     <!-- build:head-assets -->
     <meta name="theme-color" content="#0a0e14">
@@ -51,8 +51,8 @@
     {
       "@context": "https://schema.org",
       "@type": "BlogPosting",
-      "headline": "The Bridge — Why AI Security Needs SOC People, and SOC Needs AI Red Teamers",
-      "description": "Two communities that should be talking to each other are mostly not. Here's what each side is missing — and what bridging them looks like in practice.",
+      "headline": "The Bridge: Why AI Security Needs SOC People, and SOC Needs AI Red Teamers",
+      "description": "Two communities that should be talking to each other are mostly not. Here's what each side is missing, and what bridging them looks like in practice.",
       "author": {
         "@type": "Person",
         "name": "Chima Anthony Ukachukwu",
@@ -127,8 +127,8 @@
     <article class="post-article">
         <header class="post-header">
             <p class="post-eyebrow"><a href="../index.html">← All writing</a></p>
-            <h1 class="post-title">The Bridge — Why AI Security Needs SOC People, and SOC Needs AI Red Teamers</h1>
-            <p class="post-dek">Two communities that should be talking to each other are mostly not. Here's what each side is missing — and what bridging them looks like in practice.</p>
+            <h1 class="post-title">The Bridge: Why AI Security Needs SOC People, and SOC Needs AI Red Teamers</h1>
+            <p class="post-dek">Two communities that should be talking to each other are mostly not. Here's what each side is missing, and what bridging them looks like in practice.</p>
             <p class="post-meta">
                 <span class="post-meta-item">By Chima Anthony Ukachukwu</span>
                 <span class="post-meta-divider">·</span>
@@ -141,21 +141,21 @@
         <div class="post-body">
             <p>I split my week between two communities that, by my count, almost never talk to each other.</p>
 
-            <p>Monday and Tuesday I'm an AI red teamer — running adversarial test campaigns against frontier LLMs, writing rubrics that try to catch reward hacking, auditing agentic trajectories for the kinds of failures a benchmark wouldn't surface. The vocabulary is alignment, evaluation, prompt injection, jailbreak taxonomy, <em>"did the model do the thing it said it did, or did it sandbag the test?"</em></p>
+            <p>Monday and Tuesday I'm an AI red teamer, running adversarial test campaigns against frontier LLMs, writing rubrics that try to catch reward hacking, auditing agentic trajectories for the kinds of failures a benchmark wouldn't surface. The vocabulary is alignment, evaluation, prompt injection, jailbreak taxonomy, <em>"did the model do the thing it said it did, or did it sandbag the test?"</em></p>
 
-            <p>Wednesday and Thursday I'm a SOC analyst — triaging Splunk notables, tuning Microsoft Defender alerts, automating MISP threat intel, writing detection rules that survive contact with reality. The vocabulary is MTTD, false-positive ratio, alert fatigue, runbooks, <em>"what does the analyst do at 3am when this fires?"</em></p>
+            <p>Wednesday and Thursday I'm a SOC analyst, triaging Splunk notables, tuning Microsoft Defender alerts, automating MISP threat intel, writing detection rules that survive contact with reality. The vocabulary is MTTD, false-positive ratio, alert fatigue, runbooks, <em>"what does the analyst do at 3am when this fires?"</em></p>
 
             <p>These two worlds share a foundational truth: in both, the defender is outnumbered, and the attacker only has to be right once. Both are about asymmetric games where you fail in production and learn in public.</p>
 
             <p>And yet the communities barely overlap. AI safety conferences cite Bruce Schneier and the SANS Top 25 maybe once a year. SOC training programs barely mention prompt injection. The OWASP Top 10 for LLM Applications is the closest thing to a bridge document we have, and most people I know in either field haven't read it.</p>
 
-            <p>This is a problem — for both sides. Here's why.</p>
+            <p>This is a problem for both sides. Here's why.</p>
 
             <h2>What SOC people bring to AI security</h2>
 
             <p>Most AI safety work today, when it touches "security" at all, looks like this: someone runs a batch of adversarial prompts against a model, observes failures, and writes them up. That's offensive security. It is <em>one part</em> of a security program. It is not most of one.</p>
 
-            <p>What's missing — what SOC people would notice immediately — is detection, monitoring, response, and the operational discipline to keep a security control alive past its first deployment.</p>
+            <p>What's missing, and what SOC people would notice immediately, is detection, monitoring, response, and the operational discipline to keep a security control alive past its first deployment.</p>
 
             <p>Three concrete things SOC discipline would import into AI security:</p>
 
@@ -169,11 +169,11 @@
 
             <p>A SOC detection that fires once and never gets revisited becomes noise. Same is true of an AI safety evaluation. If a model passes your prompt injection test today, that pass is meaningful for <em>today's model, today's deployment, today's threat patterns</em>. Without continuous re-evaluation against new attack patterns, the test becomes ceremonial.</p>
 
-            <p>SOC teams have decades of experience with detection lifecycle management — write, test, deploy, tune, retire. AI safety teams are mostly still on "write" and "deploy."</p>
+            <p>SOC teams have decades of experience with detection lifecycle management: write, test, deploy, tune, retire. AI safety teams are mostly still on "write" and "deploy."</p>
 
             <h3>Triage discipline.</h3>
 
-            <p>When 200 alerts hit a SOC at the same time, the first task is sorting which ones <em>might</em> actually matter — not investigating all 200. AI safety evaluations produce hundreds of "findings" per run. Which ones are red-team-finding-worthy and which ones are noise? SOC analysts have explicit frameworks for this (severity, exploitability, impact, asset criticality). AI safety teams are reinventing those frameworks from scratch, often badly.</p>
+            <p>When 200 alerts hit a SOC at the same time, the first task is sorting which ones <em>might</em> actually matter, not investigating all 200. AI safety evaluations produce hundreds of "findings" per run. Which ones are red-team-finding-worthy and which ones are noise? SOC analysts have explicit frameworks for this (severity, exploitability, impact, asset criticality). AI safety teams are reinventing those frameworks from scratch, often badly.</p>
 
             <h2>What AI red teamers bring to SOC</h2>
 
@@ -183,13 +183,13 @@
 
             <h3>Adversarial creativity beyond the playbook.</h3>
 
-            <p>Traditional SOC work is heavily playbook-driven. That's fine — playbooks are how you scale a team and onboard new analysts. But playbooks codify yesterday's attacks. AI red teamers are trained to ask "how could this go wrong in a way that has never happened before?" That muscle, applied to a SOC environment, surfaces detection gaps that the existing detection set will never catch.</p>
+            <p>Traditional SOC work is heavily playbook-driven. That's fine. Playbooks are how you scale a team and onboard new analysts. But playbooks codify yesterday's attacks. AI red teamers are trained to ask "how could this go wrong in a way that has never happened before?" That muscle, applied to a SOC environment, surfaces detection gaps that the existing detection set will never catch.</p>
 
             <p>For example: most SOCs I've seen do not have detections for <em>"an internal user is using an LLM-integrated assistant to extract data they shouldn't have access to."</em> That's not in any 2022 playbook.</p>
 
             <h3>Surface enumeration discipline.</h3>
 
-            <p>When I do a prompt injection assessment of an LLM application, the first phase is mapping every untrusted input the model can ingest — user input, retrieved documents, tool outputs, image alt text, OCR'd content, function-call return values. Each is a separate trust boundary. Each is a separate attack surface.</p>
+            <p>When I do a prompt injection assessment of an LLM application, the first phase is mapping every untrusted input the model can ingest: user input, retrieved documents, tool outputs, image alt text, OCR'd content, function-call return values. Each is a separate trust boundary. Each is a separate attack surface.</p>
 
             <p>Most SOC programs don't think about their environment this way. They monitor "endpoints" and "network." But every internal SaaS tool that ingests user-controlled content is an attack surface. Every webhook is an attack surface. Every CSV import in a finance tool is an attack surface. AI red teamers think this way by default. Traditional SOC programs often don't.</p>
 
@@ -207,11 +207,11 @@
 
             <p><strong>Two.</strong> An AI safety evaluation I contributed to catalogued 47 jailbreak patterns surviving the latest model. Beautiful work. Zero of those findings had a corresponding detection rule, runbook, or operational response plan. If those 47 patterns hit the model in production, what happens? Nobody had asked. SOC mindset would have closed the loop in a sprint.</p>
 
-            <p><strong>Three.</strong> I watched a team treat "prompt injection" as <em>one threat</em> — a checkbox on a risk register. AI red teamers know prompt injection is a <em>category</em> with at least nine distinct mechanisms, each requiring a different defensive control. Treating the category as a single thing produces single-thing controls. Single-thing controls don't survive contact with attackers.</p>
+            <p><strong>Three.</strong> I watched a team treat "prompt injection" as <em>one threat</em>, a checkbox on a risk register. AI red teamers know prompt injection is a <em>category</em> with at least nine distinct mechanisms, each requiring a different defensive control. Treating the category as a single thing produces single-thing controls. Single-thing controls don't survive contact with attackers.</p>
 
             <h2>What "the bridge" looks like in practice</h2>
 
-            <p>I'm building toward what I think the next five years of security careers will look like — and what I think most security leaders should be hiring for. The shape of it:</p>
+            <p>I'm building toward what I think the next five years of security careers will look like, and what I think most security leaders should be hiring for. The shape of it:</p>
 
             <p><strong>SOC programs that have an AI red teamer on staff.</strong> Not as a curiosity hire. As a senior contributor whose job is to surface attack surfaces the existing detection set will never catch. Embedded with the detection engineering team, not isolated in a research role.</p>
 
@@ -219,15 +219,15 @@
 
             <p><strong>Joint exercises.</strong> A purple-team-style engagement where a SOC team and an AI red team run together against a single environment that includes both traditional infrastructure and LLM-integrated applications. I've never seen this run as standard practice. It should be standard practice.</p>
 
-            <p><strong>Shared vocabulary.</strong> OWASP Top 10 for LLM Applications, OWASP Top 10 for Agentic Applications (2026), MITRE ATLAS, NIST AI RMF — these are the bridge documents. SOC programs that don't read them are flying blind in 2026 environments. AI safety programs that don't read SANS, NIST CSF, or ISO 27001 are reinventing detection lifecycle management with worse tooling.</p>
+            <p><strong>Shared vocabulary.</strong> OWASP Top 10 for LLM Applications, OWASP Top 10 for Agentic Applications (2026), MITRE ATLAS, NIST AI RMF. These are the bridge documents. SOC programs that don't read them are flying blind in 2026 environments. AI safety programs that don't read SANS, NIST CSF, or ISO 27001 are reinventing detection lifecycle management with worse tooling.</p>
 
             <h2>Closing</h2>
 
-            <p>If you're a SOC analyst reading this and you've been waiting for a sign that AI security isn't "someone else's problem" — this is it. Your discipline transfers. The detection engineering muscle you've spent years building is exactly what AI safety needs. Start with the OWASP LLM Top 10 this weekend. You'll be ahead of most "AI security" people inside a month.</p>
+            <p>If you're a SOC analyst reading this and you've been waiting for a sign that AI security isn't "someone else's problem", this is it. Your discipline transfers. The detection engineering muscle you've spent years building is exactly what AI safety needs. Start with the OWASP LLM Top 10 this weekend. You'll be ahead of most "AI security" people inside a month.</p>
 
-            <p>If you're an AI safety researcher reading this and you've been doing offensive work without a coherent operational follow-through — your evaluations need a SOC layer. Build it. Or hire someone who already has.</p>
+            <p>If you're an AI safety researcher reading this and you've been doing offensive work without a coherent operational follow-through, your evaluations need a SOC layer. Build it. Or hire someone who already has.</p>
 
-            <p>If you're a hiring manager — the candidates who can do both are rare today. They will be the senior security architects of 2030. Hire them now while they're still affordable.</p>
+            <p>If you're a hiring manager, the candidates who can do both are rare today. They will be the senior security architects of 2030. Hire them now while they're still affordable.</p>
         </div>
 
         <!-- blog:rail -->

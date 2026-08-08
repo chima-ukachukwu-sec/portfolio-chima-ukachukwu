@@ -1,6 +1,6 @@
 # portfolio-chima-ukachukwu
 
-Source for **[chimaukachukwu.com](https://chimaukachukwu.com)** — the personal site of Chima Anthony Ukachukwu (AI Security Analyst & Red Teamer, Oklahoma City).
+Source for **[chimaukachukwu.com](https://chimaukachukwu.com)**, the personal site of Chima Anthony Ukachukwu (AI Security Analyst & Red Teamer, Oklahoma City).
 
 Static site: HTML / CSS / JavaScript, no framework, no build step. Deployed via GitHub Pages from `main`.
 
@@ -10,10 +10,10 @@ Static site: HTML / CSS / JavaScript, no framework, no build step. Deployed via 
 
 | Route | What it is |
 |---|---|
-| [`/`](https://chimaukachukwu.com/) | Homepage — about, expertise, portfolio, certifications, tech stack, career timeline, interactive terminal, contact |
+| [`/`](https://chimaukachukwu.com/) | Homepage: about, expertise, portfolio, certifications, tech stack, career timeline, interactive terminal, contact |
 | [`/blog/`](https://chimaukachukwu.com/blog/) | Writing on AI security, SOC, and the bridge between them |
-| [`/blog/posts/the-bridge.html`](https://chimaukachukwu.com/blog/posts/the-bridge.html) | *The Bridge — Why AI Security Needs SOC People, and SOC Needs AI Red Teamers* |
-| [`/lab/pattern-detector/`](https://chimaukachukwu.com/lab/pattern-detector/) | Interactive AI Red Team Pattern Detector — paste a prompt, see which jailbreak categories it matches. Runs entirely client-side |
+| [`/blog/posts/the-bridge.html`](https://chimaukachukwu.com/blog/posts/the-bridge.html) | *The Bridge: Why AI Security Needs SOC People, and SOC Needs AI Red Teamers* |
+| [`/lab/pattern-detector/`](https://chimaukachukwu.com/lab/pattern-detector/) | Interactive AI Red Team Pattern Detector: paste a prompt, see which jailbreak categories it matches. Runs entirely client-side |
 | [`/portfolio/case-studies/`](https://chimaukachukwu.com/#portfolio) | Long-form case studies: Adverse Insight, Hobby Lobby MISP, AI Red Teaming Frameworks |
 | [`/resume/`](https://chimaukachukwu.com/resume/) | HTML resume (PDF version in `assets/resume/`) |
 | [`/now/`](https://chimaukachukwu.com/now/) | What I'm currently working on, building, learning, and open to |
@@ -26,7 +26,7 @@ Static site: HTML / CSS / JavaScript, no framework, no build step. Deployed via 
 - **HTML / CSS / vanilla JS.** One stylesheet (`css/style.css`, ~2,300 lines), one behavior file (`js/main.js`, ~830 lines).
 - **No framework, no bundler, no build step.** Edit a file, push, GitHub Pages serves it.
 - **No backend.** The contact form posts to [Formspree](https://formspree.io); the pattern-detector demo runs entirely in the browser.
-- **Privacy-friendly analytics** via [Plausible](https://plausible.io) — no cookies, no personal data collected.
+- **Privacy-friendly analytics** via [Plausible](https://plausible.io). No cookies, no personal data collected.
 - **hCaptcha** on the contact form to discourage bot submissions.
 
 ---
@@ -94,11 +94,11 @@ portfolio-chima-ukachukwu/
 
 ## Related repos
 
-- [`chima-ukachukwu-sec`](https://github.com/chima-ukachukwu-sec/chima-ukachukwu-sec) — GitHub profile README
-- [`ai-red-teaming-frameworks`](https://github.com/chima-ukachukwu-sec/ai-red-teaming-frameworks) — methodology repo backing the AI red team case study
-- [`ai-evaluation-safety-portfolio`](https://github.com/chima-ukachukwu-sec/ai-evaluation-safety-portfolio) — NDA-compliant AI safety evaluation work
-- [`soc-defensive-portfolio`](https://github.com/chima-ukachukwu-sec/soc-defensive-portfolio) — SOC, threat-intel, and incident-response writeups
-- [`adverse-insight`](https://github.com/chima-ukachukwu-sec/adverse-insight) — 3-agent contract risk analyzer (Streamlit + OpenAI). [Live demo](https://adverse-insight.streamlit.app/)
+- [`chima-ukachukwu-sec`](https://github.com/chima-ukachukwu-sec/chima-ukachukwu-sec), the GitHub profile README
+- [`ai-red-teaming-frameworks`](https://github.com/chima-ukachukwu-sec/ai-red-teaming-frameworks), the methodology repo backing the AI red team case study
+- [`ai-evaluation-safety-portfolio`](https://github.com/chima-ukachukwu-sec/ai-evaluation-safety-portfolio), NDA-compliant AI safety evaluation work
+- [`soc-defensive-portfolio`](https://github.com/chima-ukachukwu-sec/soc-defensive-portfolio): SOC, threat-intel, and incident-response writeups
+- [`adverse-insight`](https://github.com/chima-ukachukwu-sec/adverse-insight), a 3-agent contract risk analyzer (Streamlit + OpenAI). [Live demo](https://adverse-insight.streamlit.app/)
 
 ---
 
@@ -109,7 +109,7 @@ portfolio-chima-ukachukwu/
 ## The Lab
 
 Four interactive AI security exhibits at [chimaukachukwu.com/lab](https://chimaukachukwu.com/lab/).
-All of them are deterministic and run entirely in the browser — no backend, no API key, no model
+All of them are deterministic and run entirely in the browser. No backend, no API key, no model
 call, nothing sent anywhere.
 
 | Exhibit | What it does |
@@ -120,14 +120,14 @@ call, nothing sent anywhere.
 | [Red Team Atlas](https://chimaukachukwu.com/lab/red-team-atlas/) | The ten categories as reference: mechanism, detection signal, mitigation, OWASP mapping |
 
 The determinism is the design, not a limitation. Because the same input always produces the same
-result, you can change one control and attribute the difference to it — which a sampled model
+result, you can change one control and attribute the difference to it, which a sampled model
 cannot demonstrate.
 
 [How the site is built →](https://chimaukachukwu.com/colophon/)
 
 ## Working on this site
 
-Deployment is still just `git push` — GitHub Pages serves the files as they are.
+Deployment is still just `git push`. GitHub Pages serves the files as they are.
 
 Shared markup (navigation, footer, head assets) lives in `partials/` and is stamped into every
 page by a small Node script with no dependencies:

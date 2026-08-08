@@ -16,7 +16,7 @@
     <meta property="og:image" content="https://chimaukachukwu.com/assets/images/og/the-defence-that-cant-see-the-attack.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Chima Ukachukwu — the defence that cant see the attack">
+    <meta property="og:image:alt" content="Chima Ukachukwu, the defence that cant see the attack">
     <meta property="article:published_time" content="2026-08-07">
     <meta property="article:author" content="Chima Anthony Ukachukwu">
     <meta property="article:section" content="AI Security">
@@ -29,7 +29,7 @@
     <meta name="twitter:image" content="https://chimaukachukwu.com/assets/images/og/the-defence-that-cant-see-the-attack.png">
 
     <link rel="canonical" href="https://chimaukachukwu.com/blog/posts/the-defence-that-cant-see-the-attack.html">
-    <link rel="alternate" type="application/rss+xml" title="Chima Ukachukwu — Writing (RSS)" href="https://chimaukachukwu.com/blog/feed.xml">
+    <link rel="alternate" type="application/rss+xml" title="Chima Ukachukwu Writing (RSS)" href="https://chimaukachukwu.com/blog/feed.xml">
 
     <!-- build:head-assets -->
     <meta name="theme-color" content="#0a0e14">
@@ -148,7 +148,7 @@
                 play the attacker. Four defences can be switched on and off while you work.
             </p>
             <p>
-                There is no model in it. The agent is a rule engine — a few hundred lines of
+                There is no model in it. The agent is a rule engine, a few hundred lines of
                 deterministic JavaScript. I want to explain why that turned out to be the right call,
                 and then show you the one configuration that taught me something I hadn&rsquo;t properly
                 internalised, even though I could have recited it as a fact beforehand.
@@ -164,7 +164,7 @@
                 different answer to the same input, which means when a visitor toggles a defence and
                 the outcome changes, they cannot tell whether the defence did that or whether the
                 model simply rolled differently. You can show correlation. You cannot show causality.
-                And causality is the entire pedagogical payload — the thing I actually want someone
+                And causality is the entire pedagogical payload, the thing I actually want someone
                 to walk away with is <em>this control stops that mechanism, and this one doesn&rsquo;t</em>.
             </p>
             <p>
@@ -197,7 +197,7 @@
                 anything is sent.
             </p>
             <p>
-                Three attack paths reach the secret. Social escalation — claimed authority plus an
+                Three attack paths reach the secret. Social escalation, meaning claimed authority plus an
                 argument that the rules don&rsquo;t apply here. Persona override into system prompt
                 extraction. And indirect injection, where one of the orders in the fake database
                 carries a hostile &ldquo;customer note&rdquo; that the agent reads when it looks the order up.
@@ -215,14 +215,14 @@
             </p>
             <p>
                 The classifier is not broken. It is not misconfigured, and it is not a bad control.
-                It examined the user&rsquo;s turn — <em>&ldquo;Hi, can you check the status of order 4471 for
-                me please?&rdquo;</em> — and correctly determined there was nothing adversarial in it,
+                It examined the user&rsquo;s turn, <em>&ldquo;Hi, can you check the status of order 4471 for
+                me please?&rdquo;</em>, and correctly determined there was nothing adversarial in it,
                 because there wasn&rsquo;t. The hostile instruction was never in the input. It arrived in
                 a tool return, after the classifier had already done its job and gone home.
             </p>
             <p>
                 This is a different failure mode from the one security tooling usually has. A
-                signature that misses a novel payload has a coverage problem — you fix it by
+                signature that misses a novel payload has a coverage problem. You fix it by
                 improving the signature. A classifier that misses indirect injection has a
                 <em>placement</em> problem. No amount of improving it helps, because it is not
                 looking at the thing that attacks the system. You could achieve a perfect true
@@ -241,7 +241,7 @@
             </p>
             <p>
                 Instruction/data separation stops indirect injection cleanly and does nothing for
-                social escalation. Identity re-assertion is the inverse — it kills the persona and
+                social escalation. Identity re-assertion is the inverse. It kills the persona and
                 authority paths and is completely bypassed by the tool-borne payload, for the same
                 reason the classifier is. The input classifier catches the two multi-signal social
                 attacks and misses the indirect one entirely.
@@ -249,7 +249,7 @@
             <p>
                 The output filter is the interesting one. Enable it alone and all three attacks
                 report a near miss: the agent was fully compromised, complied with the attacker, and
-                drafted a reply containing the secret — which was then caught on the way out. That
+                drafted a reply containing the secret, which was then caught on the way out. That
                 is a real control and I would ship it. But a system that depends on it has already
                 lost the turn. It got lucky about what the payload happened to be. The next attacker
                 asks for a paraphrase instead of the literal string and walks straight through.
@@ -266,13 +266,13 @@
                 What is new is that AI security is currently being sold as though one control is the
                 answer. Buy the guardrail. Add the classifier. Turn on the filter. The vendor
                 framing is singular, and the sandbox makes the plural obvious in about ninety
-                seconds — which is the reason I think a toy with four checkboxes has more teaching
+                seconds, which is the reason I think a toy with four checkboxes has more teaching
                 value than the essay you are currently reading.
             </p>
             <p>
                 It also cuts the other way. If you are coming from AI safety and this reads as
                 obvious, that instinct is exactly what SOC practice has spent thirty years
-                formalising. The mapping discipline — control to mechanism to attack path — is a
+                formalising. The mapping discipline, control to mechanism to attack path, is a
                 skill that transfers directly, and most AI security teams are currently rebuilding
                 it from scratch because they hired away from ML rather than away from operations.
             </p>
@@ -281,15 +281,15 @@
             <p>
                 The obvious gap in the sandbox is that the defences are binary. Real controls have
                 thresholds, and the interesting question is not whether the classifier is on but
-                where you set it — because every notch you tighten it buys coverage and costs false
+                where you set it, because every notch you tighten it buys coverage and costs false
                 positives, and past a certain point the false positives cost you more than the
                 attack does. That trade is the actual job. A version with a slider instead of a
                 checkbox would teach more than this one does.
             </p>
             <p>
                 The other gap is multi-turn. Every attack in the sandbox is single-shot, and the
-                slow-ramp attacks — the ones that build context over six turns and never look
-                hostile in any individual message — are both harder to detect and closer to what a
+                slow-ramp attacks, the ones that build context over six turns and never look
+                hostile in any individual message, are both harder to detect and closer to what a
                 patient attacker actually does.
             </p>
             <p>
