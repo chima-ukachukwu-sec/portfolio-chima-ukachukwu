@@ -1189,6 +1189,14 @@ section {
 .terminal-output-line {
     padding: var(--space-1) 0;
     animation: fadeInTerm var(--duration-base) var(--ease-out);
+    /* The command templates are authored as monospace layout: newlines separate
+       rows and runs of spaces align the second column. Without pre-wrap the
+       browser collapsed both, so every command rendered as one run-on line and
+       `help` lost its columns. */
+    white-space: pre-wrap;
+    /* Repo URLs and scanned prompts are long unbroken tokens. Without this they
+       push the terminal wider than its container on narrow screens. */
+    overflow-wrap: anywhere;
 }
 
 @keyframes fadeInTerm {
@@ -1235,8 +1243,13 @@ section {
     color: #3fb950;
 }
 
+/* Was a run of U+2500 box-drawing characters. Those are not in the latin font
+   subset, so they fell back to a system face with different metrics: the rule
+   broke the monospace grid and overflowed the container on mobile. A border
+   draws the same line, adapts to the container width, and needs no glyph. */
 .terminal-output-line .output-divider {
-    color: var(--border-color);
+    display: block;
+    border-bottom: 1px solid var(--border-color);
     margin: var(--space-2) 0;
 }
 
@@ -1305,8 +1318,17 @@ section {
         font-size: var(--text-2xs);
     }
 
+    /* Must stay at 16px. Safari on iOS zooms the whole page when a focused
+       input is smaller than that, which threw the layout every time someone
+       tapped the prompt on a phone. */
     .terminal-input {
-        font-size: var(--text-sm);
+        font-size: var(--text-lg);
+    }
+
+    /* The banner is legible ASCII art at desktop widths and unreadable noise at
+       0.4rem on a phone. The title above it already says who this is. */
+    .ascii-art {
+        display: none;
     }
 
     .terminal-skill-item {
