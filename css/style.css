@@ -2266,11 +2266,38 @@ section {
     border-radius: var(--radius-md);
 }
 
+/* Diagrams are authored as inline SVG rather than exported images: they cost
+   nothing against the asset budget, stay sharp at any zoom, and pick up the
+   theme's own tokens instead of baking colours into a file. */
+.post-figure-diagram svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: var(--bg-secondary);
+    padding: var(--space-4);
+}
+
 .post-figure figcaption {
     margin-top: var(--space-4);
     color: var(--text-muted);
     font-size: var(--text-sm);
     line-height: 1.6;
+}
+
+/* A fixed-viewBox diagram scaled to a 335px phone column renders its 11px
+   labels at 5.3px, which is unreadable. Below the breakpoint the figure
+   scrolls sideways instead of shrinking: 640px keeps the smallest label at
+   about 10px. The page itself never scrolls horizontally, only the figure. */
+@media (max-width: 768px) {
+    .post-figure-diagram {
+        overflow-x: auto;
+    }
+
+    .post-figure-diagram svg {
+        min-width: 640px;
+    }
 }
 
 /* Muted small print. .post-note is the same thing on a content page — an

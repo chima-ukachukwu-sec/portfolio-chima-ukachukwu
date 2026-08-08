@@ -157,6 +157,96 @@
 
             <p>Three deliverables, in roughly this order:</p>
 
+            <figure class="post-figure post-figure-diagram">
+                <svg viewBox="0 0 700 520" role="img" aria-labelledby="pipe-t pipe-d"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <title id="pipe-t">Threat intelligence pipeline, from community feeds to the SOC</title>
+                    <desc id="pipe-d">Four stages flowing downward. Community feeds (CIRCL OSINT,
+                        abuse.ch URLhaus and ThreatFox, AlienVault OTX and others) are untrusted
+                        input. They pass into scheduled Python ingestion, which normalises each
+                        source's schema and isolates per-feed failures. Between ingestion and
+                        storage sits a governance decision: which feeds to trust, what to
+                        auto-ingest versus flag for analyst review. Indicators land in a
+                        containerised MISP instance running server, database and cache under
+                        Docker Compose. Analysts consume from Splunk. The link from MISP into
+                        Splunk is drawn dashed because it was designed but never built, which is
+                        the gap named in the lessons below.</desc>
+
+                    <!-- 1. feeds -->
+                    <rect x="40" y="16" width="620" height="70" rx="10"
+                          fill="var(--bg-card)" stroke="var(--border-color)"/>
+                    <text x="60" y="42" font-family="var(--font-mono)" font-size="11"
+                          fill="var(--text-muted)" letter-spacing="1">UNTRUSTED INPUT</text>
+                    <text x="60" y="66" font-family="var(--font-sans)" font-size="14"
+                          fill="var(--text-primary)">CIRCL OSINT · abuse.ch (URLhaus, ThreatFox) · AlienVault OTX · others</text>
+
+                    <path d="M350 86 L350 116" stroke="var(--border-hover)" stroke-width="2"/>
+                    <path d="M344 108 L350 118 L356 108" fill="none" stroke="var(--border-hover)" stroke-width="2"/>
+
+                    <!-- 2. ingestion -->
+                    <rect x="40" y="120" width="620" height="92" rx="10"
+                          fill="var(--bg-card)" stroke="var(--border-color)"/>
+                    <text x="60" y="146" font-family="var(--font-mono)" font-size="11"
+                          fill="var(--text-muted)" letter-spacing="1">SCHEDULED INGESTION · PYTHON</text>
+                    <text x="60" y="170" font-family="var(--font-sans)" font-size="14"
+                          fill="var(--text-primary)">Per-source schema, rate limit and error handling</text>
+                    <text x="60" y="192" font-family="var(--font-sans)" font-size="13"
+                          fill="var(--text-secondary)">A partial feed failure does not take down the run</text>
+
+                    <path d="M350 212 L350 242" stroke="var(--border-hover)" stroke-width="2"/>
+                    <path d="M344 234 L350 244 L356 234" fill="none" stroke="var(--border-hover)" stroke-width="2"/>
+
+                    <!-- 3. governance gate: the judgment layer, not an engineering one -->
+                    <rect x="40" y="246" width="620" height="92" rx="10"
+                          fill="none" stroke="var(--accent-primary)" stroke-width="1.5"/>
+                    <text x="60" y="272" font-family="var(--font-mono)" font-size="11"
+                          fill="var(--accent-primary)" letter-spacing="1">GOVERNANCE DECISION</text>
+                    <text x="60" y="296" font-family="var(--font-sans)" font-size="14"
+                          fill="var(--text-primary)">Which feeds to trust · auto-ingest or flag for review</text>
+                    <text x="60" y="318" font-family="var(--font-sans)" font-size="13"
+                          fill="var(--text-secondary)">The judgment problem, not the engineering one</text>
+
+                    <!-- Indicators land in MISP, so this points at MISP rather than at the
+                         gap between the two boxes. Splunk is reached from there, dashed. -->
+                    <path d="M350 338 L350 354 L190 354 L190 368" fill="none"
+                          stroke="var(--border-hover)" stroke-width="2"/>
+                    <path d="M184 360 L190 370 L196 360" fill="none" stroke="var(--border-hover)" stroke-width="2"/>
+
+                    <!-- 4. MISP -->
+                    <rect x="40" y="372" width="300" height="84" rx="10"
+                          fill="var(--bg-card)" stroke="var(--border-color)"/>
+                    <text x="60" y="398" font-family="var(--font-mono)" font-size="11"
+                          fill="var(--text-muted)" letter-spacing="1">MISP · DOCKER COMPOSE</text>
+                    <text x="60" y="422" font-family="var(--font-sans)" font-size="14"
+                          fill="var(--text-primary)">server · database · cache</text>
+                    <text x="60" y="444" font-family="var(--font-sans)" font-size="13"
+                          fill="var(--text-secondary)">One command to stand up</text>
+
+                    <!-- 5. SOC consumer -->
+                    <rect x="360" y="372" width="300" height="84" rx="10"
+                          fill="var(--bg-card)" stroke="var(--border-color)"/>
+                    <text x="380" y="398" font-family="var(--font-mono)" font-size="11"
+                          fill="var(--text-muted)" letter-spacing="1">SOC · WHERE ANALYSTS LIVE</text>
+                    <text x="380" y="422" font-family="var(--font-sans)" font-size="14"
+                          fill="var(--text-primary)">Splunk triage</text>
+
+                    <!-- the gap: designed, never built -->
+                    <path d="M340 414 L360 414" stroke="var(--text-muted)"
+                          stroke-width="2" stroke-dasharray="4 4"/>
+                    <text x="350" y="490" text-anchor="middle" font-family="var(--font-mono)"
+                          font-size="11" fill="var(--text-muted)">
+                        dashed = designed, never built
+                    </text>
+                </svg>
+                <figcaption>The pipeline, and the part of it I got wrong. Indicators flowed from
+                    community feeds into a containerised MISP, but the link into Splunk stayed a
+                    design intention. Analysts spent their day in Splunk, so intel that needed a
+                    MISP query to reach them largely did not. The governance step is the one drawn
+                    in outline rather than filled: deciding which feeds to trust took more thought
+                    than the code that pulled them, and none of it was an engineering
+                    problem.</figcaption>
+            </figure>
+
             <h3>1. Containerized deployment</h3>
 
             <p>Rebuilt the MISP environment as a Docker-Compose-based deployment: MISP server, database, cache, all wired together with a single command. Configuration that had previously lived in someone's head moved into a checked-in template file and a documented setup process.</p>
