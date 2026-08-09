@@ -554,7 +554,7 @@ function initTerminal() {
 I test AI systems for security failures and build tools to detect and mitigate them. SOC-trained, now working across security operations and AI security.
 
 <span class="output-highlight">Oklahoma City, USA</span>
-<span class="output-highlight">M.S. Cybersecurity, Oklahoma City University</span>
+<span class="output-highlight">M.S. Computer Science, Cybersecurity, Oklahoma City University</span>
 <span class="output-highlight">IT and systems administration since 2014, security since 2023</span>
 
 <span class="output-subtitle">Evidence rather than adjectives: run <span class="cmd-highlight">skills</span>, <span class="cmd-highlight">lab</span> or <span class="cmd-highlight">github</span>.
@@ -661,7 +661,7 @@ IT infrastructure, then security operations, then AI security. Each stage built 
         education: () => `
 <span class="output-title">Education</span>
 <span class="output-divider"></span>
-<span class="output-highlight">M.S. Cybersecurity</span>, Oklahoma City University. GPA 3.7 / 4.0
+<span class="output-highlight">M.S. Computer Science, Cybersecurity</span>, Oklahoma City University. GPA 3.7 / 4.0
 
 Risk management, incident response and threat intelligence, cloud security,
 GRC, ethical hacking and network defence.
@@ -717,7 +717,7 @@ GRC, ethical hacking and network defence.
 <span class="output-success">Specialty:</span>   AI Red Teaming, SOC Operations, LLM Security
 <span class="output-success">Status:</span>      Active, available for opportunities
 <span class="output-success">Created:</span>     2014 (a decade of progressive IT and cybersecurity experience)
-<span class="output-success">Updated:</span>     2026 (M.S. Cybersecurity, industry certifications + ongoing training)
+<span class="output-success">Updated:</span>     2026 (M.S. Computer Science, Cybersecurity, industry certifications + ongoing training)
 <span class="output-success">Source:</span>      github.com/chima-ukachukwu-sec`,
 
         ls: () => `
