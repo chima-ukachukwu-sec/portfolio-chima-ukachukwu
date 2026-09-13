@@ -12,9 +12,9 @@ Each numbered phase below is a bounded ProjectOS phase. Specifications live in
 | Phase | Scope | State |
 |---|---|---|
 | 0 | Factual baseline. Approved canonical facts, backups, live verification. | Complete |
-| 1 | ProjectOS attachment and repo-level agent governance. | Current |
-| 2 | Resume source. Builder correctness, document metadata, content. | Not started |
-| 3 | Portfolio site. | Not started |
+| 1 | ProjectOS attachment and repo-level agent governance. | Complete |
+| 2 | Resume source. Builder correctness, document metadata, content. | Complete |
+| 3 | Portfolio site. | Next |
 | 4 | Independent Codex review. | Not started |
 | 4b | Deploy and verify. | Not started |
 | 5 | LinkedIn. | Not started |
