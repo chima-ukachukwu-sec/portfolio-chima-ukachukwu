@@ -10,7 +10,17 @@ _github-profile-readme/
 
 # Local-only context for Claude sessions (Claude Code, Cowork, etc.)
 CLAUDE.md
-.claude/
+
+# Everything under .claude/ is local-only and private, with one deliberate
+# exception: the ProjectOS Premium Build skill link, which the canonical
+# v1.1.0 layout expects to be tracked so a fresh clone passes project-os-check.
+# Git cannot re-include a path inside an excluded directory, so the directory
+# itself is not excluded; each level is narrowed instead. Anything new under
+# .claude/ is ignored by default, including new files inside .claude/skills/.
+.claude/*
+!.claude/skills/
+.claude/skills/*
+!.claude/skills/premium-build
 
 # Internal working notes — candid self-critique, not for the public repo
 AUDIT.md
